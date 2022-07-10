@@ -57,13 +57,13 @@ const AnimatedWord = (props) => {
     <StyledAnimatedWord>
       <StyledAnimatedWordWrapper>
         <StyledAnimatedWordPart top>
-          {array.map(symbol => 
-            <span style={symbol.style} dangerouslySetInnerHTML={{__html: symbol.text}}></span>     
+          {array.map((symbol, index) => 
+            <span key={`symbol-${index}`} style={symbol.style} dangerouslySetInnerHTML={{__html: symbol.text}}></span>     
           )}
         </StyledAnimatedWordPart>
         <StyledAnimatedWordPart bottom>
-          {array.map(symbol => 
-            <span style={symbol.style} dangerouslySetInnerHTML={{__html: symbol.text}}></span>   
+          {array.map((symbol, index) => 
+            <span key={`symbol-${index}`} style={symbol.style} dangerouslySetInnerHTML={{__html: symbol.text}}></span>   
           )}
         </StyledAnimatedWordPart>
       </StyledAnimatedWordWrapper>

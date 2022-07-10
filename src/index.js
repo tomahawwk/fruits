@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // Styles
 import './assets/styles/normalize.css'
+import './assets/styles/routing.css'
 import Fonts from "./assets/styles/Fonts";
 
 import {createGlobalStyle, ThemeProvider} from 'styled-components'
@@ -19,7 +20,8 @@ const theme = {
     grey5: "#929292",
     grey6: "#555555",
     yellow: "#fbe201",
-    light: "#F9F3DF",
+    light: "#FFF",
+    altLight: "#F9F3DF",
     text: "#818183"
   },
   screen: {
@@ -63,13 +65,11 @@ const Global = createGlobalStyle`
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={theme}>
-        <Fonts />
-        <Global />
-        <App />
-      </ThemeProvider>
-    </Router>
-  </React.StrictMode>
+  <Router>
+    <ThemeProvider theme={theme}>
+      <Fonts />
+      <Global />
+      <App />
+    </ThemeProvider>
+  </Router>
 );

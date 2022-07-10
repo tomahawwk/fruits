@@ -26,9 +26,8 @@ const StyledHeader = styled(Flex)`
     position: absolute;
     top: 0;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,.5), transparent);
     left: 0;
-    z-index: 2;
+    z-index: 3;
     ${props => fluidRange({
        prop: 'height',
        fromSize: `${props.theme.headerSize.tablet}px`,

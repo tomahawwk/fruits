@@ -15,12 +15,12 @@ const StyledButton = styled.button`
         text-transform: uppercase;
         background-color: transparent;
         font-weight: 400;
-        border: 1px solid ${props => props.theme.colors.light};
+        border: 1px solid ${props => props.theme.colors.grey5};
         &:hover{
             color: ${props => props.theme.colors.black};
             font-weight: 600;
-            background-color: ${props => props.theme.colors.light};
-            border: 1px solid ${props => props.theme.colors.light};
+            background-color: ${props => props.theme.colors.yellow};
+            border: 1px solid ${props => props.theme.colors.yellow};
         }
     `}
     ${props => props.icon && css`
@@ -30,7 +30,7 @@ const StyledButton = styled.button`
             transition-duration: .4s;
             width: 100%;
             height: 100%;
-            fill: white;
+            fill: ${props => props.theme.colors.light};
         }
     `}
 `

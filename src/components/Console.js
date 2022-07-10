@@ -10,7 +10,6 @@ const StyledConsole = styled.textarea`
     font-size: 24px;
     resize: none;
     border: none;
-    color: ${props => props.color || props.theme.colors.primary};
     &:focus {
         outline: none;
     }

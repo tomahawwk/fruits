@@ -16,6 +16,7 @@ const StyledSection = styled.section`
             props.theme.screen.tablet,
             props.theme.screen.desktop,
         )}
+        min-height: 100vh;
     `}
 
     ${props => props.grey && css`
@@ -23,6 +24,21 @@ const StyledSection = styled.section`
     `}
     ${props => props.grain && css`
         background-color: ${props => props.theme.colors.grey3};
+        
+        &:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-image: url('images/grey-texture.png');
+            object-fit: cover;
+            opacity: .08;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
         &:before {
             animation: ${Grain} 8s steps(10) infinite;
             background-image: url('images/noise.png');

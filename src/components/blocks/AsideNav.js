@@ -12,7 +12,7 @@ const StyledAsideNav = styled(Flex)`
     height: 100vh;
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 3;
     padding-bottom: 40px;
     left: 0;
     background: ${props => props.theme.colors.grey3};

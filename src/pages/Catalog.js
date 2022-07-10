@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Flex from '../components/helpers/Flex';
+import Page from '../components/blocks/Page';
 
-const StyledCatalog = styled(Flex)`
+const StyledCatalog = styled(Page)`
     
 `
 

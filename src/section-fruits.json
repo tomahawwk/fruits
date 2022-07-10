@@ -1,0 +1,102 @@
+[
+    {
+        "key": 5,
+        "id": 5,
+        "title": "Tangerines",
+        "description": "Tangerines are smaller and less rounded than common oranges. The taste is considered less sour, as well as sweeter and stronger, than that of an orange. A ripe tangerine is firm to slightly soft, and pebbly-skinned with no deep grooves, as well as orange in color. The peel is thin, with little bitter white mesocarp.",
+        "category": 1,
+        "oldprice": 52,
+        "price": 48,
+        "image": "images/cards/3.jpg"
+    },
+    {
+        "key": 1,
+        "id": 1,
+        "title": "Lemons",
+        "description": "The lemon is a round, slightly elongated fruit, it has a strong and resistant skin, with an intense bright yellow colour when it is totaly ripe, giving off a special aroma when it is cut. The pulp is pale yellow, juicy and acid, divided in gores.",
+        "category": 1,
+        "oldprice": 58,
+        "price": 45,
+        "image": "images/cards/5.jpg"
+    },
+    {
+        "key": 2,
+        "id": 2,
+        "title": "Mango",
+        "description": "The mango fruit is roughly oval in shape, with uneven sides. The fruit is a drupe, with an outer flesh surrounding a stone. The flesh is soft and bright yellow-orange in color. The skin of the fruit is yellow-green to red.",
+        "category": 2,
+        "oldprice": 47,
+        "price": 34,
+        "image": "images/cards/2.jpg"
+    },
+    {
+        "key": 3,
+        "id": 3,
+        "title": "Coconut",
+        "description": "Coconut is the fruit of a tropical palm plant. It has a hard shell, edible white flesh and clear liquid, sometimes referred to as “water,” which is often used as a beverage. Coconut flesh or “meat” is aromatic, chewy in texture and rich in taste.",
+        "category": 2,
+        "oldprice": 84,
+        "price": 62,
+        "image": "images/cards/4.jpg"
+    },
+    {
+        "key": 4,
+        "id": 4,
+        "title": "Cherries",
+        "description": "The fruit is a fleshy drupe (stone fruit) that is generally heart-shaped to nearly globular, about 2 cm (1 inch) in diameter, and varies in colour from yellow through red to nearly black. The acid content of the sweet cherry is low. The higher acid content of the sour cherry produces its characteristic tart flavour.",
+        "category": 3,
+        "oldprice": 45,
+        "price": 39,
+        "image": "images/cards/1.jpg"
+    },
+    {
+        "key": 6,
+        "id": 6,
+        "title": "Berries",
+        "description": "A berry is a small, pulpy, and often edible fruit. Typically, berries are juicy, rounded, brightly colored, sweet, sour or tart, and do not have a stone or pit, although many pips or seeds may be present.",
+        "category": 3,
+        "oldprice": 37,
+        "price": 24,
+        "image": "images/cards/6.jpg"
+    },
+    {
+        "key": 7,
+        "id": 7,
+        "title": "Pears",
+        "description": "Pear fruits are generally sweeter and of softer texture than apples and are distinguished by the presence of hard cells in the flesh, the so-called grit, or stone cells. In general, pear fruits are elongate, being narrow at the stem end and broader at the opposite end.",
+        "category": 1,
+        "oldprice": 29,
+        "price": 18,
+        "image": "images/cards/9.jpg"
+    },
+    {
+        "key": 8,
+        "id": 8,
+        "title": "Garnet",
+        "description": "Garnet derives from Old French grenat by metathesis, from Medieval Latin granatum as used in a different meaning 'of a dark red color'. This derivation may have originated from pomum granatum, describing the color of pomegranate pulp, or from granum, referring to 'red dye, cochineal'.",
+        "category": 1,
+        "oldprice": 64,
+        "price": 57,
+        "image": "images/cards/7.jpg"
+    },
+    {
+        "key": 10,
+        "id": 10,
+        "title": "Avocado",
+        "description": "An avocado is a bright green fruit with a large pit and dark leathery skin. They're also known as alligator pears or butter fruit. Avocados are a favorite of the produce section. They're the go-to ingredient for guacamole dips. And they're turning up in everything from salads and wraps to smoothies and even brownies.",
+        "category": 2,
+        "oldprice": 105,
+        "price": 86,
+        "image": "images/cards/10.jpg"
+    },
+    {
+        "key": 11,
+        "id": 11,
+        "title": "Apples",
+        "description": "Apple is a sweet and delicious fruit that is very healthy. It is also a good disease-fighter and we can eat it every day. The delicious taste and bright colour of the food make it even more appealing. Moreover, it is a versatile fruit which we can use in many dishes.",
+        "category": 1,
+        "oldprice": 37,
+        "price": 26,
+        "image": "images/cards/11.jpg"
+    }
+]

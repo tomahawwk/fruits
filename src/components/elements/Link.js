@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled, {css} from 'styled-components'
 
-export default styled(Link).attrs(props => ({ primary: true }))`
+export default styled(Link)`
   text-decoration: none;
   
   //Primary link

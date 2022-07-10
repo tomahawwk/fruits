@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Title from '../elements/Title';
-import Text from '../elements/Text';
-import Button from '../elements/Button';
-import Counter from '../elements/Counter';
-import Price from '../elements/Price';
-import AnimatedWord from '../elements/AnimatedWord';
+import Title from '../../elements/Title';
+import Text from '../../elements/Text';
+import Button from '../../elements/Button';
+import Counter from '../../elements/Counter';
+import Price from '../../elements/Price';
+import AnimatedWord from '../../elements/AnimatedWord';
 
-import Flex from '../helpers/Flex';
+import Flex from '../../helpers/Flex';
 
 const StyledCard = styled.div`
-    height: 28em;
     width: 100%;
     z-index: 10;
+    height: 43vh;
     display: grid;
     background-color: ${props => props.theme.colors.grey2};
     grid-template-rows: repeat(2, 1fr);

@@ -1,22 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import styled from 'styled-components'
 import { fluidRange } from 'polished'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import AppContext from './context';
 
 import Header from './components/blocks/Header';
 import AsideNav from './components/blocks/AsideNav';
 import Menu from './components/blocks/Menu';
 
+import RouteAnimation from './components/elements/RouteAnimation';
+
 import Main from './pages/Main';
 import Catalog from './pages/Catalog';
-
-import fruits from './fruits.json'
+import NotFound from './pages/NotFound';
 
 const AppWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   font-size: 16px;
   padding: 0px 0px 0px 0px;
   ${props => fluidRange({
@@ -30,18 +34,56 @@ const AppWrapper = styled.div`
 `
 
 const App = () => {
+  const location = useLocation();
   const [menuOpened, setMenuOpened] = useState();
+  const [routeAnimation, setRouteAnimation] = useState();
+  const [mainItems, setMainItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const timeout = {
+    appear: 1000,
+    enter: 2000,
+    exit: 1000,
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try{
+        const [itemsResponse] = await Promise.all([
+          axios.get("https://62bcc3246b1401736c008049.mockapi.io/main-fruits")
+        ]);
+        setMainItems(itemsResponse.data);
+        setIsLoading(false);
+      }
+      catch(error){ 
+        alert("Ошибка при запросе данных")
+      }
+    }
+    fetchData();
+  }, [])
 
   return (
     <AppWrapper>
-      <AppContext.Provider value={{menuOpened, setMenuOpened}}>
+      <AppContext.Provider value={{
+          menuOpened, 
+          setMenuOpened, 
+          isLoading, 
+          setIsLoading,
+          routeAnimation}}>
         <Header />
         <AsideNav />
-        <Routes>
-          <Route path="/" exact element={ <Main items={fruits}/> }/>
-          <Route path="/catalog" exact element={ <Catalog/> }/>
-        </Routes>
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames="fade" timeout={timeout} onEnter={() => setRouteAnimation(true)} onEntered={() => setRouteAnimation(false)}>
+            <Routes location={location}>
+              <Route path="/" exact element={<Main items={mainItems}/>} />
+              <Route path="/catalog" exact element={ <Catalog/>}/>
+              <Route path="*" exact element={ <NotFound/>}  />
+            </Routes>
+          </CSSTransition>
+        </TransitionGroup>
+       
         <Menu />
+        <RouteAnimation />
       </AppContext.Provider>
     </AppWrapper>
   );

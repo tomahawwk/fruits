@@ -16,12 +16,12 @@ const Nav = (props) => {
     return (
         <StyledNav>
             <li>
-                <Link to="/catalog">
+                <Link to="/catalog" primary>
                     <AnimatedWord text="Catalog" />
                 </Link>
             </li>
             <li>
-                <Link to="/articles">
+                <Link to="/articles" primary>
                     <AnimatedWord text="Articles" />
                 </Link>
             </li>

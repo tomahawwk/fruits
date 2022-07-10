@@ -36,6 +36,7 @@ const Categories = (props) => {
         <StyledCategories>
             {categories.map((category, index) => (
                 <StyledCategory
+                    key={`category-${index}`}
                     onClick={() => onClickCategory(index)}
                     active={activeCategory === index ? true : false}
                     >{category.title}</StyledCategory>

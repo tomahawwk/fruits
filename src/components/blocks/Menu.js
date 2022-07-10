@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
-import React, { useContext, useEffect} from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../../context';
-import { gsap } from "gsap";
 import Section from './Section';
 
 const StyledMenu = styled.div`
@@ -12,16 +11,6 @@ const StyledMenu = styled.div`
     height: 100vh;
     z-index: 12;
     pointer-events: none;
-`
-
-const StyledMenuOverlay = styled.svg`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    fill: ${props => props.theme.colors.light};
 `
 
 const StyledMenuContent = styled(Section)`
@@ -37,73 +26,46 @@ const StyledMenuContent = styled(Section)`
     
     ${props => props.open && css`
         opacity: 1;
+        pointer-events: all;
     `}
+`
+
+const StyledMenuClose = styled.button`
+    position: fixed;
+    top: 0;
+    background: none;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    width: 30px;
+    height: 30px;
+    &:before, &:after{
+        width: 100%;
+        height: 2px;
+        background-color: ${props => props.theme.colors.altLight}; 
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        content: '';
+        bottom: 0;
+        margin: auto;
+        will-change: transform;
+        transition-duration: .4s;
+        transform-origin: left;
+        transition-timing-function: cubic-bezier(.165,.84,.44,1);
+    }
 `
 
 const Menu = (props) => {
     const { menuOpened } = useContext(AppContext);
-    useEffect(() => {
-        overlayAnimation(); 
-    }, [menuOpened]);
-
-    let isAnimating = false;
-    const overlayAnimation = () => {
-        if ( isAnimating ) return;
-        isAnimating = true;
-        const overlayPath = document.querySelector('.overlay__path');
-        
-        gsap.timeline({
-            onComplete: () => isAnimating = false
-        })
-        .set(overlayPath, {
-            attr: { d: 'M 0 100 V 100 Q 50 100 100 100 V 100 z' }
-        })
-        .to(overlayPath, { 
-            duration: 0.8,
-            ease: 'power4.in',
-            attr: { d: 'M 0 100 V 50 Q 50 0 100 50 V 100 z' }
-        }, 0)
-        .to(overlayPath, { 
-            duration: 0.3,
-            ease: 'power2',
-            attr: { d: 'M 0 100 V 0 Q 50 0 100 0 V 100 z' },
-            onComplete: () => {
-                //menuWrap.classList.add('menu-wrap--open');
-            }
-        })
-        // // title elements
-        // .to([title.main, title.sub], { 
-        //     duration: 0.8,
-        //     ease: 'power3.in',
-        //     y: -200,
-        //     stagger: 0.05
-        // }, 0.2)
-        .set(overlayPath, { 
-            attr: { d: 'M 0 0 V 100 Q 50 100 100 100 V 0 z' }
-        })
-        .to(overlayPath, { 
-            duration: 0.3,
-            ease: 'power2.in',
-            attr: { d: 'M 0 0 V 50 Q 50 0 100 50 V 0 z' }
-        })
-        .to(overlayPath, { 
-            duration: 0.8,
-            ease: 'power4',
-            attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' }
-        })
-    }
+    let menuShow = false;
 
     return (
         <StyledMenu>
-            <StyledMenuOverlay
-                width="100%"
-                height="100%"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-            >
-                <path vector-effect="non-scaling-stroke" className="overlay__path" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
-            </StyledMenuOverlay>
-            <StyledMenuContent open={menuOpened} grain></StyledMenuContent>
+            <StyledMenuContent open={menuOpened} grain>
+                <StyledMenuClose show={menuShow} />
+            </StyledMenuContent>
         </StyledMenu>
     )
 }
