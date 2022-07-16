@@ -22,7 +22,7 @@ const StyledCard = styled.div`
     opacity: 0;
     transition-duration: .6s;
     transition-timing-function: ease;
-    transform: translate(30px, 30px);
+    transform: translate(0px, 30px);
     &.enter {
         opacity: 0;
     }
