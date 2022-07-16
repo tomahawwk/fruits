@@ -10,8 +10,15 @@ const StyledCardGrid = styled.div`
 
 const CardGrid = (props) => {
     return (
-        <StyledCardGrid {...props} />
+        <StyledCardGrid {...props}/>
     )
 }
 
 export default CardGrid;
+
+
+{/* <TransitionGroup>
+            <CSSTransition key="1" timeout={600} classNames="fade" onEnter={() => test()}>
+                <StyledCardGrid {...props}/>
+            </CSSTransition>
+        </TransitionGroup> */}

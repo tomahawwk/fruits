@@ -1591,6 +1591,92 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
+"@react-spring/animated@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.5.0.tgz#bedc9301ec81a29331327aa25e37125a94080f48"
+  integrity sha512-FgotFIRQsgxFTgNZhsqi19GUO8isFAeUF/Ica6TeBkR87LQelHGWOg+wW5S3kaX9pzUgC4LOfzj0fRoMFaQKmA==
+  dependencies:
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/core@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.5.0.tgz#0f3ba069237ce08752e319aac71c621adc37500b"
+  integrity sha512-/5uopqj3NztZ8g2tD7jhtpSlUFSCr+WbLs0sb6ylwjuOJB050LCpYTJ8iurPf/wuhkYd7Q2xLK0Kr5PO0v53eQ==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/rafz" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/konva@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/konva/-/konva-9.5.0.tgz#7d794794379abcab8a0c2932cf04f395958f362c"
+  integrity sha512-b2J/DnnzgQcLNo5y/idXGAUbVKCC6BUhtNjRhna1+mNsrjuBrUxJ/n4zBpHwqVHNK4/2IXmvNIkitPe/LraE3g==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/native@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/native/-/native-9.5.0.tgz#5b89911e78b8f83fd1c46370b687aedf6dda728c"
+  integrity sha512-gznPcy18OVTS7qblgq8eal2vDOcatyBg2J/WXYejYVUUFJJI4ZF+nYoPFIxf2pz/Q0iYPjqES1Ae7JiizCvl8w==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/rafz@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.5.0.tgz#25ee5ad7dbac2b7486b3a0dd23aa0a6880793d9f"
+  integrity sha512-jvelJ/YNeVTkPIRnVu6mD/lopZqixiAY5omCgQM8kT1kAnRPeyuGfHAb73HTnqOzcIL8vOluNfTfUM/xcPm3RQ==
+
+"@react-spring/shared@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.5.0.tgz#d80df5a6496fe4d414e608a7bcef448598e4ffee"
+  integrity sha512-XuRFgWiiV6LRd3JMQAVhsMnDIBF+M1Z3MeNI6Y+5oIf6mINQHLNPWjYt/lcLZ4cuKYi+OOce4G9zJx003b9w4g==
+  dependencies:
+    "@react-spring/rafz" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/three@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/three/-/three-9.5.0.tgz#74c919c93c26b7255ded8c69f3a02f5730cb198c"
+  integrity sha512-tr5qgW4jvWrodAVc5gL0vu7+yDD9cnqut7tEIQELgrk4ffTlt+biPh2p2sW/KTVAu51ZO+aK/8caqt26DzqpFQ==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/types@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.5.0.tgz#5ef3af4edc4a5d667f202b9581ac0dfc20889cfb"
+  integrity sha512-qrLwe77qa1LdS/tjCZKljzoXDSg9WPAgrfAkl8x1w8y9E8jHnCr2Z8UkM/sXvFlCZvMfsGes4XnE4oUNdjNuNQ==
+
+"@react-spring/web@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.5.0.tgz#a47dbf9bf2942a29c22339711eb580c61631d3b3"
+  integrity sha512-fq33Og23zCLxH7HELdOyAk0pWtwbSsk8MzPenN2JZMYI1dElB208r4CedM78TPY99YWIY2XRJ45VxbikxVeWLQ==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
+"@react-spring/zdog@~9.5.0":
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/@react-spring/zdog/-/zdog-9.5.0.tgz#5f1a612a97040dca4a253ef32849827d373f54f1"
+  integrity sha512-d+rfOC4PC4L78a0ep2YIqpcaqoQdlWLI52Gy32cOHFPT4WgOrX+r6kZWjQli6P2LmcGoY6A9kh051MQpRVnI3g==
+  dependencies:
+    "@react-spring/animated" "~9.5.0"
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/shared" "~9.5.0"
+    "@react-spring/types" "~9.5.0"
+
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -3095,6 +3181,11 @@ cjs-module-lexer@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
+
+classnames@^2.2.3:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 clean-css@^5.2.2:
   version "5.3.0"
@@ -7421,6 +7512,13 @@ react-dom@^18.1.0:
     loose-envify "^1.1.0"
     scheduler "^0.22.0"
 
+react-dropdown@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/react-dropdown/-/react-dropdown-1.10.0.tgz#c566e5de5212dc4bf2041c20d755e667760b8fab"
+  integrity sha512-jvlPVB5KU1tuacx9+igu5c+Xtpzjos5ZRXhMxHiVmdEM0SR2vabeAoL9QfN3p4e1CjgdjYsM8gCXbFNSyT25EQ==
+  dependencies:
+    classnames "^2.2.3"
+
 react-error-overlay@^6.0.11:
   version "6.0.11"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
@@ -7531,6 +7629,18 @@ react-scripts@5.0.1:
     workbox-webpack-plugin "^6.4.1"
   optionalDependencies:
     fsevents "^2.3.2"
+
+react-spring@^9.5.0:
+  version "9.5.0"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.5.0.tgz#59f894332a98da5714c9c6a139bb26ffb5058454"
+  integrity sha512-7zdiTrSOQXYB2B/7HT6ehbdBFt5aGCQuSmJzqbbbUyv9LiSH4DIE8PLBS1W0jW1684GwXF7NCdnETE+Ay7jBxQ==
+  dependencies:
+    "@react-spring/core" "~9.5.0"
+    "@react-spring/konva" "~9.5.0"
+    "@react-spring/native" "~9.5.0"
+    "@react-spring/three" "~9.5.0"
+    "@react-spring/web" "~9.5.0"
+    "@react-spring/zdog" "~9.5.0"
 
 react-transition-group@^1.2.0:
   version "1.2.1"

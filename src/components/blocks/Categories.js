@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components'
-import React, {useState} from 'react'
+import React from 'react'
 
 const StyledCategories = styled.ul`
     display: flex;
@@ -19,17 +19,13 @@ const StyledCategory = styled.li`
     `}
 `
 
-const Categories = (props) => {
-    const [activeCategory, setActiveCategory] = useState(0);
-    
-    const onClickCategory = (index) => {
-        setActiveCategory(index);
-    }
+const Categories = ({ value, onChangeCategory }) => {
 
     const categories = [
         { title: "All" },
-        { title: "Oranges" },
-        { title: "Apples" },
+        { title: "Fruits" },
+        { title: "Exotic fruits" },
+        { title: "Berries" },
     ]
 
     return (
@@ -37,8 +33,8 @@ const Categories = (props) => {
             {categories.map((category, index) => (
                 <StyledCategory
                     key={`category-${index}`}
-                    onClick={() => onClickCategory(index)}
-                    active={activeCategory === index ? true : false}
+                    onClick={() => onChangeCategory(index)}
+                    active={value === index ? true : false}
                     >{category.title}</StyledCategory>
             ))}
         </StyledCategories>

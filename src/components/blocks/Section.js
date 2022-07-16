@@ -29,7 +29,7 @@ const StyledSection = styled.section`
             content: "";
             width: 100%;
             height: 100%;
-            background-image: url('images/grey-texture.png');
+            //background-image: url('images/grey-texture.png');
             object-fit: cover;
             opacity: .08;
             background-size: 100%;

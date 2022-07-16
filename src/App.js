@@ -39,7 +39,9 @@ const App = () => {
   const [routeAnimation, setRouteAnimation] = useState();
   const [mainItems, setMainItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState({ value: 'rating', label: 'rating '});
+
   const timeout = {
     appear: 1000,
     enter: 2000,
@@ -47,20 +49,26 @@ const App = () => {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     async function fetchData() {
       try{
         const [itemsResponse] = await Promise.all([
-          axios.get("https://62bcc3246b1401736c008049.mockapi.io/main-fruits")
+          axios.get(`https://62bcc3246b1401736c008049.mockapi.io/main-fruits?${
+            categoryId > 0 ? `category=${categoryId}` : '' 
+          }&sortBy=${sortType.value.replace('-', '')}&order=${sortType.value.includes('-') ? 'asc' : 'desc'}`)
         ]);
         setMainItems(itemsResponse.data);
         setIsLoading(false);
       }
       catch(error){ 
-        alert("Ошибка при запросе данных")
+        console.log("Ошибка при запросе фруктиков")
       }
     }
-    fetchData();
-  }, [])
+    setTimeout(() => {
+      fetchData();
+    }, 700)
+    console.log(sortType)
+  }, [categoryId, sortType])
 
   return (
     <AppWrapper>
@@ -69,8 +77,12 @@ const App = () => {
           setMenuOpened, 
           isLoading, 
           setIsLoading,
-          routeAnimation}}>
-        <Header />
+          routeAnimation,
+          categoryId,
+          setCategoryId,
+          sortType,
+          setSortType}}>
+        <Header /> 
         <AsideNav />
         <TransitionGroup>
           <CSSTransition key={location.key} classNames="fade" timeout={timeout} onEnter={() => setRouteAnimation(true)} onEntered={() => setRouteAnimation(false)}>
@@ -81,7 +93,6 @@ const App = () => {
             </Routes>
           </CSSTransition>
         </TransitionGroup>
-       
         <Menu />
         <RouteAnimation />
       </AppContext.Provider>
