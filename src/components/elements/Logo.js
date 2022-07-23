@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom';
 
 const StyledLogo = styled(Link)`
@@ -10,17 +10,26 @@ const StyledLogo = styled(Link)`
     b {
         font-family: ${props => props.theme.fonts.primary};
         font-weight: 600;
-        font-size: 32px;
+        font-size: 28px;
     }
     p{
         font-family: ${props => props.theme.fonts.secondary};
-        font-size: 40px;
+        font-size: 32px;
+        color: ${props => props.theme.colors.yellow};
     }
+
+    ${props => props.row && css`
+        flex-direction: row;
+        grid-gap: 20px;
+        p{
+            color: white;
+        }
+    `}
 `
 
 const Logo = (props) => {
     return (
-        <StyledLogo to="/">
+        <StyledLogo {...props} to="/">
             <b>React</b>
             <p>Fruits</p>
         </StyledLogo>

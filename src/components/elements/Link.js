@@ -9,6 +9,10 @@ export default styled(Link)`
     color: ${props => props.color || props.theme.colors.light};
   `}
 
+  ${props => props.plus && css`
+    color: ${props => props.color || props.theme.colors.light};
+  `}
+
   //Arrow link
   ${props => props.arrow && css`
     color: ${props => props.color || "red"};

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Button from './Button';
 import { BasketIcon } from './Icons';
@@ -10,11 +10,20 @@ const StyledNav = styled.ul`
     display: flex;
     grid-gap: 50px; 
     list-style: none;
+    ${props => props.footer && css`
+        a{
+            color: rgba(255,255,255,.5);
+            transition-duration: .4s;
+            &:hover {
+                color: white;
+            }
+        }
+    `}
 `
 
 const Nav = (props) => {
     return (
-        <StyledNav>
+        <StyledNav {...props}>
             <li>
                 <Link to="/catalog" primary>
                     <AnimatedWord text="Catalog" />
@@ -25,11 +34,14 @@ const Nav = (props) => {
                     <AnimatedWord text="Articles" />
                 </Link>
             </li>
-            <li>
-                <Button icon>
-                    <BasketIcon />
-                </Button>
-            </li>
+            
+            {!props.footer &&
+                <li>
+                    <Button icon>
+                        <BasketIcon />
+                    </Button>
+                </li>
+            }
         </StyledNav>
     )
 }

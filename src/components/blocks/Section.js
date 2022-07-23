@@ -22,9 +22,9 @@ const StyledSection = styled.section`
     ${props => props.grey && css`
         background-color: ${props => props.theme.colors.grey4};
     `}
+
     ${props => props.grain && css`
         background-color: ${props => props.theme.colors.grey3};
-        
         &:after {
             content: "";
             width: 100%;
@@ -39,6 +39,7 @@ const StyledSection = styled.section`
             top: 0;
             left: 0;
         }
+
         &:before {
             animation: ${Grain} 8s steps(10) infinite;
             background-image: url('images/noise.png');
@@ -46,7 +47,7 @@ const StyledSection = styled.section`
             height: 300%;
             left: -50%;
             opacity: .4;
-            position: fixed;
+            position: absolute;
             top: -100%;
             width: 300%;
             z-index: 1;

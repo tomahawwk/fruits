@@ -9,7 +9,6 @@ import Burger from '../elements/Burger';
 import Socials from './Socials';
 
 const StyledAsideNav = styled(Flex)`
-    height: 100vh;
     position: fixed;
     top: 0;
     z-index: 3;
@@ -34,12 +33,15 @@ const StyledAsideNav = styled(Flex)`
         width: 1px;
         background-color: ${props => props.theme.colors.grey};
     }
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        display: none;
+    }
 `
 
 const AsideNav = (props) => {
     const { menuOpened, setMenuOpened } = useContext(AppContext);
     return (
-        <StyledAsideNav justify="space-between" direction="column">
+        <StyledAsideNav justify="space-between" direction="column" height="100vh">
             <Burger click={() => setMenuOpened(!menuOpened)} />
             <Socials />
         </StyledAsideNav>

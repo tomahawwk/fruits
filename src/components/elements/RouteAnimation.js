@@ -34,18 +34,17 @@ const RouteAnimation = (props) => {
     let isAnimating = false;
 
     useEffect(() => {
-        if (menuOpened === firstRenderRef.current || routeAnimation === firstRenderRef.current){
+        if (menuOpened === firstRenderRef.current || routeAnimation === firstRenderRef.current)
             overlayAnimation(false);
-        }
             
-        else if(routeAnimation === firstRenderRef.current){
+        else if(routeAnimation === firstRenderRef.current)
             overlayAnimation(true);
-        }
-    },[routeAnimation, menuOpened, firstRenderRef])
+        
+    }, [routeAnimation, menuOpened, firstRenderRef])
 
     const overlayAnimation = (reverseFlag) => {
         if ( isAnimating ) return;
-
+        console.log("ove")
         setReverse(reverseFlag);
         isAnimating = true;
         const overlayPath = document.querySelector('.overlay__path');

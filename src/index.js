@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 // Styles
 import './assets/styles/normalize.css'
@@ -66,10 +68,12 @@ const Global = createGlobalStyle`
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-    <ThemeProvider theme={theme}>
-      <Fonts />
-      <Global />
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Fonts />
+        <Global />
+        <App />
+      </ThemeProvider>
+    </Provider>
   </Router>
 );

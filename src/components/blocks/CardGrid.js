@@ -6,6 +6,7 @@ const StyledCardGrid = styled.div`
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 30px;
     width: 100%;
+    min-height: 43vh;
 `
 
 const CardGrid = (props) => {
@@ -15,10 +16,3 @@ const CardGrid = (props) => {
 }
 
 export default CardGrid;
-
-
-{/* <TransitionGroup>
-            <CSSTransition key="1" timeout={600} classNames="fade" onEnter={() => test()}>
-                <StyledCardGrid {...props}/>
-            </CSSTransition>
-        </TransitionGroup> */}

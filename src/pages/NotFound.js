@@ -76,7 +76,7 @@ const StyledNotFoundHead = styled(Flex)`
 
 const NotFound = (props) => {
     return (
-        <StyledNotFound>
+        <StyledNotFound withoutFooter>
             <StyledNotFoundSection grain>
                 <StyledNotFoundHead>
                     <span>Error</span>

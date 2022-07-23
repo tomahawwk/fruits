@@ -11,7 +11,6 @@ const StyledCategories = styled.ul`
 const StyledCategory = styled.li`
     padding: 5px;
     border: none;
-    cursor: pointer;
     background: none;
     color: ${props => props.theme.colors.grey5};
     ${props => props.active && css`

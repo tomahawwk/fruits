@@ -3,7 +3,7 @@ import Flex from '../helpers/Flex';
 import { fluidRange } from 'polished'
 
 import Logo from '../elements/Logo';
-import Menu from '../elements/Nav';
+import Nav from '../elements/Nav';
 
 const StyledHeader = styled(Flex)`
     ${props => fluidRange({
@@ -25,7 +25,6 @@ const StyledHeader = styled(Flex)`
     )}
     position: absolute;
     top: 0;
-    width: 100%;
     left: 0;
     z-index: 3;
     ${props => fluidRange({
@@ -36,13 +35,23 @@ const StyledHeader = styled(Flex)`
      props.theme.screen.tablet,
      props.theme.screen.desktop,
     )}
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        ${props => fluidRange({
+            prop: 'padding-left',
+            fromSize: `${props.theme.unit.tablet}px`,
+            toSize: `${props.theme.unit.desktop}px`,
+            },
+            props.theme.screen.tablet,
+            props.theme.screen.desktop,
+        )}
+    }
 `
 
 const Header = (props) => {
     return (
-        <StyledHeader justify="space-between" align="center">
+        <StyledHeader justify="space-between" align="center" gap="20px" width="100%">
             <Logo />
-            <Menu />
+            <Nav />
         </StyledHeader>
     )
 }

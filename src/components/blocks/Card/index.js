@@ -80,7 +80,7 @@ const Card = (props) => {
     } 
 
     return (
-        <CSSTransition in={!isLoading} appear={true} timeout={timeout} onEnter={() => console.log(1)} onExit={() => console.log(2)}>
+        <CSSTransition in={!isLoading} appear={true} timeout={timeout}>
             <StyledCard style={{ transitionDelay: `${props.index * 50}ms` }}>
                 <StyledCardImage>
                     <img src={ props.image }/>
