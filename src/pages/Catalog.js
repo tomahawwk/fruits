@@ -70,11 +70,11 @@ const Catalog = (props) => {
             />
             <Section grey>
                 <Content>
-                    <Search value={searchValue} setValue={setSearchValue} />
-                    <Flex justify="space-between">
+                    {/* <Search value={searchValue} setValue={setSearchValue} /> */}
+                    {/* <Flex justify="space-between">
                         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
                         <Sort value={sortType} onChangeSort={(id) => setSortType(id)} />
-                    </Flex>
+                    </Flex> */}
                     <CardGrid> { items } </CardGrid>
                     <Flex justify="space-between">
                         <Pagination onChangePage={(number) => setCurrentPage(number)}/>

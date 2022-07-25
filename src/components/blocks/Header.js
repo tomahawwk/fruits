@@ -17,10 +17,10 @@ const StyledHeader = styled(Flex)`
 
     ${props => fluidRange({
        prop: 'padding-right',
-       fromSize: `${props.theme.unit.tablet}px`,
+       fromSize: `${props.theme.unit.phone}px`,
        toSize: `${props.theme.unit.desktop}px`,
      },
-     props.theme.screen.tablet,
+     props.theme.screen.phone,
      props.theme.screen.desktop,
     )}
     position: absolute;
@@ -29,19 +29,19 @@ const StyledHeader = styled(Flex)`
     z-index: 3;
     ${props => fluidRange({
        prop: 'height',
-       fromSize: `${props.theme.headerSize.tablet}px`,
+       fromSize: `${props.theme.headerSize.phone}px`,
        toSize: `${props.theme.headerSize.desktop}px`,
      },
-     props.theme.screen.tablet,
+     props.theme.screen.phone,
      props.theme.screen.desktop,
     )}
     @media (max-width: ${props => props.theme.screen.tablet}){
         ${props => fluidRange({
             prop: 'padding-left',
-            fromSize: `${props.theme.unit.tablet}px`,
+            fromSize: `${props.theme.unit.phone}px`,
             toSize: `${props.theme.unit.desktop}px`,
             },
-            props.theme.screen.tablet,
+            props.theme.screen.phone,
             props.theme.screen.desktop,
         )}
     }

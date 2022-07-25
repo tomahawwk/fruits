@@ -14,6 +14,10 @@ const StyledPageHead = styled(Section)`
     grid-gap: 30px;
     justify-content: center;
     height: 45vh;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        height: auto;
+        padding: 70px 0 10px;
+    }
 `
 
 const StyledPageHeadTitle = styled(Title)`
@@ -30,6 +34,16 @@ const StyledPageHeadTitle = styled(Title)`
         right: 15%;
         font-weight: 300;
         opacity: .7;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        font-weight: 400;
+        font-size: 16px;
+        &:first-letter{
+            color: ${props => props.theme.colors.yellow};  
+        }
     }
 `
 
@@ -42,6 +56,9 @@ const StyledPageHeadPart = styled.div`
         font-weight: 400;
         font-size: 14px;
         color: rgba(255,255,255,.7);
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        display: none;
     }
 `
 

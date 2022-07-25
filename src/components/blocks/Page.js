@@ -30,6 +30,9 @@ const StyledPage = styled.div`
     }
     @media (max-width: ${props => props.theme.screen.tablet}){
         padding-left: 0;
+        &::-webkit-scrollbar{
+            width: 2px;
+        }
     }
 `
 

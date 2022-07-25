@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useContext } from 'react'
-import styled from 'styled-components'
+import React, { useContext } from 'react'
+import styled, { css } from 'styled-components'
 import { CSSTransition } from "react-transition-group";
 import AppContext from '../../../context';
 
@@ -9,6 +9,7 @@ import Button from '../../elements/Button';
 import Counter from '../../elements/Counter';
 import Price from '../../elements/Price';
 import AnimatedWord from '../../elements/AnimatedWord';
+import Picture from '../../elements/Picture';
 
 import Flex from '../../helpers/Flex';
 
@@ -36,21 +37,41 @@ const StyledCard = styled.div`
     &.exit-active {
         opacity: 0;
     }
+    @media (max-width: ${props => props.theme.screen.desktop}){
+        height: 53vh;
+    }
+    @media (max-width: ${props => props.theme.screen.desktopMin}){
+        height: 57vh;
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        grid-template-columns: 120px auto;
+        height: 130px;
+        grid-template-rows: auto;
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: ${props => props.theme.colors.grey};
+    }
 `
 
 const StyledCardImage = styled.div`
     overflow: hidden;
     width: 100%;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        padding: 10px;    
+    }
     img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            object-fit: contain;
+        }
     }
 `
 
 const StyledCardContent = styled(Flex)`
     padding: 20px;
     width: 100%;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        padding: 12px 15px;
+    }
 `
 
 const StyledCardFooterRow = styled.div`
@@ -60,7 +81,7 @@ const StyledCardFooterRow = styled.div`
     grid-gap: 10px;
     align-items: end;
     button{
-        & > *{
+        & > * {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -68,6 +89,11 @@ const StyledCardFooterRow = styled.div`
             top: 0;
         }
     }
+    ${props => props.desktop && css`
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
+    `}
 `
 
 const Card = (props) => {
@@ -83,9 +109,9 @@ const Card = (props) => {
         <CSSTransition in={!isLoading} appear={true} timeout={timeout}>
             <StyledCard style={{ transitionDelay: `${props.index * 50}ms` }}>
                 <StyledCardImage>
-                    <img src={ props.image }/>
+                    <Picture desktop={props.desktopImage} phone={props.phoneImage} alt={props.title} />
                 </StyledCardImage>
-                <StyledCardContent direction="column" justify="space-between">
+                <StyledCardContent direction="column" justify="space-between" gap="10px">
                     <Flex direction="column" gap="10px">
                         <Title>{ props.title }</Title>
                         <Text clamp="2">{ props.description }</Text>
@@ -98,7 +124,7 @@ const Card = (props) => {
                             </Flex>
                             <Text uppercase>Price for 1 pound</Text>
                         </StyledCardFooterRow>
-                        <StyledCardFooterRow>
+                        <StyledCardFooterRow desktop>
                             <Counter />
                             <Button outlined>
                                 <AnimatedWord text="ADD_TO_CART" />

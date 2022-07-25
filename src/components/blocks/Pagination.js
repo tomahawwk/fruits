@@ -8,6 +8,9 @@ const StyledPagination = styled(ReactPaginate)`
     grid-gap: 5px;
     list-style: none;
     margin-top: 35px;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        margin-top: 20px;
+    }
     .previous, .next{
         display: none;
     }
@@ -28,6 +31,11 @@ const StyledPagination = styled(ReactPaginate)`
         &:hover {
             border: 1px solid rgba(255,255,255,1);
         }
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            width: 35px;
+            height: 35px;
+            font-size: 10px;
+        }
     }
     
     li.selected{
@@ -44,7 +52,7 @@ const Pagination = ({ onChangePage }) => {
             breakLabel="..."
             onPageChange={e => onChangePage(e.selected + 1)}
             pageRangeDisplayed={10}
-            pageCount={1}
+            pageCount={2}
             renderOnZeroPageCount={null}
         />
     )

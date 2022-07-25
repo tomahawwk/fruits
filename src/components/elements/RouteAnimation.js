@@ -25,6 +25,9 @@ const StyledRouteAnimationOverlay = styled.svg`
     ${props => props.reverse && css`
         transform: rotate(0deg);
     `}
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        fill: ${props => props.theme.colors.yellow};
+    }
 `
 
 const RouteAnimation = (props) => {

@@ -16,12 +16,16 @@ const StyledText = styled.p`
         text-transform: uppercase;
         font-size: 9px;
         font-weight: 600;
+        white-space: nowrap;
     `}
 
     ${props => props.yellowLabel && css`
         color: ${props.theme.colors.yellow};
         font-family: ${props.theme.fonts.secondary};
     `}
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        font-size: ${props => props.size || '9px'};
+    }
 `
 
 const Text = (props) => {

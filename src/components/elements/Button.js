@@ -22,6 +22,9 @@ const StyledButton = styled.button`
             background-color: ${props => props.theme.colors.yellow};
             border: 1px solid ${props => props.theme.colors.yellow};
         }
+        @media (max-width: ${props => props.theme.screen.tablet}){
+            font-size: 9px;
+        }
     `}
     ${props => props.icon && css`
         width: ${props => props.width || "15px"};

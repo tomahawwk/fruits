@@ -18,11 +18,11 @@ const StyledSection = styled.section`
         )}
         min-height: 100vh;
     `}
-
+            
     ${props => props.grey && css`
         background-color: ${props => props.theme.colors.grey4};
     `}
-
+            
     ${props => props.grain && css`
         background-color: ${props => props.theme.colors.grey3};
         &:after {
@@ -54,6 +54,10 @@ const StyledSection = styled.section`
             pointer-events: none;
         }
     `}
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        background: none;
+        padding: ${props => props.theme.unit.phone}px 0;
+    }
 `
 
 const Section = (props) => {

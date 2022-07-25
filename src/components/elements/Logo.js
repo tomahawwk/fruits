@@ -25,6 +25,19 @@ const StyledLogo = styled(Link)`
             color: white;
         }
     `}
+
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        flex-direction: row;
+        grid-gap: 10px;
+        align-items: center;
+        b, p {
+            font-size: 22px;
+        }
+        p {
+            margin-top: 4px;
+            color: white;
+        }
+    }
 `
 
 const Logo = (props) => {

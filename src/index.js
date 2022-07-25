@@ -28,8 +28,10 @@ const theme = {
   },
   screen: {
     phone: "425px",
+    tabletMin: "600px",
     tablet: "900px",
-    desktop: "1440px"
+    desktopMin: "1240px",
+    desktop: "1480px"
   },
   fonts: {
     primary: "Facundo",
@@ -41,10 +43,11 @@ const theme = {
   },
   headerSize: {
     desktop: "140",
-    tablet: "90"
+    tablet: "70",
+    phone: "50",
   },
   unit: {
-    desktop: "90",
+    desktop: "80",
     tablet: "35",
     phone: "16"
   }

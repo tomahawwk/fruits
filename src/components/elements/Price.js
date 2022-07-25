@@ -10,7 +10,13 @@ const StyledPrice = styled.p`
         line-height: 1;
         margin-bottom: 3px;
         color: ${props => props.theme.colors.text};
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            font-size: 14px!important;
+        }
     `}
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        font-size: 20px;
+    }
 `
 
 const Price = (props) => {

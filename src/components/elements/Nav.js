@@ -19,6 +19,9 @@ const StyledNav = styled.ul`
             }
         }
     `}
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        display: none;
+    }
 `
 
 const Nav = (props) => {
