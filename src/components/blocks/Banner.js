@@ -20,6 +20,10 @@ const StyledBanner = styled.div`
         width: 100%;
         height: 100%;
     }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        padding: 30px ${props => props.theme.unit.phone}px 25px;
+        height: initial;
+    }
 `
 
 const StyledBannerImage = styled.img`
@@ -30,6 +34,10 @@ const StyledBannerImage = styled.img`
     height: 120%;
     left: 0;
     position: absolute;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        transform: scaleX(-1);
+        object-position: right;
+    }
 `
 
 const StyledBannerContent = styled.div`
@@ -41,6 +49,11 @@ const StyledBannerContent = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        width: 100%;
+        line-height: 50%;
+        grid-gap: 30px;
+    }
 `
 
 const StyledBannerLink = styled(Link)`
@@ -53,6 +66,10 @@ const StyledBannerLink = styled(Link)`
     align-items: center;
     transition-duration: .4s;
     width: fit-content;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        font-size: 10px;
+        grid-gap: 12px;
+    }
     &:hover {
         span{
             background-color: ${props => props.theme.colors.yellow};
@@ -74,6 +91,10 @@ const StyledBannerLink = styled(Link)`
         height: 35px;
         border: 1px solid white;
         transition-duration: inherit;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            width: 35px;
+            height: 25px;
+        }
         &:before, &:after {
             content: '';
             position: absolute;
@@ -86,10 +107,16 @@ const StyledBannerLink = styled(Link)`
             width: 9px;
             height: 1px;
             transition-duration: inherit;
+            @media (max-width: ${props => props.theme.screen.tabletMin}){
+                width: 7px;
+            }
         }
         &:after{
             width: 1px;
             height: 9px;
+            @media (max-width: ${props => props.theme.screen.tabletMin}){
+                height: 7px;
+            }
         }
     }
 `

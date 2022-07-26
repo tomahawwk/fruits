@@ -34,6 +34,9 @@ const StyledPage = styled.div`
             width: 2px;
         }
     }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        background: ${props => props.theme.colors.grey2};
+    }
 `
 
 const StyledPageInner = styled.div`

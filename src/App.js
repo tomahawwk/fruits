@@ -59,11 +59,9 @@ const App = () => {
     
     <AppWrapper>
       <AppContext.Provider value={{
-        menuOpened, 
-        routeAnimation,
-        setMenuOpened}}>
+        routeAnimation}}>
         <Header /> 
-        <AsideNav />
+        <AsideNav menuOpened={menuOpened} setMenuOpened={setMenuOpened}/>
         <TransitionGroup>
           <CSSTransition key={location.key} classNames="fade" timeout={timeout} onEnter={() => setRouteAnimation(true)} onEntered={() => setRouteAnimation(false)}>
             <Routes location={location}>
@@ -73,8 +71,8 @@ const App = () => {
             </Routes>
           </CSSTransition>
         </TransitionGroup>
-        <Menu />
-        <RouteAnimation />
+        <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened} setRouteAnimation={setRouteAnimation}/>
+        <RouteAnimation animation={routeAnimation} menuOpened={menuOpened} />
         <Cursor />
       </AppContext.Provider>
     </AppWrapper>

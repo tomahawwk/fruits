@@ -38,8 +38,7 @@ const StyledAsideNav = styled(Flex)`
     }
 `
 
-const AsideNav = (props) => {
-    const { menuOpened, setMenuOpened } = useContext(AppContext);
+const AsideNav = ({ menuOpened, setMenuOpened }) => {
     return (
         <StyledAsideNav justify="space-between" direction="column" height="100vh">
             <Burger click={() => setMenuOpened(!menuOpened)} />

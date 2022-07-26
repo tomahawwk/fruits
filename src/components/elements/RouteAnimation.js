@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import AppContext from '../../context';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from "gsap";
 
 const StyledRouteAnimation = styled.div`
@@ -21,7 +20,7 @@ const StyledRouteAnimationOverlay = styled.svg`
     height: 100%;
     transform: rotate(180deg);
     z-index: 1;
-    fill: ${props => props.theme.colors.light};
+    fill: ${props => props.theme.colors.grey5};
     ${props => props.reverse && css`
         transform: rotate(0deg);
     `}
@@ -30,25 +29,21 @@ const StyledRouteAnimationOverlay = styled.svg`
     }
 `
 
-const RouteAnimation = (props) => {
-    const { routeAnimation, menuOpened } = useContext(AppContext);
-    const [reverse, setReverse] = useState(true);
+const RouteAnimation = ({ animation, menuOpened }) => {
     const firstRenderRef = useRef(true);
     let isAnimating = false;
 
     useEffect(() => {
-        if (menuOpened === firstRenderRef.current || routeAnimation === firstRenderRef.current)
+        if (menuOpened === firstRenderRef.current || animation === firstRenderRef.current)
             overlayAnimation(false);
             
-        else if(routeAnimation === firstRenderRef.current)
+        else if(animation === firstRenderRef.current)
             overlayAnimation(true);
         
-    }, [routeAnimation, menuOpened, firstRenderRef])
+    }, [animation, menuOpened, firstRenderRef])
 
-    const overlayAnimation = (reverseFlag) => {
+    const overlayAnimation = () => {
         if ( isAnimating ) return;
-        console.log("ove")
-        setReverse(reverseFlag);
         isAnimating = true;
         const overlayPath = document.querySelector('.overlay__path');
         
@@ -103,7 +98,7 @@ const RouteAnimation = (props) => {
                 height="100%"
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
-                reverse={routeAnimation}
+                reverse={animation}
             >
                 <path vectorEffect="non-scaling-stroke" className="overlay__path" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
             </StyledRouteAnimationOverlay>

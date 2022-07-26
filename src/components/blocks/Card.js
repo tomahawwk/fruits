@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { CSSTransition } from "react-transition-group";
-import AppContext from '../../../context';
 
-import Title from '../../elements/Title';
-import Text from '../../elements/Text';
-import Button from '../../elements/Button';
-import Counter from '../../elements/Counter';
-import Price from '../../elements/Price';
-import AnimatedWord from '../../elements/AnimatedWord';
-import Picture from '../../elements/Picture';
+import Title from '../elements/Title';
+import Text from '../elements/Text';
+import Button from '../elements/Button';
+import Counter from '../elements/Counter';
+import Price from '../elements/Price';
+import AnimatedWord from '../elements/AnimatedWord';
+import Picture from '../elements/Picture';
+import { useSelector } from 'react-redux'
 
-import Flex from '../../helpers/Flex';
+import Flex from '../helpers/Flex';
 
 const StyledCard = styled.div`
     width: 100%;
@@ -44,12 +44,18 @@ const StyledCard = styled.div`
         height: 57vh;
     }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
-        grid-template-columns: 120px auto;
+        grid-template-columns: 100px auto;
         height: 130px;
         grid-template-rows: auto;
         border-radius: 4px;
         overflow: hidden;
         background-color: ${props => props.theme.colors.grey};
+        box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+        transform: translate(20px, 0px);
+    }
+    @media (max-width: ${props => props.theme.screen.phone}){
+        grid-template-columns: 90px auto;
+        height: 120px;
     }
 `
 
@@ -96,26 +102,33 @@ const StyledCardFooterRow = styled.div`
     `}
 `
 
-const Card = (props) => {
-    const { isLoading } = useContext(AppContext);
+const StyledCardContentHead = styled.div`
+    display: flex;
+    grid-gap: 10px;
+    flex-direction: column;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        grid-gap: 5px;
+    }
+`
 
+const Card = (props) => {
     const timeout = {
         appear: 0,
-        enter: 700,
-        exit: 700,
+        enter: 600,
+        exit: 600,
     } 
-
+    const loading = useSelector(state => state.filter.loading);
     return (
-        <CSSTransition in={!isLoading} appear={true} timeout={timeout}>
+        <CSSTransition in={!loading} appear={true} timeout={timeout}>
             <StyledCard style={{ transitionDelay: `${props.index * 50}ms` }}>
                 <StyledCardImage>
                     <Picture desktop={props.desktopImage} phone={props.phoneImage} alt={props.title} />
                 </StyledCardImage>
                 <StyledCardContent direction="column" justify="space-between" gap="10px">
-                    <Flex direction="column" gap="10px">
+                    <StyledCardContentHead>
                         <Title>{ props.title }</Title>
                         <Text clamp="2">{ props.description }</Text>
-                    </Flex>
+                    </StyledCardContentHead>
                     <Flex direction="column" gap="20px">
                         <StyledCardFooterRow>
                             <Flex align="end" gap="10px">

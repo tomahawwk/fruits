@@ -35,7 +35,6 @@ const StyledLogo = styled(Link)`
         }
         p {
             margin-top: 4px;
-            color: white;
         }
     }
 `

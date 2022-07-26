@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { setSort } from '../../redux/slices/filterSlice'
 
 const StyledSort = styled(Dropdown)`
     
@@ -17,8 +19,10 @@ const options = [
 ];
 
 const Sort = ({ value, onChangeSort}) => {
+    const dispatch = useDispatch();
+
     return (
-        <Dropdown options={options} onChange={(e) => onChangeSort(e)} placeholder={options[0].name} />
+        <Dropdown options={options} onChange={(e) => dispatch(setSort(e))} placeholder={options[0].name} />
     )
 }
 

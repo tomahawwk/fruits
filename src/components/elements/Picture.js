@@ -14,7 +14,7 @@ const StyledPicture = styled.picture`
 const Picture = (props) => {
     return (
         <StyledPicture {...props}>
-            <source srcset={props.phone} media="(max-width: 550px)" />
+            <source srcSet={props.phone} media="(max-width: 550px)" />
             <img src={props.desktop} alt={props.alt}/>
         </StyledPicture>
     )

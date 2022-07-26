@@ -13,12 +13,20 @@ const StyledFooter = styled.div`
     color: white;
     display: grid;
     grid-template-columns: 25fr 75fr;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        grid-template-columns: initial;
+    }
 `
 
 const StyledFooterPart = styled(Content)`
     background: ${props => props.theme.colors.black};
     padding-top: 40px;
     padding-bottom: 40px;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
     ${props => props.grey && css`
         background-color: ${props => props.theme.colors.grey4};
     `}
@@ -26,6 +34,20 @@ const StyledFooterPart = styled(Content)`
     ${props => props.bottom && css`
         align-items: center;
         display: flex;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            p {
+                text-align: center;
+                width: 100%;
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    `}
+
+    ${props => props.desktop && css`
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
     `}
 `
 
@@ -66,8 +88,8 @@ const Footer = (props) => {
             </StyledFooterPart>
             <Banner url="/" image="images/banner.jpg"/>
 
-            <StyledFooterPart grey>
-                <Logo row />
+            <StyledFooterPart grey desktop>
+                <Logo row="true" />
             </StyledFooterPart>
             <StyledFooterPart bottom>
                 <Flex width="100%" justify="space-between" align="center">

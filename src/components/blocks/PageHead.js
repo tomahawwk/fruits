@@ -17,6 +17,10 @@ const StyledPageHead = styled(Section)`
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         height: auto;
         padding: 70px 0 10px;
+        background: none;
+        &:before{
+            display: none;
+        }
     }
 `
 

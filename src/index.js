@@ -44,7 +44,7 @@ const theme = {
   headerSize: {
     desktop: "140",
     tablet: "70",
-    phone: "50",
+    phone: "60",
   },
   unit: {
     desktop: "80",
