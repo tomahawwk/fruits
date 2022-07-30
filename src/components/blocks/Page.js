@@ -21,7 +21,7 @@ const StyledPage = styled.div`
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar{
-        width: 5px;
+        width: 3px;
         height: 20px;
     }
         

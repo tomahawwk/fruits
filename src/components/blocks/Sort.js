@@ -9,7 +9,7 @@ const StyledSort = styled(Dropdown)`
     
 `
 
-const options = [
+export const sortOptions = [
     { label: "rating (desc)", value: 'rating' },
     { label: "rating (asc)", value: '-rating' },
     { label: 'price (desc)', value: 'price' },
@@ -18,11 +18,11 @@ const options = [
     { label: 'alphabet (asc)', value: '-title' }
 ];
 
-const Sort = ({ value, onChangeSort}) => {
+const Sort = () => {
     const dispatch = useDispatch();
 
     return (
-        <Dropdown options={options} onChange={(e) => dispatch(setSort(e))} placeholder={options[0].name} />
+        <Dropdown options={sortOptions} onChange={(e) => dispatch(setSort(e))} placeholder={sortOptions[0].name} />
     )
 }
 

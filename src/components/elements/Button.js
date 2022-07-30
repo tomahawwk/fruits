@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components'
 
 const StyledButton = styled.button`
     will-change: transform;
-    cursor: pointer;
+    ;
     border: none;
     background: none;
     ${props => props.outlined && css`

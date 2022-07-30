@@ -16,7 +16,7 @@ const StyledCounter = styled(Flex)`
     }
     button{
         align-self: center;
-        cursor: pointer;
+        ;
         background: none;
         color: ${props => props.theme.colors.light};
         border: none;

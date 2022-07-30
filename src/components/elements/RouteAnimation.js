@@ -31,6 +31,7 @@ const StyledRouteAnimationOverlay = styled.svg`
 
 const RouteAnimation = ({ animation, menuOpened }) => {
     const firstRenderRef = useRef(true);
+    const overlayPath = useRef();
     let isAnimating = false;
 
     useEffect(() => {
@@ -45,20 +46,19 @@ const RouteAnimation = ({ animation, menuOpened }) => {
     const overlayAnimation = () => {
         if ( isAnimating ) return;
         isAnimating = true;
-        const overlayPath = document.querySelector('.overlay__path');
         
         gsap.timeline({
             onComplete: () => isAnimating = false
         })
-        .set(overlayPath, {
+        .set(overlayPath.current, {
             attr: { d: 'M 0 100 V 100 Q 50 100 100 100 V 100 z' }
         })
-        .to(overlayPath, { 
+        .to(overlayPath.current, { 
             duration: 0.8,
             ease: 'power4.in',
             attr: { d: 'M 0 100 V 50 Q 50 0 100 50 V 100 z' }
         }, 0)
-        .to(overlayPath, { 
+        .to(overlayPath.current, { 
             duration: 0.3,
             ease: 'power2',
             attr: { d: 'M 0 100 V 0 Q 50 0 100 0 V 100 z' },
@@ -73,15 +73,15 @@ const RouteAnimation = ({ animation, menuOpened }) => {
         //     y: -200,
         //     stagger: 0.05
         // }, 0.2)
-        .set(overlayPath, { 
+        .set(overlayPath.current, { 
             attr: { d: 'M 0 0 V 100 Q 50 100 100 100 V 0 z' }
         })
-        .to(overlayPath, { 
+        .to(overlayPath.current, { 
             duration: 0.3,
             ease: 'power2.in',
             attr: { d: 'M 0 0 V 50 Q 50 0 100 50 V 0 z' }
         })
-        .to(overlayPath, { 
+        .to(overlayPath.current, { 
             duration: 0.8,
             ease: 'power4',
             attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' },
@@ -100,7 +100,7 @@ const RouteAnimation = ({ animation, menuOpened }) => {
                 preserveAspectRatio="none"
                 reverse={animation}
             >
-                <path vectorEffect="non-scaling-stroke" className="overlay__path" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+                <path vectorEffect="non-scaling-stroke" ref={overlayPath} d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
             </StyledRouteAnimationOverlay>
         </StyledRouteAnimation>
     )

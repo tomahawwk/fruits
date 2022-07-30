@@ -1,8 +1,7 @@
-import axios from 'axios';
+
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setLoading } from '../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
 import Flex from '../components/helpers/Flex';
 
@@ -26,49 +25,12 @@ const StyledCatalogFilters = styled(Flex)`
     }
 `
 
-const Catalog = (props) => {
+const Catalog = ({ catalogItems, setCurrentPage, searchValue, setSearchValue, sortType, categoryId }) => {
     const dispatch = useDispatch();
-
-    const categoryId = useSelector(state => state.filter.categoryId);
-    const sortType = useSelector(state => state.filter.sort.value);
-    const [catalogItems, setCatalogItems] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [searchValue, setSearchValue] = useState('');
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
     }
-
-    useEffect(() => {
-        dispatch(setLoading(true))
-        const category = categoryId > 0 ? `category=${categoryId}` : '';
-        const search = searchValue ? `&search=${searchValue}` : '';
-        const order = sortType.includes('-') ? 'asc' : 'desc';
-        const sort = sortType.replace('-', '');
-        async function fetchData() {
-          try{
-            const [catalogItemsResponse] = await Promise.all([
-              axios.get(`https://62bcc3246b1401736c008049.mockapi.io/items?page=${currentPage}&limit=10&${category}&sortBy=${sort}&order=${order}${search}`)
-            ]);
-            catalogItemsResponse.data.forEach((item, index) => {
-                item.index = index;
-            })
-            setCatalogItems(catalogItemsResponse.data);
-
-            
-            setTimeout(() => {
-                dispatch(setLoading(false))
-            }, 100)
-            
-          }
-          catch(error){ 
-            console.log("Ошибка при запросе фруктиков")
-          }
-        }
-        setTimeout(() => {
-            fetchData();
-        }, 600)
-    }, [categoryId, sortType, searchValue, currentPage]);
 
     const items = catalogItems.map((item) => (<Card key={item.key} {...item} />));
 
@@ -81,7 +43,7 @@ const Catalog = (props) => {
             />
             <Section grey>
                 <Content>
-                    <Search value={searchValue} setValue={setSearchValue} />
+                    <Search searchValue={searchValue} setSearchValue={setSearchValue} />
                     <StyledCatalogFilters justify="space-between">
                         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
                         <Sort value={sortType} />

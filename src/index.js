@@ -31,7 +31,7 @@ const theme = {
     tabletMin: "600px",
     tablet: "900px",
     desktopMin: "1240px",
-    desktop: "1480px"
+    desktop: "1440px"
   },
   fonts: {
     primary: "Facundo",
@@ -50,6 +50,10 @@ const theme = {
     desktop: "80",
     tablet: "35",
     phone: "16"
+  },
+  transition: {
+    duration: ".5s",
+    function: "cubic-bezier(.165,.84,.44,1)",
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { css } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import ReactPaginate from 'react-paginate';
 
@@ -23,7 +24,7 @@ const StyledPagination = styled(ReactPaginate)`
         color: white;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
+        ;
         letter-spacing: 0.04em;
         border: 1px solid rgba(255,255,255,.1);
         transition-duration: .4s;
@@ -47,12 +48,14 @@ const StyledPagination = styled(ReactPaginate)`
 
 
 const Pagination = ({ onChangePage }) => {
+    const { currentPage } = useSelector(state => state.filter);
     return (
         <StyledPagination
             breakLabel="..."
             onPageChange={e => onChangePage(e.selected + 1)}
             pageRangeDisplayed={10}
             pageCount={2}
+            forcePage={currentPage - 1}
             renderOnZeroPageCount={null}
         />
     )

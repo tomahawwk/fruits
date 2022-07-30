@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
-import React, { useState } from 'react';
+import React from 'react';
 import Section from './Section';
+
 import Link from '../elements/Link'
 
 const StyledMenu = styled.div`
@@ -26,6 +27,7 @@ const StyledMenuContent = styled(Section)`
     z-index: 0;
     padding: 150px 100px 100px;
     display: flex;
+    justify-content: space-between;
     ${props => props.open && css`
         opacity: 1;
         pointer-events: all;
@@ -42,8 +44,10 @@ const StyledMenuClose = styled.button`
     width: 30px;
     height: 30px;
     border: none;
+    transition-duration: .6s;
+    transition-timing-function: ease;
     z-index: 2;
-    &:before, &:after{
+    &:before, &:after {
         width: 100%;
         height: 2px;
         background-color: ${props => props.theme.colors.grey5}; 
@@ -58,12 +62,20 @@ const StyledMenuClose = styled.button`
         transition-duration: .4s;
         transition-timing-function: cubic-bezier(.165,.84,.44,1);
     }
-    &:before{
+
+    &:before {
         transform: rotate(45deg);
     }
 
-    &:after{
+    &:after {
         transform: rotate(-45deg);
+    }
+
+    &:hover {
+        transform: scale(.8);
+        &:before, &:after{
+            background-color: white;
+        }
     }
 `
 
@@ -79,6 +91,7 @@ const StyledMenuList = styled.ul`
     align-items: flex-start;
     height: fit-content;
     a {
+        overflow: hidden;
         span{
             text-transform: uppercase;
             font-size: 72px;
@@ -108,6 +121,26 @@ const StyledMenuList = styled.ul`
     }
 `
 
+const StyledMenuContacts = styled.ul`
+    max-width: 500px;
+    align-self: flex-end;
+    display: grid;
+    grid-gap: 25px;
+`
+
+const StyledMenuContact = styled.li`
+    display: grid;
+    grid-gap: 10px;
+    b{
+        color: white;
+        font-size: 22px;
+    }
+    p{
+        font-size: 18px;
+        color: ${props => props.theme.colors.grey5}
+    }
+`
+
 const Menu = ({ menuOpened, setMenuOpened }) => {
     let menuShow = false;
 
@@ -117,10 +150,19 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
                 <StyledMenuClose show={menuShow} onClick={() => setMenuOpened(!menuOpened)}/>
                 <StyledMenuList>
                     <li><Link to="/catalog"><span><b>C</b>atalog</span></Link></li> 
-                    <li><Link to="/catalog"><span><b>A</b>rticles</span></Link></li> 
-                    <li><Link to="/catalog"><span><b>A</b>bout</span></Link></li> 
-                    <li><Link to="/catalog"><span><b>H</b>ome</span></Link></li>
+                    <li><Link to="/articles"><span><b>A</b>rticles</span></Link></li> 
+                    <li><Link to="/"><span><b>H</b>ome</span></Link></li>
                 </StyledMenuList>
+                <StyledMenuContacts>
+                    <StyledMenuContact>
+                        <b>Phone</b>
+                        <p>8 (951) 667 59 73</p>
+                    </StyledMenuContact>
+                    <StyledMenuContact>
+                        <b>Location</b>
+                        <p>15, Begovaya, St. Petersburg</p>
+                    </StyledMenuContact>
+                </StyledMenuContacts>
             </StyledMenuContent>
         </StyledMenu>
     )

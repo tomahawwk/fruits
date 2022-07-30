@@ -3,7 +3,7 @@ import { fluidRange } from 'polished'
 
 const StyledBurger = styled.button`
     background-color: ${props => props.theme.colors.grey2};
-    cursor: pointer;
+    ;
     border: none;
     position: relative;
     ${props => fluidRange({
@@ -22,6 +22,8 @@ const StyledBurger = styled.button`
      props.theme.screen.tablet,
      props.theme.screen.desktop,
     )}
+    transition-duration: .6s;
+    transition-timing-function: ease;
     &:before, &:after, span{
         width: 30px;
         height: 2px;
@@ -34,9 +36,9 @@ const StyledBurger = styled.button`
         bottom: 0;
         margin: auto;
         will-change: transform;
-        transition-duration: .4s;
         transform-origin: left;
-        transition-timing-function: cubic-bezier(.165,.84,.44,1);
+        transition-duration: inherit;
+        transition-timing-function: inherit;
     }
     &:before{
         transform: translateY(-9px);
@@ -49,13 +51,13 @@ const StyledBurger = styled.button`
     }
     &:hover{
         &:before{
-            transform: translateY(-7px);
+            transform: translateY(-7px) scaleX(.8) translateX(3px);
         }
         span{
-            transform: scaleX(1) translateX(0px);
+            transform: scaleX(.8) translateX(3px);
         }
         &:after{
-            transform: translateY(7px) scaleX(1) translateX(0);
+            transform: translateY(7px) scaleX(.8) translateX(3px);
         }
     }
 `
