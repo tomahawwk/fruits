@@ -60,7 +60,7 @@ const StyledFooterContact = styled(Flex)`
     }
 
     a{
-        transition-duration: .4s;
+        transition-duration: ${props => props.theme.transition.duration};;
         &:hover{
             color: white;
         }

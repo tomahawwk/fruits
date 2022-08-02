@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
 import styled from 'styled-components'
 import Flex from '../helpers/Flex';
 import { fluidRange } from 'polished'
-import AppContext from '../../context';
 
 import Burger from '../elements/Burger';
 

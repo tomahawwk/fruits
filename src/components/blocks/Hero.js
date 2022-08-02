@@ -235,10 +235,6 @@ const Hero = (props) => {
                     slidesPerView={1}
                     speed="1500"
                     centeredSlides={true}
-                    autoplay={{
-                        delay: 3500,
-                        disableOnInteraction: false,
-                    }}
                     modules={[Autoplay, EffectFade]}
                     >
                     {slides.map((slide, index) => (

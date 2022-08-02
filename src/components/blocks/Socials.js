@@ -18,7 +18,7 @@ const StyledSocials = styled(Flex)`
         width: 100%;
         height: 100%;
         opacity: .5;
-        transition-duration: .4s;
+        transition-duration: ${props => props.theme.transition.duration};;
         fill: ${props => props.theme.colors.light};
     }
 `

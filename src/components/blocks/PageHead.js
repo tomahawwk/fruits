@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fluidRange } from 'polished'
 
 import Section from './Section';
 
 import Title from '../elements/Title';
 import Link from '../elements/Link'
+import { ArrowPrevIcon, ArrowNextIcon } from '../elements/Icons'
+
+import Flex from '../helpers/Flex'
 
 const StyledPageHead = styled(Section)`
     display: flex;
@@ -22,21 +24,24 @@ const StyledPageHead = styled(Section)`
             display: none;
         }
     }
+    & > * {
+        z-index: 2;
+    }
 `
 
 const StyledPageHeadTitle = styled(Title)`
     text-align: center;
     position: relative;
     width: fit-content;
-    &:before{
+    span{
         color: ${props => props.theme.colors.yellow};
         font-family: ${props => props.theme.fonts.secondary};
-        content: 'Goods';
         position: absolute;
         top: -20px;
         font-size: 32px;
-        right: 15%;
+        left: 60%;
         font-weight: 300;
+        white-space: nowrap;
         opacity: .7;
         @media (max-width: ${props => props.theme.screen.tabletMin}){
             display: none;
@@ -64,14 +69,19 @@ const StyledPageHeadPart = styled.div`
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         display: none;
     }
+
 `
 
 const PageHead = (props) => {
     return (
         <StyledPageHead grain>
-            <StyledPageHeadTitle t1>{ props.title }</StyledPageHeadTitle>
+            <StyledPageHeadTitle t1>{ props.title } <span>{ props.subtitle }</span></StyledPageHeadTitle>
             <StyledPageHeadPart>
                 <p>{props.back.name} / {props.next.name}</p>
+                <Flex justify="center" gap="15px">
+                    <Link to={props.back.url} arrow="true"><ArrowPrevIcon /></Link>
+                    <Link to={props.next.url} arrow="true"><ArrowNextIcon /></Link>
+                </Flex>
             </StyledPageHeadPart>
         </StyledPageHead>
     )

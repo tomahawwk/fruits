@@ -1,9 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import Button from './Button';
-import { BasketIcon } from './Icons';
 import Link from './Link';
+import BasketLink from './BasketLink';
 import AnimatedWord from './AnimatedWord';
 
 const StyledNav = styled.ul`
@@ -13,7 +12,7 @@ const StyledNav = styled.ul`
     ${props => props.footer && css`
         a{
             color: rgba(255,255,255,.5);
-            transition-duration: .4s;
+            transition-duration: ${props => props.theme.transition.duration};;
             &:hover {
                 color: white;
             }
@@ -40,9 +39,7 @@ const Nav = (props) => {
             
             {!props.footer &&
                 <li>
-                    <Button icon>
-                        <BasketIcon />
-                    </Button>
+                    <BasketLink />
                 </li>
             }
         </StyledNav>

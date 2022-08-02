@@ -64,7 +64,7 @@ const StyledBannerLink = styled(Link)`
     grid-gap: 20px;
     font-size: 12px;
     align-items: center;
-    transition-duration: .4s;
+    transition-duration: ${props => props.theme.transition.duration};;
     width: fit-content;
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         font-size: 10px;

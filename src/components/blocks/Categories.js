@@ -1,29 +1,35 @@
 import styled, {css} from 'styled-components'
 import React from 'react'
-
+import AnimatedWord from '../elements/AnimatedWord';
 const StyledCategories = styled.ul`
     display: flex;
-    grid-gap: 20px; 
+    grid-gap: 30px; 
     list-style: none;
-    margin-bottom: 20px;
 `
 
 const StyledCategory = styled.li`
-    padding: 5px;
-    border: none;
-    background: none;
-    color: ${props => props.theme.colors.grey5};
+    button {
+        font-weight: 500;
+        border: none;
+        background: none;
+        transition-duration: ${props => props.theme.transition.duration};;
+        color: ${props => props.theme.colors.grey5};
+        &:hover {
+            color: ${props => props.theme.colors.yellow};
+        }
+    }
     ${props => props.active && css`
-        color: ${props => props.theme.colors.light};
+        button{
+            color: ${props => props.theme.colors.yellow};
+        }
     `}
 `
 
 const Categories = ({ value, onChangeCategory }) => {
-
     const categories = [
         { title: "All" },
         { title: "Fruits" },
-        { title: "Exotic fruits" },
+        { title: "Exotic_fruits" },
         { title: "Berries" },
     ]
 
@@ -32,9 +38,13 @@ const Categories = ({ value, onChangeCategory }) => {
             {categories.map((category, index) => (
                 <StyledCategory
                     key={`category-${index}`}
-                    onClick={() => onChangeCategory(index)}
+                    
                     active={value === index ? true : false}
-                    >{category.title}</StyledCategory>
+                    >
+                <button onClick={() => onChangeCategory(index)}>
+                    <AnimatedWord text={category.title} />
+                </button>
+                </StyledCategory>
             ))}
         </StyledCategories>
     )

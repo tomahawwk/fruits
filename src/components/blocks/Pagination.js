@@ -27,7 +27,7 @@ const StyledPagination = styled(ReactPaginate)`
         ;
         letter-spacing: 0.04em;
         border: 1px solid rgba(255,255,255,.1);
-        transition-duration: .4s;
+        transition-duration: ${props => props.theme.transition.duration};;
         font-size: 12px;
         &:hover {
             border: 1px solid rgba(255,255,255,1);

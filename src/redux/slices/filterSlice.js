@@ -4,8 +4,8 @@ const initialState = {
     categoryId: 0,
     currentPage: 1,
     sort: { 
-        value: 'rating', 
-        label: 'rating'
+        label: 'rating (highest)', 
+        value: 'rating'
     },
     loading: false
 }

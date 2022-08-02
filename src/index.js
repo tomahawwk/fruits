@@ -8,7 +8,7 @@ import { store } from './redux/store'
 // Styles
 import './assets/styles/normalize.css'
 import './assets/styles/routing.css'
-import Fonts from "./assets/styles/Fonts";
+import './assets/styles/fonts.css'
 
 import {createGlobalStyle, ThemeProvider} from 'styled-components'
 
@@ -21,6 +21,7 @@ const theme = {
     grey4: "#07060B",
     grey5: "#929292",
     grey6: "#555555",
+    grey7: "#ADADAD",
     yellow: "#fbe201",
     light: "#FFF",
     altLight: "#F9F3DF",
@@ -77,7 +78,6 @@ root.render(
   <Router>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Fonts />
         <Global />
         <App />
       </ThemeProvider>

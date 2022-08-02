@@ -59,7 +59,7 @@ const StyledMenuClose = styled.button`
         bottom: 0;
         margin: auto;
         will-change: transform;
-        transition-duration: .4s;
+        transition-duration: ${props => props.theme.transition.duration};;
         transition-timing-function: cubic-bezier(.165,.84,.44,1);
     }
 
@@ -98,7 +98,7 @@ const StyledMenuList = styled.ul`
             font-weight: 700;
             color: ${props => props.theme.colors.grey3};
             display: inline-block;
-            transition-duration: .4s;
+            transition-duration: ${props => props.theme.transition.duration};;
             letter-spacing: 0.03em;
             text-shadow: 0 -1px 1px ${props => props.theme.colors.grey5}, -1px 0 1px ${props => props.theme.colors.grey5}, 0 1px 1px ${props => props.theme.colors.grey5}, 1px 0 1px ${props => props.theme.colors.grey5};
         }
@@ -113,7 +113,7 @@ const StyledMenuList = styled.ul`
                 
             }
             b{
-                transition-duration: .4s;
+                transition-duration: ${props => props.theme.transition.duration};;
                 color: ${props => props.theme.colors.yellow};
                 text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
             }

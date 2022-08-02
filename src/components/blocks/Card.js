@@ -114,8 +114,8 @@ const StyledCardContentHead = styled.div`
 const Card = (props) => {
     const timeout = {
         appear: 0,
-        enter: 600,
-        exit: 600,
+        enter: 700,
+        exit: 500,
     } 
     const loading = useSelector(state => state.filter.loading);
     return (

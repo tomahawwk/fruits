@@ -16,6 +16,7 @@ import PageHead from '../components/blocks/PageHead';
 import Pagination from '../components/blocks/Pagination';
 
 import Content from '../components/elements/Content';
+import SectionHead from '../components/elements/SectionHead';
 
 const StyledCatalog = styled(Page)``
 
@@ -38,16 +39,17 @@ const Catalog = ({ catalogItems, setCurrentPage, searchValue, setSearchValue, so
         <StyledCatalog mobileHeadImage="">
             <PageHead
                 title="Catalog"
+                subtitle="our goods"
                 back={{ name: "Home", url: "/" }}
                 next={{ name: "Articles", url: "/articles" }}
             />
             <Section grey>
                 <Content>
-                    <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-                    <StyledCatalogFilters justify="space-between">
+                    {/* <Search searchValue={searchValue} setSearchValue={setSearchValue} /> */}
+                    <SectionHead>
                         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
                         <Sort value={sortType} />
-                    </StyledCatalogFilters>
+                    </SectionHead>
                     <CardGrid> { items } </CardGrid>
                     <Flex justify="space-between">
                         <Pagination onChangePage={(number) => setCurrentPage(number)}/>

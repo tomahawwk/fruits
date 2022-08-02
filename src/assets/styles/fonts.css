@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'Holimount';
+  src: url("../fonts/holimount/Holimount.otf") format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url("../fonts/facundo/Facundo-Light.woff") format('woff'),
+    url("../fonts/facundo/Facundo-Light.woff2") format('woff2');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url("../fonts/facundo/Facundo-Regular.woff") format('woff'),
+    url("../fonts/facundo/Facundo-Regular.woff2") format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url("../fonts/facundo/Facundo-Bold.woff") format('woff'),
+    url("../fonts/facundo/Facundo-Bold.woff2") format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}

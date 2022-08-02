@@ -9,8 +9,6 @@ import { fluidRange } from 'polished'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import AppContext from './context';
-
 import Header from './components/blocks/Header';
 import AsideNav from './components/blocks/AsideNav';
 import Menu from './components/blocks/Menu';
@@ -23,6 +21,7 @@ import Main from './pages/Main';
 import Catalog from './pages/Catalog';
 import Articles from './pages/Articles';
 import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -134,9 +133,7 @@ const App = () => {
   
   return (
     <AppWrapper>
-      <AppContext.Provider value={{
-        routeAnimation}}>
-        <Header /> 
+      <Header /> 
         <AsideNav menuOpened={menuOpened} setMenuOpened={setMenuOpened}/>
         <TransitionGroup>
           <CSSTransition key={location.pathname} classNames="fade" timeout={timeout} onEnter={() => setRouteAnimation(true)} onEntered={() => setRouteAnimation(false)}>
@@ -153,6 +150,7 @@ const App = () => {
                   />
               }/>
               <Route path="/articles" exact element={ <Articles />}/>
+              <Route path="/cart" exact element={ <Cart />}/>
               <Route path="*" exact element={ <NotFound/>}  />
             </Routes>
           </CSSTransition>
@@ -160,7 +158,6 @@ const App = () => {
         <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened} setRouteAnimation={setRouteAnimation}/>
         <RouteAnimation animation={routeAnimation} menuOpened={menuOpened} />
         <Cursor />
-      </AppContext.Provider>
     </AppWrapper>
   );
 }
