@@ -1,19 +1,26 @@
 import styled, {css} from 'styled-components'
 import React from 'react'
 import Text from '../elements/Text'
-import Price from '../elements/Price'
-import Counter from '../elements/Counter';
+import BasketItem from '../elements/BasketItem'
+import { useSelector, useDispatch } from 'react-redux';
+import { clearItems } from '../../redux/slices/cartSlice';
 import Button from '../elements/Button';
+import AnimatedWord from '../elements/AnimatedWord';
 
 const StyledBasket = styled.div`
+    min-height: 50vh;
+`
 
+const StyledBasketContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
 `
 
 const StyledBasketHead = styled.div`
     display: grid;
-    grid-template-columns: 1fr 150px 150px 150px 120px;
+    grid-template-columns: 1fr 150px 150px 150px 100px;
     align-items: center;
-    margin-bottom: 20px;
     p {
         color: white;
         font-size: 12px;
@@ -34,76 +41,70 @@ const StyledBasketList = styled.ul`
     flex-direction: column;
 `
 
-const StyledBasketItem = styled.li`
-    width: 100%;
-    background: ${props => props.theme.colors.grey2};
-    padding: 15px 0;
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: 1fr 150px 150px 150px 120px;
+const StyledBasketFooter = styled.div`
+    justify-content: flex-end;
     align-items: center;
-    & > * {
-        color: ${props => props.theme.colors.grey7};
-        font-size: 16px;
-        font-weight: 500;
-        letter-spacing: 0.07em;
+    grid-gap: 25px;
+    display: flex;
+    & > div {
         display: flex;
-        padding: 0 15px;
-        &:not(:first-child) {
-            justify-content: center;
-        }
+        grid-gap: 20px;
+        align-items: center;
     }
-    .counter {
-        border: none;
+    p {
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        span {
+            color: ${props => props.theme.colors.yellow};
+        }
     }
 `
 
-const StyledBasketItemHead = styled.div`
-    display: flex;
-    align-items: center;
-    grid-gap: 15px;
-    img {
-        width: 90px;
-        height: 90px;
-    }
-    p {
-        font-size: 12px;
-        font-weight: 500;
-        color: ${props => props.theme.colors.grey7};
-    }
+const StyledBasketEmpty = styled.div`
+
 `
 
 const Basket = () => {
-    const goods = [
-        { title: "All" },
-        { title: "Fruits" },
-        { title: "Exotic fruits" },
-        { title: "Berries" },
-    ]
+    const dispatch = useDispatch();
+    const {items, totalPrice} = useSelector(state => state.cart);
+
+    const onClear = () => {
+        dispatch(clearItems());
+    }
 
     return (
         <StyledBasket>
-            <StyledBasketHead>
-                <Text uppercase="true">Product</Text>
-                <Text uppercase="true">Price</Text>
-                <Text uppercase="true">Quantity</Text>
-                <Text uppercase="true">Total</Text>
-                <Text uppercase="true">Delete</Text>
-            </StyledBasketHead>
-            <StyledBasketList>
-                {goods.map((item, index) => (
-                    <StyledBasketItem key={index}>
-                        <StyledBasketItemHead>
-                            <img src="images/cards/1.jpg" alt="123"/>
-                            <Text uppercase="true">{item.title}</Text>
-                        </StyledBasketItemHead>
-                        <Price>45$</Price>
-                        <Counter className="counter" />
-                        <Price>125$</Price>
-                        <div><Button close="true" /></div>
-                    </StyledBasketItem>
-                ))};
-            </StyledBasketList>
+            { items.length ?
+                <StyledBasketContent>
+                    <StyledBasketHead>
+                        <Text uppercase="true">Product</Text>
+                        <Text uppercase="true">Price</Text>
+                        <Text uppercase="true">Quantity</Text>
+                        <Text uppercase="true">Total</Text>
+                        <Text uppercase="true">Delete</Text>
+                    </StyledBasketHead>
+                    <StyledBasketList>
+                        {items.map((item, index) => (
+                            <li key={index}>
+                                <BasketItem {...item}/>
+                            </li>
+                        ))}
+                    </StyledBasketList>
+                    <StyledBasketFooter>
+                        <Button outlined="true" animated="true" grey="true" onClick={onClear}>
+                            <AnimatedWord text="Delete_all" />
+                        </Button>
+                        <Button outlined="true" animated="true">
+                            <AnimatedWord text={`Buy_for_${ totalPrice }_€`} />
+                        </Button>
+                    </StyledBasketFooter>
+                </StyledBasketContent>
+                :
+                <StyledBasketEmpty>
+                    
+                </StyledBasketEmpty>
+            }
         </StyledBasket>
     )
 }

@@ -60,6 +60,24 @@ const StyledBurger = styled.button`
             transform: translateY(7px) scaleX(.8) translateX(3px);
         }
     }
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        background: none;
+        width: 36px;
+        height: 36px;
+        &:before, &:after, span{
+            transform-origin: right;
+            height: px;
+        }
+        &:before{
+            transform: translateY(-6px) scaleX(.5);
+        }
+        span{
+            transform: scaleX(.6);
+        }
+        &:after{
+            transform: translateY(6px) scaleX(.3);
+        }
+    }
 `
 
 const Burger = (props) => {

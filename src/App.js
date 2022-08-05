@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import qs from 'qs';
-import { setLoading, setCurrentPage, setFilters } from './redux/slices/filterSlice';
-
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { fluidRange } from 'polished'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useSelector, useDispatch } from 'react-redux';
+import { setRouteAnimation, setAppearAnimation } from './redux/slices/animationSlice';
 
+// Blocks
 import Header from './components/blocks/Header';
 import AsideNav from './components/blocks/AsideNav';
 import Menu from './components/blocks/Menu';
-import { sortOptions } from './components/blocks/Sort';
 
+// Elements
 import RouteAnimation from './components/elements/RouteAnimation';
 import Cursor from './components/elements/Cursor';
 
+// Pages
 import Main from './pages/Main';
 import Catalog from './pages/Catalog';
 import Articles from './pages/Articles';
@@ -51,112 +50,43 @@ const AppWrapper = styled.div`
 
 const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
-  const isSearch = useRef(false);
-  const isMounted = useRef(false);
   const [menuOpened, setMenuOpened] = useState();
-  const [routeAnimation, setRouteAnimation] = useState();
-  const { categoryId, currentPage } = useSelector(state => state.filter);
-  const sort = useSelector(state => state.filter.sort);
-  const [catalogItems, setCatalogItems] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
-  }
+  const {routeAnimate} = useSelector(state => state.animation);
 
   const timeout = {
     appear: 1000,
     enter: 2000,
     exit: 1000,
   }
-
-  const fetchFruits = () => {
-    dispatch(setLoading(true))
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
-    const order = sort.value.includes('-') ? 'asc' : 'desc';
-    const sortValue = sort.value.replace('-', '');
-    async function fetchData() {
-      try{
-        const [catalogItemsResponse] = await Promise.all([
-          axios.get(`https://62bcc3246b1401736c008049.mockapi.io/items?page=${currentPage}&limit=10&${category}&sortBy=${sortValue}&order=${order}${search}`)
-        ]);
-        catalogItemsResponse.data.forEach((item, index) => {
-          item.index = index;
-        })
-        setCatalogItems(catalogItemsResponse.data);
-        setTimeout(() => {
-          dispatch(setLoading(false))
-        }, 600)
-      }
-      catch(error){ 
-        console.log("Ошибка при запросе фруктиков")
-      }
-    }
-    setTimeout(() => {
-      fetchData();
-    }, 600)
-  }
-
-  useEffect(() => {
-    if(window.location.search){
-      const params = qs.parse(window.location.search.substring(1))
-      const sort = sortOptions.find(obj => obj.value === params.sortProperty)
-      dispatch(
-        setFilters({
-          ...params,
-          sort
-        })
-      )
-    }
-  }, [])
-
-  useEffect(() => {
-    if(!isSearch.current) {
-      fetchFruits();
-    }
-    isSearch.current = false;
-  }, [categoryId, sort.value, searchValue, currentPage]);
-
-  useEffect(() => {
-    if(isMounted.current){
-      const queryString = qs.stringify({
-        sortProperty: sort.value,
-        categoryId,
-        currentPage
-      });
-      navigate(`?${queryString}`)
-    }
-    isMounted.current = true;
-  }, [categoryId, sort.value, searchValue, currentPage])
   
   return (
     <AppWrapper>
-      <Header /> 
+      <Header menuOpened={menuOpened} setMenuOpened={setMenuOpened}/> 
         <AsideNav menuOpened={menuOpened} setMenuOpened={setMenuOpened}/>
         <TransitionGroup>
-          <CSSTransition key={location.pathname} classNames="fade" timeout={timeout} onEnter={() => setRouteAnimation(true)} onEntered={() => setRouteAnimation(false)}>
+          <CSSTransition
+            key={location.pathname}
+            classNames="fade"
+            timeout={timeout}
+            onEnter={() => dispatch(setRouteAnimation(true))}
+            onExited={() => dispatch(setAppearAnimation(true))}
+            onEntered={() => {
+              dispatch(setRouteAnimation(false))
+              dispatch(setAppearAnimation(false))
+            }}
+            >
             <Routes location={location}>
-              <Route path="/" exact element={<Main/>} />
-              <Route path="/catalog" exact element={
-                <Catalog 
-                  catalogItems={catalogItems}
-                  setCurrentPage={onChangePage}
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                  sortType={sort.value}
-                  categoryId={categoryId}
-                  />
-              }/>
+              <Route path="/" exact element={ <Main/> } />
+              <Route path="/catalog" exact element={ <Catalog /> }/>
               <Route path="/articles" exact element={ <Articles />}/>
               <Route path="/cart" exact element={ <Cart />}/>
               <Route path="*" exact element={ <NotFound/>}  />
             </Routes>
           </CSSTransition>
         </TransitionGroup>
-        <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened} setRouteAnimation={setRouteAnimation}/>
-        <RouteAnimation animation={routeAnimation} menuOpened={menuOpened} />
+        <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened}/>
+        <RouteAnimation animation={routeAnimate} menuOpened={menuOpened} />
         <Cursor />
     </AppWrapper>
   );

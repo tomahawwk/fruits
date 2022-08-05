@@ -60,7 +60,7 @@ const StyledPageHeadPart = styled.div`
     display: flex;
     flex-direction: column;
     grid-gap: 20px;
-    p{
+    a, span{
         color: white;
         font-weight: 400;
         font-size: 14px;
@@ -69,7 +69,6 @@ const StyledPageHeadPart = styled.div`
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         display: none;
     }
-
 `
 
 const PageHead = (props) => {
@@ -77,7 +76,11 @@ const PageHead = (props) => {
         <StyledPageHead grain>
             <StyledPageHeadTitle t1>{ props.title } <span>{ props.subtitle }</span></StyledPageHeadTitle>
             <StyledPageHeadPart>
-                <p>{props.back.name} / {props.next.name}</p>
+                <Flex justify="center" gap="3px">
+                    <Link to={props.back.url}>{props.back.name}</Link>
+                    <span>/</span>
+                    <Link to={props.next.url}>{props.next.name}</Link>
+                </Flex>
                 <Flex justify="center" gap="15px">
                     <Link to={props.back.url} arrow="true"><ArrowPrevIcon /></Link>
                     <Link to={props.next.url} arrow="true"><ArrowNextIcon /></Link>

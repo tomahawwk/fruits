@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { CSSTransition } from "react-transition-group";
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, minusItem } from '../../redux/slices/cartSlice';
 
 import Title from '../elements/Title';
 import Text from '../elements/Text';
@@ -9,7 +11,6 @@ import Counter from '../elements/Counter';
 import Price from '../elements/Price';
 import AnimatedWord from '../elements/AnimatedWord';
 import Picture from '../elements/Picture';
-import { useSelector } from 'react-redux'
 
 import Flex from '../helpers/Flex';
 
@@ -17,6 +18,7 @@ const StyledCard = styled.div`
     width: 100%;
     z-index: 10;
     height: 43vh;
+    position: relative;
     display: grid;
     background-color: ${props => props.theme.colors.grey2};
     grid-template-rows: repeat(2, 1fr);
@@ -95,6 +97,11 @@ const StyledCardFooterRow = styled.div`
             top: 0;
         }
     }
+    & > p {
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
+    }
     ${props => props.desktop && css`
         @media (max-width: ${props => props.theme.screen.tabletMin}){
             display: none;
@@ -111,38 +118,123 @@ const StyledCardContentHead = styled.div`
     }
 `
 
-const Card = (props) => {
+const StyledCardButton = styled(Button)`
+    position: relative;
+    & > span {
+        right: 15px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        background-color: ${props => props.theme.colors.grey2};
+        color: white;
+        border-radius: 100%;
+        width: 24px;
+        height: 24px;
+        left: initial;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        transition-duration: ${props => props.theme.transition.duration};
+        transition-timing-function: ${props => props.theme.transition.function};
+    }
+    & > div {
+        transition-duration: .6s;
+        transition-timing-function: ${props => props.theme.transition.function};
+    }
+    ${props => props.active && css`
+        border: 1px solid ${props.theme.colors.yellow};
+        background: ${props.theme.colors.yellow};
+        will-change: initial;
+        color: black;
+        font-weight: 600;
+        & > div {
+            transform: translateX(-30px);
+            & > div div{
+                &:last-child{
+                    span {
+                        transform: skewX(0) translateY(-100%);
+                    }
+                }
+                &:first-child{
+                    span {
+                        transform: skewX(0deg) translateY(-100%);
+                    }
+                }
+            }
+        }
+        
+        & > span {
+            animation: counterAnimate .5s ease-in-out forwards;
+        }
+    `}
+    @keyframes counterAnimate {
+        0% { transform: scale(0) }
+        80% { transform: scale(1.05) }
+        100% { transform: scale(1) }
+    }
+`
+
+const StyledCardMobileButton = styled(Button)`
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    display: none;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        display: flex;
+    }
+`
+
+const Card = ({id, title, phoneImage, index, description, desktopImage, price, oldprice}) => {
+    const dispatch = useDispatch();
+    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id));
+    const { isLoading } = useSelector(state => state.fruits);
+    const count = cartItem ? cartItem.count : 0; 
+
+    const onClickAdd = () => {
+        const item = { id, title, price, desktopImage };
+        dispatch(addItem(item));
+    }
+
+    const onCountMinus = () => {
+        dispatch(minusItem(id))
+    }
+
     const timeout = {
-        appear: 0,
-        enter: 700,
-        exit: 500,
+        appear: 600,
+        enter: 600,
+        exit: 600,
     } 
-    const loading = useSelector(state => state.filter.loading);
+    
     return (
-        <CSSTransition in={!loading} appear={true} timeout={timeout}>
-            <StyledCard style={{ transitionDelay: `${props.index * 50}ms` }}>
+        <CSSTransition in={!isLoading} appear={true} timeout={timeout}>
+            <StyledCard style={{ transitionDelay: `${index * 50}ms` }}>
                 <StyledCardImage>
-                    <Picture desktop={props.desktopImage} phone={props.phoneImage} alt={props.title} />
+                    <Picture desktop={desktopImage} phone={phoneImage} alt={title} />
                 </StyledCardImage>
                 <StyledCardContent direction="column" justify="space-between" gap="10px">
                     <StyledCardContentHead>
-                        <Title>{ props.title }</Title>
-                        <Text clamp="2">{ props.description }</Text>
+                        <Title>{ title }</Title>
+                        <Text clamp="2">{ description }</Text>
                     </StyledCardContentHead>
                     <Flex direction="column" gap="20px">
                         <StyledCardFooterRow>
                             <Flex align="end" gap="10px">
-                                <Price>{ props.price }$</Price>
-                                <Price old>{ props.oldprice }$</Price>
+                                <Price>{ price } €</Price>
+                                <Price old>{ oldprice } €</Price>
                             </Flex>
                             <Text uppercase>Price for 1 pound</Text>
                         </StyledCardFooterRow>
                         <StyledCardFooterRow desktop>
-                            <Counter />
-                            <Button outlined>
-                                <AnimatedWord text="ADD_TO_CART" />
-                            </Button>
+                            <Counter onPlus={onClickAdd} onMinus={onCountMinus} count={count} />
+                            <StyledCardButton outlined="true" animated="true" onClick={onClickAdd} active={count > 0 && true}>
+                                <AnimatedWord text={count > 0 ? "ADD_MORE" : "ADD_TO_CART"} />
+                                { count > 0 && <span>{ count }</span> }
+                            </StyledCardButton>
                         </StyledCardFooterRow>
+                        <StyledCardMobileButton onClick={onClickAdd} quad="true">+</StyledCardMobileButton>
                     </Flex>
                 </StyledCardContent>
             </StyledCard>

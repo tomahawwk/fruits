@@ -49,14 +49,28 @@ const StyledFooterPart = styled(Content)`
             display: none;
         }
     `}
+
+    .contacts {
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+    }
 `
 
 const StyledFooterContact = styled(Flex)`
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        grid-gap: 7px;
+    }
     span, a{
         color: rgba(255,255,255,.4);
         text-decoration: none;
         width: fit-content;
         font-size: 14px;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            font-size: 12px;
+        }
     }
 
     a{
@@ -65,13 +79,31 @@ const StyledFooterContact = styled(Flex)`
             color: white;
         }
     }
+    div{
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            font-size: 12px;
+        }
+    }
+`
+
+const StyledFooterContacts = styled.div`
+    flex-direction: column;
+    height: 100%;
+    display: flex;
+    grid-gap: 25px;
+    justify-content: space-between;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        display: grid;
+        grid-gap: 20px 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
 `
 
 const Footer = (props) => {
     return (
         <StyledFooter>
             <StyledFooterPart>
-                <Flex direction="column" gap="25px" height="100%" justify="space-between">
+                <StyledFooterContacts>
                     <StyledFooterContact direction="column" gap="15px">
                         <Title size="14px">Github</Title>
                         <a href="https://github.com/tomahawwk/">@tomahawwk</a>
@@ -84,7 +116,7 @@ const Footer = (props) => {
                         <Title size="14px">Location</Title>
                         <span>St. Petersburg, Russia</span>
                     </StyledFooterContact>
-                </Flex>
+                </StyledFooterContacts>
             </StyledFooterPart>
             <Banner url="/" image="images/banner.jpg"/>
 

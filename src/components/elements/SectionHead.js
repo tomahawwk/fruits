@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 const StyledSectionHead = styled.div`
     display: flex;
@@ -15,6 +15,11 @@ const StyledSectionHead = styled.div`
         height: 1px;
         background: ${props => props.theme.colors.grey2};
     }
+    ${props => props.desktop && css`
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
+    `}
 `
 
 const SectionHead = (props) => {

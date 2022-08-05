@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import Flex from '../helpers/Flex';
 
@@ -8,15 +8,16 @@ const StyledCounter = styled(Flex)`
     border: 1px solid ${props => props.theme.colors.grey};
     padding: 15px 20px;
     justify-content: center;
+    
     div{
         align-self: center;
         font-size: 11px;
         font-weight: 500;
+        display: block;
         color: ${props => props.theme.colors.light};
     }
     button{
         align-self: center;
-        ;
         background: none;
         color: ${props => props.theme.colors.light};
         border: none;
@@ -24,24 +25,12 @@ const StyledCounter = styled(Flex)`
     }
 `
 
-const Counter = (props) => {
-    const [count, setCount] = useState(1);
-
-    const OnPlus = () => {
-        
-        setCount(count + 1);
-    }
-
-    const OnMinus = () => {
-        if(count > 0)
-            setCount(count - 1);
-    }
-
+const Counter = ({ count, onPlus, onMinus }) => {
     return (
-        <StyledCounter {...props} align="stretch" gap="8px">
-            <button onClick={OnMinus}>-</button>
-            <div>{count}</div>
-            <button onClick={OnPlus}>+</button>
+        <StyledCounter align="stretch" gap="8px">
+            <button onClick={onMinus}>-</button>
+            <div>{count > 0 ? count : 0}</div>
+            <button onClick={onPlus}>+</button>
         </StyledCounter>
     )
 }

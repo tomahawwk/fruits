@@ -51,11 +51,12 @@ const StyledBasketLinkCounter = styled.span`
 
 const BasketLink = (props) => {
     const { items } = useSelector(state => state.cart);
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 
     return (
         <StyledBasketLink {...props} to="/cart" icon="true">
             <BasketIcon />
-            <StyledBasketLinkCounter active={items.length > 0 && true}>{ items.length > 0 && items.length }</StyledBasketLinkCounter>
+            <StyledBasketLinkCounter active={totalCount > 0 && true}>{ totalCount > 0 && totalCount }</StyledBasketLinkCounter>
         </StyledBasketLink>
     )
 }

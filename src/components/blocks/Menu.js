@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components'
+import { setRouteAnimation } from '../../redux/slices/animationSlice';
+import { fluidRange } from 'polished'
 import React from 'react';
+import { useDispatch } from 'react-redux'
+import { useLocation } from "react-router-dom";
 import Section from './Section';
 
 import Link from '../elements/Link'
@@ -32,6 +36,27 @@ const StyledMenuContent = styled(Section)`
         opacity: 1;
         pointer-events: all;
     `}
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        background-color: ${props => props.theme.colors.grey3};
+        padding-top: 80px;
+        padding-bottom: 55px;
+        ${props => fluidRange({
+                prop: 'padding-left',
+                fromSize: `${props.theme.unit.phone}px`,
+                toSize: `${props.theme.unit.desktop}px`,
+            },
+            props.theme.screen.phone,
+            props.theme.screen.desktop,
+        )}
+        ${props => fluidRange({
+                prop: 'padding-right',
+                fromSize: `${props.theme.unit.phone}px`,
+                toSize: `${props.theme.unit.desktop}px`,
+            },
+            props.theme.screen.phone,
+            props.theme.screen.desktop,
+        )}
+    }
 `
 
 const StyledMenuClose = styled.button`
@@ -77,6 +102,20 @@ const StyledMenuClose = styled.button`
             background-color: white;
         }
     }
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        left: initial;
+        width: 20px;
+        height: 20px;
+        top: 22px;
+        ${props => fluidRange({
+            prop: 'right',
+            fromSize: `${props.theme.unit.phone}px`,
+            toSize: `${props.theme.unit.desktop}px`,
+            },
+            props.theme.screen.phone,
+            props.theme.screen.desktop,
+        )}
+    }
 `
 
 const StyledMenuList = styled.ul`
@@ -90,32 +129,75 @@ const StyledMenuList = styled.ul`
     grid-gap: 10px;
     align-items: flex-start;
     height: fit-content;
-    a {
-        overflow: hidden;
-        span{
-            text-transform: uppercase;
-            font-size: 72px;
-            font-weight: 700;
-            color: ${props => props.theme.colors.grey3};
-            display: inline-block;
-            transition-duration: ${props => props.theme.transition.duration};;
-            letter-spacing: 0.03em;
-            text-shadow: 0 -1px 1px ${props => props.theme.colors.grey5}, -1px 0 1px ${props => props.theme.colors.grey5}, 0 1px 1px ${props => props.theme.colors.grey5}, 1px 0 1px ${props => props.theme.colors.grey5};
-        }
-        b{
-            transition-duration: .1s;
-            text-shadow: 0 -1px 1px ${props => props.theme.colors.yellow}, -1px 0 1px ${props => props.theme.colors.yellow}, 0 1px 1px ${props => props.theme.colors.yellow}, 1px 0 1px ${props => props.theme.colors.yellow};
-        }
-        &:hover {
-            span{
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        grid-gap: 15px;
+    }
+    li {
+        &.is-active {
+            pointer-events: none;
+            div{
                 color: ${props => props.theme.colors.grey5};
                 text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
-                
+                @media (max-width: ${props => props.theme.screen.tablet}){
+                    color: white;
+                }
             }
-            b{
-                transition-duration: ${props => props.theme.transition.duration};;
+            span:first-child{
+                transition-duration: ${props => props.theme.transition.duration};
                 color: ${props => props.theme.colors.yellow};
                 text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
+                @media (max-width: ${props => props.theme.screen.tablet}){
+                    text-shadow: none;
+                    color: ${props => props.theme.colors.yellow};
+                }
+            }
+        }
+        a {
+            overflow: hidden;
+            div{
+                text-transform: uppercase;
+                ${props => fluidRange({
+                        prop: 'font-size',
+                        fromSize: `30px`,
+                        toSize: `72px`,
+                    },
+                    props.theme.screen.phone,
+                    props.theme.screen.desktop,
+                )}
+                font-weight: 700;
+                color: ${props => props.theme.colors.grey3};
+                display: inline-block;
+                transition-duration: ${props => props.theme.transition.duration};
+                letter-spacing: 0.03em;
+                text-shadow: 0 -1px 1px ${props => props.theme.colors.grey5}, -1px 0 1px ${props => props.theme.colors.grey5}, 0 1px 1px ${props => props.theme.colors.grey5}, 1px 0 1px ${props => props.theme.colors.grey5};
+                @media (max-width: ${props => props.theme.screen.tablet}){
+                    text-shadow: none;
+                    color: white;
+                    font-weight: 300;
+                    letter-spacing: 0.08em;
+                }
+            }
+            span:first-child{
+                transition-duration: .1s;
+                text-shadow: 0 -1px 1px ${props => props.theme.colors.yellow}, -1px 0 1px ${props => props.theme.colors.yellow}, 0 1px 1px ${props => props.theme.colors.yellow}, 1px 0 1px ${props => props.theme.colors.yellow};
+                @media (max-width: ${props => props.theme.screen.tablet}){
+                    text-shadow: none;
+                    color: ${props => props.theme.colors.yellow};
+                }
+            }
+            &:hover {
+                div{
+                    color: ${props => props.theme.colors.grey5};
+                    text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
+                }
+                span:first-child{
+                    transition-duration: ${props => props.theme.transition.duration};
+                    color: ${props => props.theme.colors.yellow};
+                    text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
+                    @media (max-width: ${props => props.theme.screen.tablet}){
+                        text-shadow: none;
+                    }
+                }
             }
         }
     }
@@ -126,6 +208,9 @@ const StyledMenuContacts = styled.ul`
     align-self: flex-end;
     display: grid;
     grid-gap: 25px;
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        display: none;
+    }
 `
 
 const StyledMenuContact = styled.li`
@@ -141,17 +226,59 @@ const StyledMenuContact = styled.li`
     }
 `
 
+const StyledMenuSymbol = styled.span`
+    ${props => props.first && css`
+        transition-duration: .1s;
+        text-shadow: 0 -1px 1px ${props => props.theme.colors.yellow}, -1px 0 1px ${props => props.theme.colors.yellow}, 0 1px 1px ${props => props.theme.colors.yellow}, 1px 0 1px ${props => props.theme.colors.yellow};
+    `}
+`
+
 const Menu = ({ menuOpened, setMenuOpened }) => {
+    const dispatch = useDispatch();
+    const links = [
+        { title: "home page", url: "" },
+        { title: "catalog", url: "catalog" },
+        { title: "articles", url: "articles" },
+        { title: "cart", url: "cart" },
+    ]
+
     let menuShow = false;
+    const location = useLocation();
+    const { pathname } = location;
+    const splitLocation = pathname.split("/");
+
+    const linkHandler = () => {
+        setMenuOpened(false);
+    }
+
+    const onCloseMenu = () => {
+        dispatch(setRouteAnimation(true));
+        setMenuOpened(!menuOpened);
+        setTimeout(() => {
+            dispatch(setRouteAnimation(false));
+        }, 2000)
+    }
 
     return (
         <StyledMenu>
             <StyledMenuContent open={menuOpened} grain>
-                <StyledMenuClose show={menuShow} onClick={() => setMenuOpened(!menuOpened)}/>
+                <StyledMenuClose show={menuShow} onClick={onCloseMenu}/>
                 <StyledMenuList>
-                    <li><Link to="/catalog"><span><b>C</b>atalog</span></Link></li> 
-                    <li><Link to="/articles"><span><b>A</b>rticles</span></Link></li> 
-                    <li><Link to="/"><span><b>H</b>ome</span></Link></li>
+                    {
+                        links.map((link) => 
+                            <li className={splitLocation[1] === link.url ? "is-active" : ""}>
+                                <Link to={`/${link.url}`} onClick={() => {linkHandler()}}>
+                                    <div>
+                                        {
+                                            Array.from(link.title).map((el, index) => 
+                                                <StyledMenuSymbol first={index === 0 && true} key={index}>{ el }</StyledMenuSymbol>
+                                            )
+                                        }
+                                    </div>
+                                </Link>
+                            </li> 
+                        )
+                    }
                 </StyledMenuList>
                 <StyledMenuContacts>
                     <StyledMenuContact>

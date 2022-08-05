@@ -4,6 +4,7 @@ const StyledPrice = styled.p`
     font-size: 24px;
     color: ${props => props.theme.colors.light};
     font-weight: 500;
+    white-space: nowrap;
     ${props => props.old && css`
         text-decoration: line-through;
         font-size: 18px;

@@ -27,6 +27,7 @@ const StyledAnimatedWordWrapper = styled.div`
 const StyledAnimatedWordPart = styled.div`
   display: inline-flex;
   left: 0;
+  grid-gap: 0.07em;
   ${props => props.bottom && css`
     position: absolute;
     left: 0;
@@ -34,6 +35,7 @@ const StyledAnimatedWordPart = styled.div`
   `}
 
   span{
+    will-change: transform;
     transition: transform .5s cubic-bezier(.67,.01,.27,1);
   }
 `

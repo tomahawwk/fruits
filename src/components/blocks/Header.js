@@ -4,6 +4,7 @@ import { fluidRange } from 'polished'
 
 import Logo from '../elements/Logo';
 import Nav from '../elements/Nav';
+import Burger from '../elements/Burger';
 
 const StyledHeader = styled(Flex)`
     ${props => fluidRange({
@@ -47,11 +48,19 @@ const StyledHeader = styled(Flex)`
     }
 `
 
-const Header = (props) => {
+const StyledHeaderMobileBurger = styled(Burger)`
+    display: none;
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        display: flex;
+    }
+`
+
+const Header = ({ menuOpened, setMenuOpened }) => {
     return (
         <StyledHeader justify="space-between" align="center" gap="20px" width="100%">
             <Logo />
             <Nav />
+            <StyledHeaderMobileBurger click={() => setMenuOpened(!menuOpened)}/>
         </StyledHeader>
     )
 }

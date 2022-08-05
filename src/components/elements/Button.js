@@ -65,6 +65,36 @@ const StyledButton = styled.button`
             transform: scale(.9);
         }
     `}
+    ${props => props.animated && css`
+        padding: 0;
+        & > div {
+            padding: 16px 35px 15px;
+        }
+    `}
+    ${props => props.grey && css`
+        color: ${props.theme.colors.grey5};
+        border: 1px solid ${props.theme.colors.grey2};
+    `}
+    ${props => props.quad && css`
+        transition-duration: ${props => props.theme.transition.duration};
+        transition-timing-function: ${props => props.theme.transition.function};
+        width: 30px;
+        height: 30px;
+        background: ${props.theme.colors.yellow};
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        text-align: center;
+        box-shadow: 0px 2px 6px rgba(0,0,0,.2);
+        font-size: 28px;
+        font-weight: 300;
+        will-change: transform;
+        &:active {
+            transform: scale(1.2);
+        }
+    `}
 `
 
 const Button = (props) => {

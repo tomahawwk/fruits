@@ -1,7 +1,6 @@
 import AnimatedCursor from "react-animated-cursor"
 
 const Cursor = (props) => {
-    
     return (
         <AnimatedCursor
             innerSize={5}

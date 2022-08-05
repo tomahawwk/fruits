@@ -59,17 +59,8 @@ const RouteAnimation = ({ animation, menuOpened }) => {
             duration: 0.3,
             ease: 'power2',
             attr: { d: 'M 0 100 V 0 Q 50 0 100 0 V 100 z' },
-            onComplete: () => {
-                //menuWrap.classList.add('menu-wrap--open');
-            }
         })
-        // // title elements
-        // .to([title.main, title.sub], { 
-        //     duration: 0.8,
-        //     ease: 'power3.in',
-        //     y: -200,
-        //     stagger: 0.05
-        // }, 0.2)
+
         .set(overlayPath.current, { 
             attr: { d: 'M 0 0 V 100 Q 50 100 100 100 V 0 z' }
         })
@@ -82,9 +73,6 @@ const RouteAnimation = ({ animation, menuOpened }) => {
             duration: 0.8,
             ease: 'power4',
             attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' },
-            onComplete: () => {
-                //menuWrap.classList.add('menu-wrap--open');
-            }
         })
     }
 
