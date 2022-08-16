@@ -1,9 +1,9 @@
 [
     {
       "key": 5,
-      "id": 5,
+      "id": "5",
       "rating": 4,
-      "title": "Tangerines",
+      "title": "Tangerine",
       "description": "Tangerines are smaller and less rounded than common oranges. The taste is considered less sour, as well as sweeter and stronger, than that of an orange. A ripe tangerine is firm to slightly soft, and pebbly-skinned with no deep grooves, as well as orange in color. The peel is thin, with little bitter white mesocarp.",
       "category": 1,
       "oldprice": 52,
@@ -13,8 +13,8 @@
     },
     {
       "key": 1,
-      "id": 1,
-      "title": "Lemons",
+      "id": "1",
+      "title": "Lemon",
       "description": "The lemon is a round, slightly elongated fruit, it has a strong and resistant skin, with an intense bright yellow colour when it is totaly ripe, giving off a special aroma when it is cut. The pulp is pale yellow, juicy and acid, divided in gores.",
       "category": 1,
       "oldprice": 58,
@@ -25,7 +25,7 @@
     },
     {
       "key": 2,
-      "id": 2,
+      "id": "2",
       "title": "Mango",
       "description": "The mango fruit is roughly oval in shape, with uneven sides. The fruit is a drupe, with an outer flesh surrounding a stone. The flesh is soft and bright yellow-orange in color. The skin of the fruit is yellow-green to red.",
       "category": 2,
@@ -37,7 +37,7 @@
     },
     {
       "key": 3,
-      "id": 3,
+      "id": "3",
       "title": "Coconut",
       "description": "Coconut is the fruit of a tropical palm plant. It has a hard shell, edible white flesh and clear liquid, sometimes referred to as “water,” which is often used as a beverage. Coconut flesh or “meat” is aromatic, chewy in texture and rich in taste.",
       "category": 2,
@@ -49,8 +49,8 @@
     },
     {
       "key": 4,
-      "id": 4,
-      "title": "Cherries",
+      "id": "4",
+      "title": "Cherrie",
       "description": "The fruit is a fleshy drupe (stone fruit) that is generally heart-shaped to nearly globular, about 2 cm (1 inch) in diameter, and varies in colour from yellow through red to nearly black. The acid content of the sweet cherry is low. The higher acid content of the sour cherry produces its characteristic tart flavour.",
       "category": 3,
       "oldprice": 45,
@@ -61,8 +61,8 @@
     },
     {
       "key": 6,
-      "id": 6,
-      "title": "Blackberries",
+      "id": "6",
+      "title": "Blackberrie",
       "description": "A berry is a small, pulpy, and often edible fruit. Typically, berries are juicy, rounded, brightly colored, sweet, sour or tart, and do not have a stone or pit, although many pips or seeds may be present.",
       "category": 3,
       "oldprice": 37,
@@ -73,8 +73,8 @@
     },
     {
       "key": 7,
-      "id": 7,
-      "title": "Pears",
+      "id": "7",
+      "title": "Pear",
       "description": "Pear fruits are generally sweeter and of softer texture than apples and are distinguished by the presence of hard cells in the flesh, the so-called grit, or stone cells. In general, pear fruits are elongate, being narrow at the stem end and broader at the opposite end.",
       "category": 1,
       "oldprice": 29,
@@ -85,7 +85,7 @@
     },
     {
       "key": 8,
-      "id": 8,
+      "id": "8",
       "title": "Garnet",
       "description": "Garnet derives from Old French grenat by metathesis, from Medieval Latin granatum as used in a different meaning 'of a dark red color'. This derivation may have originated from pomum granatum, describing the color of pomegranate pulp, or from granum, referring to 'red dye, cochineal'.",
       "category": 1,
@@ -97,7 +97,7 @@
     },
     {
       "key": 9,
-      "id": 9,
+      "id": "9",
       "title": "Pineapple",
       "description": "The pineapple (Ananas comosus) is a tropical plant with an edible fruit; it is the most economically significant plant in the family Bromeliaceae. The pineapple is indigenous to South America, where it has been cultivated for many centuries.",
       "category": 2,
@@ -109,7 +109,7 @@
     },
     {
       "key": 10,
-      "id": 10,
+      "id": "10",
       "title": "Avocado",
       "description": "An avocado is a bright green fruit with a large pit and dark leathery skin. They're also known as alligator pears or butter fruit. Avocados are a favorite of the produce section. They're the go-to ingredient for guacamole dips. And they're turning up in everything from salads and wraps to smoothies and even brownies.",
       "category": 2,
@@ -121,7 +121,7 @@
     },
     {
       "key": 11,
-      "id": 11,
+      "id": "11",
       "title": "Apple",
       "description": "Apples are an incredibly nutritious fruit that offers multiple health benefits. They're rich in fiber and antioxidants. Eating them is linked to a lower risk of many chronic conditions, including diabetes, heart disease, and cancer. Apples may also promote weight loss and improve gut and brain health.",
       "category": 1,

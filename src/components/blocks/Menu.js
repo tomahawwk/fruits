@@ -133,8 +133,30 @@ const StyledMenuList = styled.ul`
         grid-gap: 15px;
     }
     li {
+        width: fit-content;
+        position: relative;
+        @media (max-width: ${props => props.theme.screen.tablet}){
+            &:before {
+                content: '';
+                position: absolute;
+                transform-origin: left;
+                width: 100%;
+                height: 1px;
+                background: rgba(255,255,255,.15);
+                left: 0;
+                bottom: -3px;
+                transform: scaleX(0);
+                transition-duration: ${props => props.theme.transition.duration};
+                transition-timing-function: ${props => props.theme.transition.function};
+            }
+        }
         &.is-active {
             pointer-events: none;
+            @media (max-width: ${props => props.theme.screen.tablet}){
+                &:before {
+                    transform: scaleX(1);
+                }
+            }
             div{
                 color: ${props => props.theme.colors.grey5};
                 text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
@@ -189,6 +211,9 @@ const StyledMenuList = styled.ul`
                 div{
                     color: ${props => props.theme.colors.grey5};
                     text-shadow: 0 -1px 1px transparent, -1px 0 1px transparent, 0 1px 1px transparent, 1px 0 1px transparent;
+                    @media (max-width: ${props => props.theme.screen.tablet}){
+                        color: white;
+                    }
                 }
                 span:first-child{
                     transition-duration: ${props => props.theme.transition.duration};
@@ -265,8 +290,8 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
                 <StyledMenuClose show={menuShow} onClick={onCloseMenu}/>
                 <StyledMenuList>
                     {
-                        links.map((link) => 
-                            <li className={splitLocation[1] === link.url ? "is-active" : ""}>
+                        links.map((link, index) => 
+                            <li className={splitLocation[1] === link.url ? "is-active" : ""} key={index}>
                                 <Link to={`/${link.url}`} onClick={() => {linkHandler()}}>
                                     <div>
                                         {
