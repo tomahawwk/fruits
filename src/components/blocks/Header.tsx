@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 
 import Flex from '../helpers/Flex';
 import { fluidRange } from 'polished'
@@ -63,6 +63,17 @@ type MenuProps = {
 };
 
 const Header:FC<MenuProps> = ({ menuOpened, setMenuOpened }) => {
+    // useEffect(() => {
+    //     window.addEventListener('scroll', isSticky);
+    //     return () => {
+    //         window.removeEventListener('scroll', isSticky);
+    //     };
+    // });
+    // const isSticky = (e) => {
+    //     const header = document.querySelector('.header-section');
+    //     const scrollTop = window.scrollY;
+    //     scrollTop >= 250 ? header.classList.add('is-sticky') : header.classList.remove('is-sticky');
+    // };
     return (
         <StyledHeader justify="space-between" align="center" gap="20px" width="100%">
             <Logo />

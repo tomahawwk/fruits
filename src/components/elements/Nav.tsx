@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
+import { FadeY } from '../helpers/Animations';
 
 import Link from './Link';
 import BasketLink from './BasketLink';
@@ -26,6 +27,19 @@ const StyledNav = styled.ul<Props>`
     `}
   @media (max-width: ${(props) => props.theme.screen.tablet}) {
     display: none;
+  }
+  li {
+    opacity: 0;
+    animation: ${FadeY} 1s ${props => props.theme.transition.function} forwards;
+    &:nth-child(1){
+      animation-delay: .1s;
+    }
+    &:nth-child(2){
+      animation-delay: .3s;
+    }
+    &:nth-child(3){
+      animation-delay: .5s;
+    }
   }
 `;
 

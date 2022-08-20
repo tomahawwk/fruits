@@ -1,7 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledFlex = styled.div`
+interface Props {
+    width?: string;
+    height?: string;
+    direction?: string;
+    align?: string;
+    justify?: string;
+    gap?: string;
+}
+
+const StyledFlex = styled.div<Props>`
     display: flex;
     width: ${props => props.width || 'initial'};
     height: ${props => props.height || 'initial'};

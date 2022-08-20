@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { fluidRange } from 'polished'
 import Footer from './Footer';
 
 const StyledPage = styled.div`
@@ -10,14 +9,7 @@ const StyledPage = styled.div`
     height: 100%;
     z-index: 1;
     overflow-y: auto;
-    ${props => fluidRange({
-       prop: 'padding-left',
-       fromSize: `${props.theme.navSize.tablet}px`,
-       toSize: `${props.theme.navSize.desktop}px`,
-     },
-     props.theme.screen.tablet,
-     props.theme.screen.desktop,
-    )}
+    
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar{

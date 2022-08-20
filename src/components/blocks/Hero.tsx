@@ -2,9 +2,11 @@ import { MouseParallaxContainer, MouseParallaxChild } from 'react-parallax-mouse
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper';
+import { Autoplay, EffectFade, Pagination } from 'swiper';
 import 'swiper/css';
+import 'swiper/css/pagination';
 import { fluidRange } from 'polished';
+import { MoveY, FadeY } from '../helpers/Animations';
 
 import Section from './Section';
 import Content from '../elements/Content';
@@ -17,7 +19,7 @@ const StyledHero = styled.div`
 `;
 
 const StyledHeroContainer = styled(Section)`
-  padding: 0;
+  padding-right: 0;
   height: 100%;
   .swiper {
     width: 100%;
@@ -98,6 +100,38 @@ const StyledSlider = styled(Swiper)`
   @media (max-width: ${(props) => props.theme.screen.desktop}) {
     display: none;
   }
+  .swiper-pagination {
+    display: flex;
+    grid-gap: 10px;
+    justify-content: center;
+  }
+  .swiper-pagination-bullet {
+    cursor: none;
+    background: none;
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    transition-duration: .4s;
+    border: 1px solid rgba(255,255,255,.2);
+    opacity: 0;
+    animation: ${FadeY} 1s ${props => props.theme.transition.function} forwards;
+    &.swiper-pagination-bullet-active {
+      transform: scale(1.3);
+      border: 1px solid rgba(255,255,255,.7);
+    }
+    &:nth-child(1){
+      animation-delay: .4s;
+    }
+    &:nth-child(2){
+      animation-delay: .5s;
+    }
+    &:nth-child(3){
+      animation-delay: .6s;
+    }
+    &:nth-child(4){
+      animation-delay: .7s;
+    }
+  }
 `;
 
 const StyledSlide = styled(Content)`
@@ -171,6 +205,7 @@ const StyledHeroTitle = styled(Content)`
   justify-content: center;
   flex-direction: column;
   grid-gap: 20px;
+  
   p {
     font-size: 14px;
   }
@@ -180,10 +215,48 @@ const StyledHeroTitle = styled(Content)`
   }
   .title {
     position: relative;
-    display: inline;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    div {
+      overflow: hidden;
+      &:nth-child(1) span{
+        animation-delay: .4s;
+      }
+      &:nth-child(2) span{
+        animation-delay: .5s;
+      }
+    }
+    span {
+      transform: translateY(-120%);
+      animation: ${MoveY} 1s ${props => props.theme.transition.function} forwards;
+      line-height: 100%;
+    }
     p {
       font-size: 34px;
       margin-left: 10px;
+    }
+  }
+  .description {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    grid-gap: 7px;
+    p {
+      overflow: hidden;
+      &:nth-child(1) span{
+        animation-delay: .7s;
+      }
+      &:nth-child(2) span{
+        animation-delay: .8s;
+      }
+    }
+    span {
+      display: block;
+      transform: translateY(-120%);
+      animation: ${MoveY} 1s ${props => props.theme.transition.function} forwards;
+      line-height: 100%;
     }
   }
   @media (max-width: ${(props) => props.theme.screen.desktop}) {
@@ -275,7 +348,8 @@ const Hero: FC = () => {
           slidesPerView={1}
           speed={1500}
           centeredSlides={true}
-          modules={[Autoplay, EffectFade]}>
+          pagination={{ clickable: true }}
+          modules={[Autoplay, EffectFade, Pagination]}>
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <StyledSlide>
@@ -322,13 +396,12 @@ const Hero: FC = () => {
         </StyledSlider>
         <StyledHeroTitle>
           <Title t1 className="title">
-            Fruit<Text yellowLabel={true}>Premium</Text>
-            <br />
-            Delivery
+            <div><span>Fruit<Text yellowLabel={true}>Premium</Text></span></div>
+            <div><span>Delivery</span></div>
           </Title>
-          <div>
-            <Text>React fruits offers convenient fresh produce</Text>
-            <Text>No grocery store shopping required!</Text>
+          <div className="description">
+            <Text><span>React fruits offers convenient fresh produce</span></Text>
+            <Text><span>No grocery store shopping required!</span></Text>
           </div>
         </StyledHeroTitle>
       </StyledHeroContainer>

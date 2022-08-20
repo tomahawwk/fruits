@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import Flex from '../helpers/Flex';
 import { fluidRange } from 'polished'
 import { FC } from 'react';
-import Burger from '../elements/Burger';
+import { AsideAppear } from '../helpers/Animations';
 
-import Socials from './Socials';
+import { Burger } from '../elements';
+
+import { Socials } from './';
 
 const StyledAsideNav = styled(Flex)`
     position: fixed;
@@ -12,6 +14,7 @@ const StyledAsideNav = styled(Flex)`
     z-index: 3;
     padding-bottom: 40px;
     left: 0;
+    animation: ${AsideAppear} 1s ${props => props.theme.transition.function} forwards;
     background: ${props => props.theme.colors.grey3};
     ${props => fluidRange({
        prop: 'width',
@@ -34,6 +37,7 @@ const StyledAsideNav = styled(Flex)`
     @media (max-width: ${props => props.theme.screen.tablet}){
         display: none;
     }
+    
 `
 
 type MenuProps = {

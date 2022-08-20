@@ -1,11 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 
-import Page from '../components/blocks/Page';
-import PageHead from '../components/blocks/PageHead';
-import Section from '../components/blocks/Section';
-import Basket from '../components/blocks/Basket';
+import { Page, PageHead, Section, Basket } from '../components/blocks';
 
-import Content from '../components/elements/Content';
+import { Content } from '../components/elements';
 
 const StyledCart = styled(Page)``
 

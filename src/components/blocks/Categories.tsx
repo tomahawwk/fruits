@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components'
-import {FC} from 'react'
+import {FC, memo} from 'react'
 import AnimatedWord from '../elements/AnimatedWord';
 
 type CategoriesProps = {
@@ -7,7 +7,7 @@ type CategoriesProps = {
     onChangeCategory: (index: number) => void;
 }
 
-interface StyledProps {
+interface CategoriesStyledProps {
     active?: boolean;
 }
 
@@ -17,7 +17,7 @@ const StyledCategories = styled.ul`
     list-style: none;
 `
 
-const StyledCategory = styled.li<StyledProps>`
+const StyledCategory = styled.li<CategoriesStyledProps>`
     button {
         font-weight: 500;
         border: none;
@@ -35,28 +35,29 @@ const StyledCategory = styled.li<StyledProps>`
     `}
 `
 
-const Categories: FC<CategoriesProps> = ({ value, onChangeCategory }) => {
-    const categories = [
-        { title: "All" },
-        { title: "Fruits" },
-        { title: "Exotic_fruits" },
-        { title: "Berries" },
-    ]
-
-    return (
-        <StyledCategories>
-            {categories.map((category, index) => (
-                <StyledCategory
-                    key={`category-${index}`}
-                    active={value === index ? true : false}
-                    >
-                <button onClick={() => onChangeCategory(index)}>
-                    <AnimatedWord text={category.title} />
-                </button>
-                </StyledCategory>
-            ))}
-        </StyledCategories>
-    )
-}
+const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
+        const categories = [
+            { title: "All" },
+            { title: "Fruits" },
+            { title: "Exotic_fruits" },
+            { title: "Berries" },
+        ]
+    
+        return (
+            <StyledCategories>
+                {categories.map((category, index) => (
+                    <StyledCategory
+                        key={`category-${index}`}
+                        active={value === index ? true : false}
+                        >
+                    <button onClick={() => onChangeCategory(index)}>
+                        <AnimatedWord text={category.title} />
+                    </button>
+                    </StyledCategory>
+                ))}
+            </StyledCategories>
+        )
+    }
+)
 
 export default Categories;

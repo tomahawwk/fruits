@@ -5,6 +5,7 @@ interface Props {
   size?: string;
   t1?: boolean;
   t2?: boolean;
+  t3?: boolean;
 }
 
 export default styled.div<Props>`
@@ -29,7 +30,7 @@ export default styled.div<Props>`
       font-weight: 600;
     `}
 
-  ${(props) =>
+    ${(props) =>
     props.t2 &&
     css`
       ${(props) =>
@@ -45,4 +46,20 @@ export default styled.div<Props>`
       text-transform: initial;
       font-weight: 600;
     `}
+  ${(props) =>
+    props.t3 &&
+    css`
+      ${(props) =>
+        fluidRange(
+          {
+            prop: 'font-size',
+            fromSize: `22px`,
+            toSize: `28px`,
+          },
+          props.theme.screen.tablet,
+          props.theme.screen.desktop,
+        )}
+      text-transform: initial;
+      font-weight: 600;
+  `}
 `;

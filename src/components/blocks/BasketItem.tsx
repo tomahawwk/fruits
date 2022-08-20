@@ -1,12 +1,10 @@
 import {FC} from 'react';
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem, minusItem, CartItem } from '../../redux/slices/cartSlice';
+import { addItem, removeItem, minusItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
 
-import Price from './Price'
-import Counter from './Counter';
-import Button from './Button';
-import Text from './Text'
+import { Price, Counter, Button, Text } from '../elements/'
 
 type BasketItemProps = {
     title: string;
@@ -63,7 +61,7 @@ const BasketItem: FC<BasketItemProps> = ({ title, desktopImage, price, count, id
     }
 
     const onCountPlus = () => {
-        dispatch(addItem({id} as CartItem))
+        dispatch(addItem({ id } as CartItem))
     }
     const onCountMinus = () => {
         dispatch(minusItem(id))

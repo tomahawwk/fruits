@@ -1,12 +1,19 @@
 import styled, { css } from 'styled-components'
-import { setRouteAnimation } from '../../redux/slices/animationSlice';
+import { setRouteAnimation } from '../../redux/animation/slice';
 import { fluidRange } from 'polished'
-import React from 'react';
 import { useDispatch } from 'react-redux'
 import { useLocation } from "react-router-dom";
+import { FadeYDown, MoveY } from '../helpers/Animations';
+
 import Section from './Section';
 
 import Link from '../elements/Link'
+
+interface MenuStyledProps {
+    show?: boolean;
+    open?: boolean;
+    first?: boolean;
+}
 
 const StyledMenu = styled.div`
     position: fixed;
@@ -18,7 +25,7 @@ const StyledMenu = styled.div`
     pointer-events: none;
 `
 
-const StyledMenuContent = styled(Section)`
+const StyledMenuContent = styled(Section)<MenuStyledProps>`
     position: fixed;
     top: 0;
     left: 0;
@@ -59,7 +66,7 @@ const StyledMenuContent = styled(Section)`
     }
 `
 
-const StyledMenuClose = styled.button`
+const StyledMenuClose = styled.button<MenuStyledProps>`
     position: fixed;
     top: 40px;
     background: none;
@@ -84,7 +91,7 @@ const StyledMenuClose = styled.button`
         bottom: 0;
         margin: auto;
         will-change: transform;
-        transition-duration: ${props => props.theme.transition.duration};;
+        transition-duration: ${props => props.theme.transition.duration};
         transition-timing-function: cubic-bezier(.165,.84,.44,1);
     }
 
@@ -118,7 +125,7 @@ const StyledMenuClose = styled.button`
     }
 `
 
-const StyledMenuList = styled.ul`
+const StyledMenuList = styled.ul<MenuStyledProps>`
     list-style: none;
     margin: 0;
     padding: 0;
@@ -150,6 +157,31 @@ const StyledMenuList = styled.ul`
                 transition-timing-function: ${props => props.theme.transition.function};
             }
         }
+        &:nth-child(1){
+            a{
+                transition-delay: 1.7s;
+            }
+        }
+        &:nth-child(2){
+            a{
+                transition-delay: 1.6s;
+            }
+        }
+        &:nth-child(3){
+            a{
+                transition-delay: 1.5s;
+            }
+        }
+        &:nth-child(4){
+            a{
+                transition-delay: 1.4s;
+            }
+        }
+        &:nth-child(5){
+            a{
+                transition-delay: 1.3s;
+            }
+        }
         &.is-active {
             pointer-events: none;
             @media (max-width: ${props => props.theme.screen.tablet}){
@@ -175,8 +207,12 @@ const StyledMenuList = styled.ul`
             }
         }
         a {
-            overflow: hidden;
+            transform: translateY(-60px);
+            transition-duration: 1s;
+            opacity: 0;
+            display: block;
             div{
+                display: block;
                 text-transform: uppercase;
                 ${props => fluidRange({
                         prop: 'font-size',
@@ -188,7 +224,6 @@ const StyledMenuList = styled.ul`
                 )}
                 font-weight: 700;
                 color: ${props => props.theme.colors.grey3};
-                display: inline-block;
                 transition-duration: ${props => props.theme.transition.duration};
                 letter-spacing: 0.03em;
                 text-shadow: 0 -1px 1px ${props => props.theme.colors.grey5}, -1px 0 1px ${props => props.theme.colors.grey5}, 0 1px 1px ${props => props.theme.colors.grey5}, 1px 0 1px ${props => props.theme.colors.grey5};
@@ -226,6 +261,12 @@ const StyledMenuList = styled.ul`
             }
         }
     }
+    ${props => props.open && css`
+        li a {
+            transform: translateY(0);
+            opacity: 1;
+        }          
+    `}
 `
 
 const StyledMenuContacts = styled.ul`
@@ -238,7 +279,7 @@ const StyledMenuContacts = styled.ul`
     }
 `
 
-const StyledMenuContact = styled.li`
+const StyledMenuContact = styled.li<MenuStyledProps>`
     display: grid;
     grid-gap: 10px;
     b{
@@ -249,9 +290,36 @@ const StyledMenuContact = styled.li`
         font-size: 18px;
         color: ${props => props.theme.colors.grey5}
     }
+    b, p {
+        transform: translateY(-20px);
+        opacity: 0;
+        transition-duration: .6s;
+    }
+    &:nth-child(1){
+        b{
+            transition-delay: 1.9s;
+        }
+        p{
+            transition-delay: 1.8s;
+        }
+    }
+    &:nth-child(2){
+        b {
+            transition-delay: 1.7s;
+        }
+        p {
+            transition-delay: 1.6s;
+        }
+    }
+    ${props => props.open && css`
+        b, p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    `}
 `
 
-const StyledMenuSymbol = styled.span`
+const StyledMenuSymbol = styled.span<MenuStyledProps>`
     ${props => props.first && css`
         transition-duration: .1s;
         text-shadow: 0 -1px 1px ${props => props.theme.colors.yellow}, -1px 0 1px ${props => props.theme.colors.yellow}, 0 1px 1px ${props => props.theme.colors.yellow}, 1px 0 1px ${props => props.theme.colors.yellow};
@@ -288,7 +356,7 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
         <StyledMenu>
             <StyledMenuContent open={menuOpened} grain>
                 <StyledMenuClose show={menuShow} onClick={onCloseMenu}/>
-                <StyledMenuList>
+                <StyledMenuList open={menuOpened}>
                     {
                         links.map((link, index) => 
                             <li className={splitLocation[1] === link.url ? "is-active" : ""} key={index}>
@@ -306,11 +374,11 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
                     }
                 </StyledMenuList>
                 <StyledMenuContacts>
-                    <StyledMenuContact>
+                    <StyledMenuContact open={menuOpened}>
                         <b>Phone</b>
                         <p>8 (951) 667 59 73</p>
                     </StyledMenuContact>
-                    <StyledMenuContact>
+                    <StyledMenuContact open={menuOpened}>
                         <b>Location</b>
                         <p>15, Begovaya, St. Petersburg</p>
                     </StyledMenuContact>

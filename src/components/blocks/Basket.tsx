@@ -1,12 +1,12 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {FC} from 'react'
-import Text from '../elements/Text'
 import { useSelector, useDispatch } from 'react-redux';
-import { getCartSelector, clearItems } from '../../redux/slices/cartSlice';
+import { clearItems } from '../../redux/cart/slice';
+import { getCartSelector } from '../../redux/cart/selectors';
 
-import Button from '../elements/Button';
-import BasketItem from '../elements/BasketItem';
-import AnimatedWord from '../elements/AnimatedWord';
+import { BasketItem } from './';
+
+import { Button, AnimatedWord, Text } from '../elements';
 
 const StyledBasket = styled.div`
     min-height: 50vh;

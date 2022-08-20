@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState } from "../store";
-
-interface AnimationState {
-    routeAnimate: boolean;
-    appearAnimate: boolean;
-}
+import { AnimationState } from "./types";
 
 const initialState: AnimationState = {
     routeAnimate: false,
@@ -23,8 +18,6 @@ const animationSlice = createSlice({
         },
     }
 })
-
-export const getAnimationSelector = (state: RootState) => state.animation;
 
 export const { setRouteAnimation, setAppearAnimation } = animationSlice.actions;
 

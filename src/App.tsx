@@ -1,27 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { fluidRange } from 'polished'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from 'react-redux';
-import { setRouteAnimation, setAppearAnimation, getAnimationSelector } from './redux/slices/animationSlice';
+import { setRouteAnimation, setAppearAnimation } from './redux/animation/slice';
+import { getAnimationSelector } from './redux/animation/selectors';
 
-// Blocks
-import Header from './components/blocks/Header';
-import AsideNav from './components/blocks/AsideNav';
-import Menu from './components/blocks/Menu';
+import { Header, AsideNav, Menu } from './components/blocks';
 
-// Elements
-import RouteAnimation from './components/elements/RouteAnimation';
-import Cursor from './components/elements/Cursor';
+import { RouteAnimation, Cursor } from './components/elements';
 
-// Pages
-import Main from './pages/Main';
-import Catalog from './pages/Catalog';
-import Articles from './pages/Articles';
-import NotFound from './pages/NotFound';
-import Product from './pages/Product';
-import Cart from './pages/Cart';
+import { Main, Catalog, Articles, NotFound, Product, Cart } from './pages';
 
 const AppWrapper = styled.div`
   width: 100%;

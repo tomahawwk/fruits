@@ -1,6 +1,10 @@
-import styled, { css } from 'styled-components'
-import React, { useEffect, useRef } from 'react';
+import styled, {css} from 'styled-components'
+import { useEffect, useRef } from 'react';
 import { gsap } from "gsap";
+
+interface RouteStyledProps {
+    reverse: boolean;
+}
 
 const StyledRouteAnimation = styled.div`
     position: fixed;
@@ -12,13 +16,13 @@ const StyledRouteAnimation = styled.div`
     pointer-events: none;
 `
 
-const StyledRouteAnimationOverlay = styled.svg`
+const StyledRouteAnimationOverlay = styled.svg<RouteStyledProps>`
     position: fixed;
     top: 0;
     left: 0;
+    transform: rotate(180deg);
     width: 100%;
     height: 100%;
-    transform: rotate(180deg);
     z-index: 1;
     fill: ${props => props.theme.colors.grey5};
     ${props => props.reverse && css`
@@ -28,15 +32,20 @@ const StyledRouteAnimationOverlay = styled.svg`
 
 const RouteAnimation = ({ animation, menuOpened }) => {
     const firstRenderRef = useRef(true);
-    const overlayPath = useRef();
+    const overlayPath = useRef<SVGPathElement>(null);
     let isAnimating = false;
+    const path = overlayPath.current;
+
+    const completeAnimation = () => {
+        isAnimating = false
+    }
 
     useEffect(() => {
         if (menuOpened === firstRenderRef.current || animation === firstRenderRef.current)
-            overlayAnimation(false);
+            overlayAnimation();
             
         else if(animation === firstRenderRef.current)
-            overlayAnimation(true);
+            overlayAnimation();
         
     }, [animation, menuOpened, firstRenderRef])
 
@@ -45,31 +54,31 @@ const RouteAnimation = ({ animation, menuOpened }) => {
         isAnimating = true;
         
         gsap.timeline({
-            onComplete: () => isAnimating = false
+            onComplete: completeAnimation
         })
-        .set(overlayPath.current, {
+        .set(path, {
             attr: { d: 'M 0 100 V 100 Q 50 100 100 100 V 100 z' }
         })
-        .to(overlayPath.current, { 
+        .to(path, { 
             duration: 0.8,
             ease: 'power4.in',
             attr: { d: 'M 0 100 V 50 Q 50 0 100 50 V 100 z' }
         }, 0)
-        .to(overlayPath.current, { 
+        .to(path, { 
             duration: 0.3,
             ease: 'power2',
             attr: { d: 'M 0 100 V 0 Q 50 0 100 0 V 100 z' },
         })
 
-        .set(overlayPath.current, { 
+        .set(path, { 
             attr: { d: 'M 0 0 V 100 Q 50 100 100 100 V 0 z' }
         })
-        .to(overlayPath.current, { 
+        .to(path, { 
             duration: 0.3,
             ease: 'power2.in',
             attr: { d: 'M 0 0 V 50 Q 50 0 100 50 V 0 z' }
         })
-        .to(overlayPath.current, { 
+        .to(path, { 
             duration: 0.8,
             ease: 'power4',
             attr: { d: 'M 0 0 V 0 Q 50 0 100 0 V 0 z' },

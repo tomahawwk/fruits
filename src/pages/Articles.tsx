@@ -1,17 +1,9 @@
-import styled from 'styled-components';
+import React from 'react';
+import { Page, PageHead, Section } from '../components/blocks';
 
-import Page from '../components/blocks/Page';
-import PageHead from '../components/blocks/PageHead';
-import Section from '../components/blocks/Section';
-
-const StyledArticles = styled(Page)`
-    
-`
-
-const Articles = (props) => {
-
+const Articles = () => {
     return (
-        <StyledArticles>
+        <Page>
             <PageHead
                 title="Articles"
                 subtitle="about us"
@@ -21,7 +13,7 @@ const Articles = (props) => {
             <Section grey>
                 Articles
             </Section>
-        </StyledArticles>
+        </Page>
     )
 }
 

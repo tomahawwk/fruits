@@ -6,6 +6,7 @@ interface Props {
   icon?: number;
   plus?: boolean;
   arrow?: number;
+  arrowicon?: number;
   height?: number;
   color?: string;
   width?: number;
@@ -30,9 +31,9 @@ export default styled(Link)<Props>`
       color: ${(props) => props.theme.colors.light};
     `}
 
-  //Arrow link
+  //ArrowIcon link
   ${(props) =>
-    props.arrow &&
+    props.arrowicon &&
     css`
       transition-duration: ${(props) => props.theme.transition.duration};
       transition-timing-function: ${(props) => props.theme.transition.function};
@@ -50,8 +51,33 @@ export default styled(Link)<Props>`
           fill: white;
         }
       }
-    `}
-
+  `}
+  ${(props) =>
+    props.arrow &&
+    css`
+      text-transform: uppercase;
+      color: white;
+      display: flex;
+      align-items: center;
+      grid-gap: 15px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      transition-duration: ${(props) => props.theme.transition.duration};
+      transition-timing-function: ${(props) => props.theme.transition.function};
+      svg {
+        will-change: transform;
+        width: 32px;
+        height: 32px;
+        transition-duration: inherit;
+        transition-timing-function: inherit;
+        fill: white;
+      }
+      &:hover {
+        svg{
+          transform: translateX(5px);
+        }
+      }
+  `}
   // Icon link
   ${(p) =>
     p.icon &&

@@ -89,8 +89,8 @@ const PageHead: FC<Props> = ({title, subtitle, back, next}) => {
                     <Link to={next.url}>{next.name}</Link>
                 </Flex>
                 <Flex justify="center" gap="15px">
-                    <Link to={back.url} arrow={+true}><ArrowPrevIcon /></Link>
-                    <Link to={next.url} arrow={+true}><ArrowNextIcon /></Link>
+                    <Link to={back.url} arrowicon={+true}><ArrowPrevIcon /></Link>
+                    <Link to={next.url} arrowicon={+true}><ArrowNextIcon /></Link>
                 </Flex>
             </StyledPageHeadPart>
         </StyledPageHead>

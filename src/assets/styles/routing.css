@@ -7,7 +7,6 @@
 
 .fade-enter.fade-enter-active {
     opacity: 1;
-    
     transform: translate(0, 0);
     transition-delay: .8s;
 }
@@ -16,7 +15,6 @@
     opacity: 1;
     transform: translate(0, 0);
     z-index: 2;
-    
 }
   
 .fade-exit.fade-exit-active {

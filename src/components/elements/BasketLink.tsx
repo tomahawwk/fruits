@@ -1,10 +1,11 @@
-import {FC} from 'react'
+import {FC, useEffect, useRef} from 'react'
 import styled, { css } from 'styled-components'
 
 import { BasketIcon } from './Icons';
+
 import Link from './Link';
 import { useSelector } from 'react-redux';
-import { getCartSelector } from '../../redux/slices/cartSlice';
+import { getCartSelector } from '../../redux/cart/selectors';
 
 interface Props {
     active?: boolean;
@@ -57,6 +58,15 @@ const StyledBasketLinkCounter = styled.span<Props>`
 const BasketLink: FC = (props) => {
     const { items } = useSelector(getCartSelector);
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
+    const isMounted = useRef(false);
+
+    useEffect(() => {
+        if(isMounted.current){
+            const json = JSON.stringify(items);
+            localStorage.setItem('basket', json)
+        }
+        isMounted.current = true;
+    }, [items])
 
     return (
         <StyledBasketLink {...props} to="/cart" icon={+true}>

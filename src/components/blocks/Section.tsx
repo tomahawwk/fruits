@@ -13,6 +13,14 @@ export default styled.section<Props>`
   padding: 80px 0;
   position: relative;
   overflow: hidden;
+  ${props => fluidRange({
+       prop: 'padding-left',
+       fromSize: `${props.theme.navSize.tablet}px`,
+       toSize: `${props.theme.navSize.desktop}px`,
+     },
+     props.theme.screen.tablet,
+     props.theme.screen.desktop,
+  )}
   ${(props) =>
     props.hero &&
     css`

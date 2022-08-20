@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "target": "es5",
+      "baseUrl": "./",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
       "skipLibCheck": true,
@@ -16,6 +17,11 @@
       "noEmit": true,
       "jsx": "react-jsx",
       "noImplicitAny": false,
+      "typeRoots": ["./src/@types", "./node_modules/@types"],
+      "paths": {
+        // Aliases for the folders we want to use
+        "@images": ["./public/images"],
+      }
     },
     "include": [
       "src",

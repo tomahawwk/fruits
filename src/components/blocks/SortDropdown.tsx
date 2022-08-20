@@ -1,19 +1,20 @@
 import styled, {css} from 'styled-components'
-import {FC} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setSort, getFilterSelector, SortValueEnum } from '../../redux/slices/filterSlice'
+import {FC, memo} from 'react'
+import { useDispatch } from 'react-redux'
+import { setSort } from '../../redux/filter/slice'
+import { SortValueEnum, Sort } from '../../redux/filter/types'
 import { useEffect, useRef, useState } from 'react';
 
 interface SortProps {
-    value: string;
+    select: Sort;
 }
 
-interface StyledProps {
+interface SortStyledProps {
     active?: boolean;
     open?: boolean;
 }
 
-const StyledSort = styled.div`
+const StyledSortDropdown = styled.div`
     display: flex;
     grid-gap: 7px;
     align-items: center;
@@ -55,7 +56,7 @@ const StyledSortLabel = styled.button`
     }
 `
 
-const StyledSortPopup = styled.div<StyledProps>`
+const StyledSortPopup = styled.div<SortStyledProps>`
     position: absolute;
     top: 40px;
     right: 0;
@@ -82,7 +83,7 @@ const StyledSortPopup = styled.div<StyledProps>`
     }
 `
 
-const StyledSortButton = styled.button<StyledProps>`
+const StyledSortButton = styled.button<SortStyledProps>`
     background: none;
     border: none;
     transition-duration: ${props => props.theme.transition.duration};
@@ -110,11 +111,10 @@ export const sortOptions: SortItem[] = [
     { label: 'alphabet (Z-A)', value: SortValueEnum.ALPHABET_ASC }
 ];
 
-const Sort: FC<SortProps> = () => {
+const SortDropdown: FC<SortProps> = memo(({ select }) => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
-    const { sort } = useSelector(getFilterSelector);
 
     const onClickItem = (obj: SortItem) => {
         dispatch(setSort(obj));
@@ -132,20 +132,20 @@ const Sort: FC<SortProps> = () => {
     }, [])
 
     return (
-        <StyledSort ref={sortRef}>
+        <StyledSortDropdown ref={sortRef}>
             <span>Sort by:</span>
             <StyledSortLabel onClick={() => setOpen(!open)}>
-                <span>{ sort.label }</span>
+                <span>{ select.label }</span>
             </StyledSortLabel>
             <StyledSortPopup open={open}>
                 <ul>
                     {sortOptions.map((item, index) => (<li key={index}>
-                        <StyledSortButton onClick={() => onClickItem(item)} active={item.value === sort.value && true}>{item.label}</StyledSortButton>
+                        <StyledSortButton onClick={() => onClickItem(item)} active={item.value === select.value && true}>{item.label}</StyledSortButton>
                     </li>))}
                 </ul>
             </StyledSortPopup>
-        </StyledSort>
+        </StyledSortDropdown>
     )
-}
+});
 
-export default Sort;
+export default SortDropdown;

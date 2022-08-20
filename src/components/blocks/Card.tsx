@@ -3,16 +3,20 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom' 
 import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, minusItem, getCartItemById, CartItem } from '../../redux/slices/cartSlice';
-import { getFruitsSelector } from '../../redux/slices/fruitsSlice';
+import { addItem, minusItem } from '../../redux/cart/slice';
+import { getCartItemById } from '../../redux/cart/selectors';
+import { CartItem } from '../../redux/cart/types';
+import { getFruitsSelector } from '../../redux/fruits/selectors';
 
-import Title from '../elements/Title';
-import Text from '../elements/Text';
-import Button from '../elements/Button';
-import Counter from '../elements/Counter';
-import Price from '../elements/Price';
-import AnimatedWord from '../elements/AnimatedWord';
-import Picture from '../elements/Picture';
+import { 
+    Title,
+    Text,
+    Button,
+    Counter,
+    Price,
+    AnimatedWord,
+    Picture 
+} from '../elements/';
 
 import Flex from '../helpers/Flex';
 
@@ -27,7 +31,7 @@ type CardProps = {
     index: number;
 }
 
-interface StyledProps {
+interface CardStyledProps {
     desktop?: boolean;
     clamp?: number;
     active?: boolean;
@@ -101,7 +105,7 @@ const StyledCardContent = styled(Flex)`
     }
 `
 
-const StyledCardFooterRow = styled.div<StyledProps>`
+const StyledCardFooterRow = styled.div<CardStyledProps>`
     display: grid;
     width: 100%;
     grid-template-columns: 4fr 6fr;
@@ -127,16 +131,17 @@ const StyledCardFooterRow = styled.div<StyledProps>`
     `}
 `
 
-const StyledCardContentHead = styled.div`
+const StyledCardContentHead = styled(Link)`
     display: flex;
     grid-gap: 10px;
     flex-direction: column;
+    text-decoration: none;
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         grid-gap: 5px;
     }
 `
 
-const StyledCardButton = styled(Button)<StyledProps>`
+const StyledCardButton = styled(Button)<CardStyledProps>`
     position: relative;
     & > span {
         right: 15px;
@@ -250,7 +255,7 @@ const Card: FC<CardProps> = ({
                     <Picture desktop={desktopImage} phone={phoneImage} alt={title} />
                 </StyledCardImage>
                 <StyledCardContent direction="column" justify="space-between" gap="10px">
-                    <StyledCardContentHead>
+                    <StyledCardContentHead to={`/catalog/${id}`}>
                         <Title>{ title }</Title>
                         <Text clamp="2">{ description }</Text>
                     </StyledCardContentHead>

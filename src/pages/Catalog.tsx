@@ -1,29 +1,32 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentPage, setFilters, setCategoryId, getFilterSelector, FilterState } from '../redux/slices/filterSlice';
-import { fetchFruits, setLoading, getFruitsSelector, SearchParams, Fruit } from '../redux/slices/fruitsSlice';
-import { getAnimationSelector } from '../redux/slices/animationSlice';
+import { setCurrentPage, setFilters, setCategoryId } from '../redux/filter/slice';
+import { getFilterSelector } from '../redux/filter/selectors';
+import { SearchParams, Fruit } from '../redux/fruits/types';
+import { setLoading } from '../redux/fruits/slice';
+import { fetchFruits } from '../redux/fruits/asyncActions';
+import { getFruitsSelector } from '../redux/fruits/selectors';
+import { getAnimationSelector } from '../redux/animation/selectors';
 import Flex from '../components/helpers/Flex';
-
-import Page from '../components/blocks/Page';
-import Search from '../components/blocks/Search';
-import CardGrid from '../components/blocks/CardGrid';
-import Card from '../components/blocks/Card';
-import Section from '../components/blocks/Section';
-import Categories from '../components/blocks/Categories';
-import Sort from '../components/blocks/Sort';
-import PageHead from '../components/blocks/PageHead';
-import Pagination from '../components/blocks/Pagination';
-import { sortOptions } from '../components/blocks/Sort';
-
-import Content from '../components/elements/Content';
-import Preloader from '../components/elements/Preloader';
-import Error from '../components/elements/Error';
-import SectionHead from '../components/elements/SectionHead';
 import { useAppDispatch } from '../redux/store';
+
+import {
+  Page,
+  CardGrid,
+  Card,
+  Search,
+  Section,
+  Categories,
+  SortDropdown,
+  PageHead,
+  Pagination,
+} from '../components/blocks';
+
+import { Content, Preloader, Error, SectionHead } from '../components/elements';
+import { sortOptions } from '../components/blocks/SortDropdown';
 
 const StyledCatalog = styled(Page)`
   position: relative;
@@ -51,10 +54,10 @@ const Catalog = () => {
     const [canFetch, setCanFetch] = useState(false);
     const {sort} = useSelector(getFilterSelector);
     const [searchValue, setSearchValue] = useState('');
-    
-    const onChangeCategory = (id) => {
-        dispatch(setCategoryId(id));
-    }
+
+    const onChangeCategory = useCallback((id: number) => {
+      dispatch(setCategoryId(id));
+    }, [])
 
     const onChangePage = (number) => {
       dispatch(setCurrentPage(number));
@@ -62,7 +65,6 @@ const Catalog = () => {
     }
 
     const getFruits = () => {
-      console.log("getFruits")
         dispatch(setLoading(true))
         const category = categoryId > 0 ? `category=${categoryId}` : '';
         const search = searchValue ? `&search=${searchValue}` : '';
@@ -76,7 +78,7 @@ const Catalog = () => {
               search,
               order,
               sortBy,
-              currentPage
+              currentPage: String(currentPage),
             })
           );
         }
@@ -85,20 +87,6 @@ const Catalog = () => {
           getData();
         }, 600)
     }
-    
-    useEffect(() => {
-        if(window.location.search){
-          const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
-          const sort = sortOptions.find(obj => obj.value === params.sortBy)
- 
-          dispatch(setFilters({
-            searchValue: params.search,
-            categoryId: Number(params.category),
-            currentPage: Number(params.currentPage),
-            sort: sort || sortOptions[0]
-          }))
-        }
-    }, [])
     
     useEffect(() => {
       if(appearAnimate){
@@ -144,6 +132,19 @@ const Catalog = () => {
       getFruits();
       setCanFetch(true)
     }
+    
+    useEffect(() => {
+      if(window.location.search){
+        const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
+        const sort = sortOptions.find(obj => obj.value === params.sortBy)
+        dispatch(setFilters({
+          searchValue: params.search,
+          categoryId: Number(params.category),
+          currentPage: Number(params.currentPage),
+          sort: sort || sortOptions[0]
+        }))
+      }
+    }, [])
 
     const catalogItems = localItems.map((item: Fruit) => (<Card key={item.index} {...item} />));
 
@@ -159,10 +160,10 @@ const Catalog = () => {
                 <Content >
                     <div className="anchor" ref={anchor} />
                     <StyledCatalogHead>
-                      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+                      {/* <Search searchValue={searchValue} setSearchValue={setSearchValue} /> */}
                       <SectionHead desktop={true}>
                           <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-                          <Sort value={sort.value} />
+                          <SortDropdown select={sort} />
                       </SectionHead>
                     </StyledCatalogHead>
                     { status === "failure" ?
@@ -177,7 +178,6 @@ const Catalog = () => {
                           </Flex> }
                       </>
                     }
-                    
                 </Content>
             </Section>
         </StyledCatalog>

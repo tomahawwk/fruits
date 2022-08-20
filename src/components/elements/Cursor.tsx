@@ -25,6 +25,7 @@ const Cursor = () => {
         'textarea',
         'button',
         '.link',
+        '.swiper-pagination-bullet'
       ]}
     />
   );

@@ -1,12 +1,12 @@
-import React from 'react'
 import styled from 'styled-components'
 import { fluidRange } from 'polished'
 import Flex from '../components/helpers/Flex';
 
-import Section from '../components/blocks/Section';
-import Page from '../components/blocks/Page';
+import { Section, Page } from '../components/blocks';
 
-import Title from '../components/elements/Title';
+import { Title } from '../components/elements';
+import React from 'react';
+
 
 const StyledNotFound = styled(Page)`
     overflow: hidden;
@@ -76,8 +76,8 @@ const StyledNotFoundHead = styled(Flex)`
 
 const NotFound = () => {
     return (
-        <StyledNotFound withoutFooter>
-            <StyledNotFoundSection grain>
+        <StyledNotFound withoutFooter={true}>
+            <StyledNotFoundSection grain={true}>
                 <StyledNotFoundHead>
                     <span>Error</span>
                     <b>404</b>

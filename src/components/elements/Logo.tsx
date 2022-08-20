@@ -1,6 +1,7 @@
 import {FC} from 'react'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom';
+import { FadeY } from '../helpers/Animations';
 
 interface Props {
     row?: number;
@@ -10,6 +11,7 @@ const StyledLogo = styled(Link)<Props>`
     text-decoration: none;
     color: ${props => props.theme.colors.light};
     display: flex;
+    animation: ${FadeY} 1s ${props => props.theme.transition.function} forwards;
     flex-direction: column;
     b {
         font-family: ${props => props.theme.fonts.primary};

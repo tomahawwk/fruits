@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FC } from 'react';
+import { fluidRange } from 'polished';
+
 import Content from '../elements/Content';
 import Logo from '../elements/Logo';
 
@@ -14,6 +16,14 @@ const StyledFooter = styled.div`
   color: white;
   display: grid;
   grid-template-columns: 25fr 75fr;
+  ${props => fluidRange({
+       prop: 'padding-left',
+       fromSize: `${props.theme.navSize.tablet}px`,
+       toSize: `${props.theme.navSize.desktop}px`,
+     },
+     props.theme.screen.tablet,
+     props.theme.screen.desktop,
+  )}
   @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
     grid-template-columns: initial;
   }
@@ -114,15 +124,15 @@ const Footer: FC = () => {
         <StyledFooterContacts>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">Github</Title>
-            <a href="https://github.com/tomahawwk/">@tomahawwk</a>
+            <a href="https://github.com/tomahawwk/" target="_blank">@tomahawwk</a>
           </StyledFooterContact>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">LinkedIn</Title>
-            <a href="https://t.me/tom_ahawk">@tom_ahawk</a>
+            <a href="https://t.me/tom_ahawk" target="_blank">@tom_ahawk</a>
           </StyledFooterContact>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">Telegram</Title>
-            <a href="https://t.me/tom_ahawk">@tom_ahawk</a>
+            <a href="https://t.me/tom_ahawk" target="_blank">@tom_ahawk</a>
           </StyledFooterContact>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">Location</Title>

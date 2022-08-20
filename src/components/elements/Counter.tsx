@@ -22,19 +22,25 @@ const StyledCounter = styled(Flex)`
         display: block;
         color: ${props => props.theme.colors.light};
     }
+    
     button{
         align-self: center;
         background: none;
         color: ${props => props.theme.colors.light};
         border: none;
         font-size: 14px;
+        transition-duration: .4s;
+        &:disabled {
+            pointer-events: none;
+            opacity: .5;
+        }
     }
 `
 
 const Counter:FC<CounterProps> = ({ count, onPlus, onMinus }) => {
     return (
         <StyledCounter align="stretch" gap="8px">
-            <button onClick={onMinus}>-</button>
+            <button disabled={count === 1} onClick={onMinus}>-</button>
             <div>{count > 0 ? count : 0}</div>
             <button onClick={onPlus}>+</button>
         </StyledCounter>
