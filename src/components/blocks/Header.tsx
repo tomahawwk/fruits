@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import {FC, useEffect} from 'react';
+import { FC } from 'react';
 
 import Flex from '../helpers/Flex';
+import { FadeY } from '../helpers/Animations';
 import { fluidRange } from 'polished'
 
 import Logo from '../elements/Logo';
@@ -55,6 +56,9 @@ const StyledHeaderMobileBurger = styled(Burger)`
     @media (max-width: ${props => props.theme.screen.tablet}){
         display: flex;
     }
+    animation: ${FadeY} 1s ${props => props.theme.transition.function} forwards;
+    animation-delay: .1s;
+    opacity: 0;
 `
 
 type MenuProps = {
@@ -63,17 +67,6 @@ type MenuProps = {
 };
 
 const Header:FC<MenuProps> = ({ menuOpened, setMenuOpened }) => {
-    // useEffect(() => {
-    //     window.addEventListener('scroll', isSticky);
-    //     return () => {
-    //         window.removeEventListener('scroll', isSticky);
-    //     };
-    // });
-    // const isSticky = (e) => {
-    //     const header = document.querySelector('.header-section');
-    //     const scrollTop = window.scrollY;
-    //     scrollTop >= 250 ? header.classList.add('is-sticky') : header.classList.remove('is-sticky');
-    // };
     return (
         <StyledHeader justify="space-between" align="center" gap="20px" width="100%">
             <Logo />

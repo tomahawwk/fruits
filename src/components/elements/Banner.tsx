@@ -5,11 +5,15 @@ import Link from './Link';
 import Title from './Title';
 import Text from './Text';
 
+type BannerProps = {
+  url: string;
+  image: string;
+};
+
 const StyledBanner = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  height: 39vh;
   display: flex;
   justify-content: flex-end;
   overflow: hidden;
@@ -125,18 +129,13 @@ const StyledBannerLink = styled(Link)`
   }
 `;
 
-type BannerProps = {
-  url: string;
-  image: string;
-};
-
 const Banner: FC<BannerProps> = ({ url, image }) => {
   return (
     <StyledBanner>
       <StyledBannerImage src={image} />
       <StyledBannerContent>
         <Title t2>
-          First purchase<br></br> bonus{' '}
+          First purchase<br></br>
           <Text yellowLabel={true} size="56px">
             Premium
           </Text>

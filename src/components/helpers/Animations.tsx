@@ -49,6 +49,15 @@ export const MoveY = keyframes`
     }
 `
 
+export const scaleX = keyframes`
+	0% {
+		transform: scaleX(0);
+	}
+	100% {
+		transform: scaleX(1);
+	}
+`
+
 export const Grain = keyframes`
   0%,
 	to {

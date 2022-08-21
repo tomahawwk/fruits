@@ -79,8 +79,11 @@ export default styled.section<Props>`
         }
       }
     `}
+    @media (max-width: ${props => props.theme.screen.tablet}){
+      padding-left: 0;
+    }
     @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
-    background: none;
-    padding: ${(props) => props.theme.unit.phone}px 0;
-  }
+      background: none;
+      padding: ${(props) => props.theme.unit.phone}px 0;
+    }
 `;

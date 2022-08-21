@@ -6,6 +6,7 @@ interface Props {
   t1?: boolean;
   t2?: boolean;
   t3?: boolean;
+  underline?: boolean;
 }
 
 export default styled.div<Props>`
@@ -13,6 +14,15 @@ export default styled.div<Props>`
   color: ${(props) => props.color || props.theme.colors.light};
   text-transform: uppercase;
   letter-spacing: 0.07em;
+  ${props => props.underline && css`
+    text-transform: initial;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    width: fit-content;
+    padding-bottom: 14px;
+    white-space: nowrap;
+  `}
   ${(props) =>
     props.t1 &&
     css`

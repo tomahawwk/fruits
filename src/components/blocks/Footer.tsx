@@ -24,6 +24,9 @@ const StyledFooter = styled.div`
      props.theme.screen.tablet,
      props.theme.screen.desktop,
   )}
+  @media (max-width: ${props => props.theme.screen.tablet}){
+    padding-left: 0;
+  }
   @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
     grid-template-columns: initial;
   }

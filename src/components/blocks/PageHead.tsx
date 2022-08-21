@@ -12,6 +12,7 @@ import Flex from '../helpers/Flex'
 interface Props {
     title?: string;
     subtitle?: string;
+    background: string;
     back: { url: string; name: string; };
     next: { url: string; name: string; };
 }
@@ -23,12 +24,26 @@ const StyledPageHead = styled(Section)`
     grid-gap: 30px;
     justify-content: center;
     height: 45vh;
+    @media (max-width: ${(props) => props.theme.screen.tablet}) {
+        padding: 70px 0 40px;
+    }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
+        margin-bottom: -40px;
         height: auto;
-        padding: 70px 0 10px;
         background: none;
         &:before{
             display: none;
+        }
+        &:after{
+            background: linear-gradient(to top, #141416, rgba(0,0,0,.6));
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 1;
+            height: 100%;
         }
     }
     & > * {
@@ -77,10 +92,20 @@ const StyledPageHeadPart = styled.div`
         display: none;
     }
 `
+const StyledPageHeadBackground = styled.img`
+    display: none;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        display: block;
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+    }
+`
 
-const PageHead: FC<Props> = ({title, subtitle, back, next}) => {
+const PageHead: FC<Props> = ({title, subtitle, back, next, background}) => {
     return (
         <StyledPageHead grain>
+            <StyledPageHeadBackground src={background} />
             <StyledPageHeadTitle t1>{ title } <span>{ subtitle }</span></StyledPageHeadTitle>
             <StyledPageHeadPart>
                 <Flex justify="center" gap="3px">

@@ -3,7 +3,7 @@ import { setRouteAnimation } from '../../redux/animation/slice';
 import { fluidRange } from 'polished'
 import { useDispatch } from 'react-redux'
 import { useLocation } from "react-router-dom";
-import { FadeYDown, MoveY } from '../helpers/Animations';
+import { FadeYDown, MoveY, scaleX } from '../helpers/Animations';
 
 import Section from './Section';
 
@@ -142,50 +142,35 @@ const StyledMenuList = styled.ul<MenuStyledProps>`
     li {
         width: fit-content;
         position: relative;
-        @media (max-width: ${props => props.theme.screen.tablet}){
-            &:before {
-                content: '';
-                position: absolute;
-                transform-origin: left;
-                width: 100%;
-                height: 1px;
-                background: rgba(255,255,255,.15);
-                left: 0;
-                bottom: -3px;
-                transform: scaleX(0);
-                transition-duration: ${props => props.theme.transition.duration};
-                transition-timing-function: ${props => props.theme.transition.function};
-            }
-        }
         &:nth-child(1){
-            a{
-                transition-delay: 1.7s;
-            }
-        }
-        &:nth-child(2){
             a{
                 transition-delay: 1.6s;
             }
         }
-        &:nth-child(3){
+        &:nth-child(2){
             a{
                 transition-delay: 1.5s;
             }
         }
-        &:nth-child(4){
+        &:nth-child(3){
             a{
                 transition-delay: 1.4s;
             }
         }
-        &:nth-child(5){
+        &:nth-child(4){
             a{
                 transition-delay: 1.3s;
+            }
+        }
+        &:nth-child(5){
+            a{
+                transition-delay: 1.2s;
             }
         }
         &.is-active {
             pointer-events: none;
             @media (max-width: ${props => props.theme.screen.tablet}){
-                &:before {
+                a:before {
                     transform: scaleX(1);
                 }
             }
@@ -208,7 +193,7 @@ const StyledMenuList = styled.ul<MenuStyledProps>`
         }
         a {
             transform: translateY(-60px);
-            transition-duration: 1s;
+            transition-duration: .6s;
             opacity: 0;
             display: block;
             div{
@@ -232,6 +217,21 @@ const StyledMenuList = styled.ul<MenuStyledProps>`
                     color: white;
                     font-weight: 300;
                     letter-spacing: 0.08em;
+                }
+            }
+            @media (max-width: ${props => props.theme.screen.tablet}){
+                &:before {
+                    content: '';
+                    position: absolute;
+                    transform-origin: left;
+                    width: 100%;
+                    height: 1px;
+                    background: rgba(255,255,255,.15);
+                    left: 0;
+                    bottom: -3px;
+                    transform: scaleX(0);
+                    transition-duration: ${props => props.theme.transition.duration};
+                    transition-timing-function: ${props => props.theme.transition.function};
                 }
             }
             span:first-child{
@@ -297,18 +297,18 @@ const StyledMenuContact = styled.li<MenuStyledProps>`
     }
     &:nth-child(1){
         b{
-            transition-delay: 1.9s;
+            transition-delay: 1.7s;
         }
         p{
-            transition-delay: 1.8s;
+            transition-delay: 1.6s;
         }
     }
     &:nth-child(2){
         b {
-            transition-delay: 1.7s;
+            transition-delay: 1.5s;
         }
         p {
-            transition-delay: 1.6s;
+            transition-delay: 1.4s;
         }
     }
     ${props => props.open && css`

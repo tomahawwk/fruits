@@ -16,6 +16,23 @@ import Text from '../elements/Text';
 const StyledHero = styled.div`
   height: 100vh;
   position: relative;
+  @media (max-width: ${props => props.theme.screen.tabletMin}){
+    height: 50vh;
+    background-image: url('./images/mobile-backgrounds/3.jpg');
+    background-position: center;
+    background-size: cover;
+    &:after{
+      background: linear-gradient(to top, #141416, rgba(0,0,0,.2) 90%);
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 1;
+      height: 100%;
+    }
+  }
 `;
 
 const StyledHeroContainer = styled(Section)`
@@ -205,7 +222,6 @@ const StyledHeroTitle = styled(Content)`
   justify-content: center;
   flex-direction: column;
   grid-gap: 20px;
-  
   p {
     font-size: 14px;
   }
@@ -218,23 +234,36 @@ const StyledHeroTitle = styled(Content)`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+      font-size: 24px;
+    }
     div {
       overflow: hidden;
       &:nth-child(1) span{
         animation-delay: .4s;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+          animation-delay: .1s;
+        }
       }
       &:nth-child(2) span{
         animation-delay: .5s;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+          animation-delay: .2s;
+        }
       }
     }
     span {
       transform: translateY(-120%);
       animation: ${MoveY} 1s ${props => props.theme.transition.function} forwards;
       line-height: 100%;
-    }
-    p {
-      font-size: 34px;
-      margin-left: 10px;
+      p {
+        font-size: 34px;
+        margin-left: 10px;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+          font-size: 18px;
+          font-weight: 300;
+        }
+      }
     }
   }
   .description {
@@ -243,6 +272,9 @@ const StyledHeroTitle = styled(Content)`
     justify-content: center;
     flex-direction: column;
     grid-gap: 7px;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+      display: none;
+    }
     p {
       overflow: hidden;
       &:nth-child(1) span{
@@ -272,6 +304,11 @@ const StyledHeroTitle = styled(Content)`
         props.theme.screen.phone,
         props.theme.screen.desktop,
       )}
+  }
+  @media (max-width: ${props => props.theme.screen.tabletMin}){
+    right: 0;
+    width: 55%;
+    z-index: 2;
   }
 `;
 

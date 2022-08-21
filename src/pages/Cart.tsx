@@ -15,6 +15,7 @@ const Cart = () => {
                 subtitle="basket"
                 back={{ name: "Catalog", url: "/catalog" }}
                 next={{ name: "Home", url: "/" }}
+                background="./images/mobile-backgrounds/2.jpg"
             />
             <Section grey>
                 <Content>

@@ -1,14 +1,24 @@
 import styled, {css} from 'styled-components'
-import { Content } from '../elements';
+import { MouseParallaxContainer, MouseParallaxChild } from 'react-parallax-mouse';
+
+import { Content, Title, Text } from '../elements';
 import Section from './Section';
+
 
 type StyledStep = {
     one?: boolean;
     two?: boolean;
     three?: boolean;
+    left?: boolean;
 }
 
-const StyledOrderSteps = styled(Content)`
+const StyledOrderSteps = styled(Section)`
+    @media (max-width: ${props => props.theme.screen.desktopMin}){
+        display: none;
+    }
+`
+
+const StyledOrderStepsContent = styled(Content)`
     display: grid;
     grid-template-rows: repeat(3, 1fr);
 `
@@ -16,9 +26,14 @@ const StyledOrderSteps = styled(Content)`
 const StyledOrderStepsRow = styled.div`
     min-height: 200px;
     display: grid;
-    grid-template-columns: auto 130px auto;
+    grid-template-columns: 1fr 130px 1fr;
+    &:nth-child(2){
+        img {
+            right: 0;
+        }
+    }
     &:last-child{
-        div{
+        & > div{
             border-bottom: none;
         }
     }
@@ -27,8 +42,12 @@ const StyledOrderStepsRow = styled.div`
 const StyledOrderStepsCell = styled.div`
     border-bottom: 1px solid rgba(255,255,255,.06);
     border-right: 1px solid rgba(255,255,255,.06);
-    padding: 30px;
+    padding: 30px 70px;
     position: relative;
+    &:first-child{
+        display: flex;
+        justify-content: flex-end;
+    }
     &:nth-child(2) {
         display: flex;
         justify-content: center;
@@ -42,12 +61,30 @@ const StyledOrderStepsCell = styled.div`
     }
     img {
         position: absolute;
+        height: 110%;
+    }
+    .parallax-container {
+        overflow: initial!important;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        div {
+            height: 100%;
+        }
     }
 `
 
-const StyledOrderStepsText = styled.div`
+const StyledOrderStepsText = styled.div<StyledStep>`
     display: flex;
     flex-direction: column;
+    max-width: 330px;
+    grid-gap: 12px;
+    ${props => props.left && css`
+        text-align: right;
+        align-items: flex-end;
+    `}
 `
 
 const StyledOrderStep = styled.div<StyledStep>`
@@ -103,42 +140,79 @@ const StyledOrderStep = styled.div<StyledStep>`
 
 const OrderSteps = () => {
     return (
-        <Section grain={true}>
-            <StyledOrderSteps>
+        <StyledOrderSteps grain={true}>
+            <StyledOrderStepsContent>
                 <StyledOrderStepsRow>
-                    <StyledOrderStepsCell></StyledOrderStepsCell>
+                    <StyledOrderStepsCell>
+                        <StyledOrderStepsText left={true}>
+                            <Title underline={true}>Make a purchase</Title>
+                            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et. </Text>
+                        </StyledOrderStepsText>
+                    </StyledOrderStepsCell>
                     <StyledOrderStepsCell>
                         <StyledOrderStep one={true}>
                             <b>01</b>
                             <span>Step</span>
                         </StyledOrderStep>
                     </StyledOrderStepsCell>
-                    <StyledOrderStepsCell>
-                        <img src="@images/order-steps/order-step-1.png" />
+                    <StyledOrderStepsCell >
+                        <MouseParallaxContainer useWindowMouseEvents={true} className="parallax-container">
+                            <MouseParallaxChild
+                                factorX={0.01}
+                                factorY={0.01}>
+                                <img src="./images/order-steps/order-step-1.png" />
+                            </MouseParallaxChild>
+                        </MouseParallaxContainer>
                     </StyledOrderStepsCell>
                 </StyledOrderStepsRow>
                 <StyledOrderStepsRow>
-                    <StyledOrderStepsCell></StyledOrderStepsCell>
+                    <StyledOrderStepsCell>
+                        <MouseParallaxContainer useWindowMouseEvents={true} className="parallax-container">
+                            <MouseParallaxChild
+                                factorX={-0.01}
+                                factorY={-0.01}>
+                                <img src="./images/order-steps/order-step-2.png" />
+                            </MouseParallaxChild>
+                        </MouseParallaxContainer>
+                    </StyledOrderStepsCell>
                     <StyledOrderStepsCell>
                         <StyledOrderStep two={true}>
                             <b>02</b>
                             <span>Step</span>
                         </StyledOrderStep>
                     </StyledOrderStepsCell>
-                    <StyledOrderStepsCell></StyledOrderStepsCell>
+                    <StyledOrderStepsCell>
+                        <StyledOrderStepsText>
+                            <Title underline={true}>We will contact you</Title>
+                            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </Text>
+                        </StyledOrderStepsText>
+                    </StyledOrderStepsCell>
                 </StyledOrderStepsRow>
                 <StyledOrderStepsRow>
-                    <StyledOrderStepsCell></StyledOrderStepsCell>
+                    <StyledOrderStepsCell>
+                        <StyledOrderStepsText left={true}>
+                            <Title underline={true}>We send the goods</Title>
+                            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. </Text>
+                        </StyledOrderStepsText>
+                    </StyledOrderStepsCell>
                     <StyledOrderStepsCell>
                         <StyledOrderStep three={true}>
                             <b>03</b>
                             <span>Step</span>
                         </StyledOrderStep>
                     </StyledOrderStepsCell>
-                    <StyledOrderStepsCell></StyledOrderStepsCell>
+                    <StyledOrderStepsCell>
+                        <MouseParallaxContainer useWindowMouseEvents={true} className="parallax-container">
+                            <MouseParallaxChild
+                                factorX={-0.01}
+                                factorY={0.01}>
+                                <img src="./images/order-steps/order-step-3.png" />
+                            </MouseParallaxChild>
+                        </MouseParallaxContainer>
+                    </StyledOrderStepsCell>
                 </StyledOrderStepsRow>
-            </StyledOrderSteps>
-        </Section>
+            </StyledOrderStepsContent>
+        </StyledOrderSteps>
         
     )
 }

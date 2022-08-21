@@ -9,6 +9,7 @@ const Articles = () => {
                 subtitle="about us"
                 back={{ name: "Catalog", url: "/catalog" }}
                 next={{ name: "Home", url: "/" }}
+                background="./images/mobile-backgrounds/1.jpg"
             />
             <Section grey>
                 Articles

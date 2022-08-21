@@ -32,7 +32,8 @@ const theme = {
     tabletMin: "600px",
     tablet: "900px",
     desktopMin: "1240px",
-    desktop: "1440px"
+    desktop: "1440px",
+    desktopMd: "1800px",
   },
   fonts: {
     primary: "Facundo",

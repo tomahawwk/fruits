@@ -33,6 +33,12 @@ const StyledBasketHead = styled.div`
             justify-content: center;
         }
     }
+    @media (max-width: ${(props) => props.theme.screen.desktopMin}) {
+        grid-template-columns: 1fr 100px 100px 100px 100px;
+    }
+    @media (max-width: ${(props) => props.theme.screen.tablet}) {
+        display: none;
+    }
 `
 
 const StyledBasketList = styled.ul`
@@ -40,6 +46,9 @@ const StyledBasketList = styled.ul`
     grid-gap: 15px; 
     list-style: none;
     flex-direction: column;
+    @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+        z-index: 1;
+    }
 `
 
 const StyledBasketFooter = styled.div`
@@ -59,6 +68,36 @@ const StyledBasketFooter = styled.div`
         span {
             color: ${props => props.theme.colors.yellow};
         }
+    }
+`
+
+const StyledBasketTotal = styled.div`
+    display: none;
+    border-radius: 4px;
+    background-color: ${props => props.theme.colors.grey};
+    box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+    padding: 12px 10px;
+    @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+        display: block;
+    }
+`
+
+const StyledBasketTotalRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 13px 0 10px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    letter-spacing: 0.06em;
+    &:first-child{
+        padding-top: 0;
+    }
+    &:last-child{
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    span {
+        color: ${props => props.theme.colors.yellow};
     }
 `
 
@@ -92,6 +131,20 @@ const Basket: FC = () => {
                             </li>
                         ))}
                     </StyledBasketList>
+                    <StyledBasketTotal>
+                        <StyledBasketTotalRow>
+                            <div>Subtotal</div>
+                            <p>{ totalPrice }.00 <span>€</span></p>
+                        </StyledBasketTotalRow>
+                        <StyledBasketTotalRow>
+                            <div>Delivery</div>
+                            <p>26.00 <span>€</span></p>
+                        </StyledBasketTotalRow>
+                        <StyledBasketTotalRow>
+                            <div>Total</div>
+                            <p>{ totalPrice + 26 }.00 <span>€</span></p>
+                        </StyledBasketTotalRow>
+                    </StyledBasketTotal>
                     <StyledBasketFooter>
                         <Button outlined={true} animated={true} grey={true} onClick={onClear}>
                             <AnimatedWord text="Delete_all" />

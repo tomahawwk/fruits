@@ -155,6 +155,7 @@ const Catalog = () => {
                 subtitle="our goods"
                 back={{ name: "Home", url: "/" }}
                 next={{ name: "Articles", url: "/articles" }}
+                background="./images/mobile-backgrounds/1.jpg"
             />
             <Section grey>
                 <Content >

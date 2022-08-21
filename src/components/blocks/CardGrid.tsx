@@ -10,11 +10,11 @@ export default styled.div<Props>`
     grid-gap: 30px;
     width: 100%;
     min-height: 43vh;
-    @media (max-width: ${props => props.theme.screen.desktop}){
+    @media (max-width: ${props => props.theme.screen.desktopMd}){
         grid-template-columns: repeat(4, 1fr);
         min-height: 53vh;
     }
-    @media (max-width: ${props => props.theme.screen.desktopMin}){
+    @media (max-width: ${props => props.theme.screen.desktop}){
         grid-template-columns: repeat(3, 1fr);
         min-height: 57vh;
         grid-gap: 25px;
