@@ -14,7 +14,7 @@ const StyledMain = styled(Page)`
 const Main = () => {
     const bestsellers = [
         {
-            category: 1,
+            category: '1',
             description: "Tangerines are smaller and less rounded than common oranges. The taste is considered less sour, as well as sweeter and stronger, than that of an orange. A ripe tangerine is firm to slightly soft, and pebbly-skinned with no deep grooves, as well as orange in color. The peel is thin, with little bitter white mesocarp.",
             desktopImage: "images/cards/3.jpg",
             id: "5",
@@ -29,7 +29,7 @@ const Main = () => {
             count: 0,
         },
         {
-            category: 3,
+            category: '3',
             description: "A berry is a small, pulpy, and often edible fruit. Typically, berries are juicy, rounded, brightly colored, sweet, sour or tart, and do not have a stone or pit, although many pips or seeds may be present.",
             desktopImage: "images/cards/6.jpg",
             id: "6",
@@ -44,7 +44,7 @@ const Main = () => {
             count: 0,
         },
         {
-            category: 1,
+            category: '1',
             description: "Apples are an incredibly nutritious fruit that offers multiple health benefits. They're rich in fiber and antioxidants. Eating them is linked to a lower risk of many chronic conditions, including diabetes, heart disease, and cancer. Apples may also promote weight loss and improve gut and brain health.",
             desktopImage: "images/cards/11.jpg",
             id: "11",
@@ -59,7 +59,7 @@ const Main = () => {
             count: 0,
         },
         {
-            category: 1,
+            category: '1',
             description: "Garnet derives from Old French grenat by metathesis, from Medieval Latin granatum as used in a different meaning 'of a dark red color'. This derivation may have originated from pomum granatum, describing the color of pomegranate pulp, or from granum, referring to 'red dye, cochineal'.",
             desktopImage: "images/cards/7.jpg",
             id: "8",
@@ -74,7 +74,7 @@ const Main = () => {
             count: 0,
         },
         {
-            category: 2,
+            category: '2',
             description: "Coconut is the fruit of a tropical palm plant. It has a hard shell, edible white flesh and clear liquid, sometimes referred to as “water,” which is often used as a beverage. Coconut flesh or “meat” is aromatic, chewy in texture and rich in taste.",
             desktopImage: "images/cards/4.jpg",
             id: "3",

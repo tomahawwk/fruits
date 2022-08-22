@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentPage, setFilters, setCategoryId } from '../redux/filter/slice';
+import { setCurrentPage, setFilters, setCategory } from '../redux/filter/slice';
 import { getFilterSelector } from '../redux/filter/selectors';
 import { SearchParams, Fruit } from '../redux/fruits/types';
 import { setLoading } from '../redux/fruits/slice';
@@ -47,7 +47,7 @@ const Catalog = () => {
     const isSearch = useRef(false);
     const isMounted = useRef(false);
     const anchor = useRef<HTMLDivElement>(null);
-    const {categoryId, currentPage} = useSelector(getFilterSelector);
+    const {category, currentPage} = useSelector(getFilterSelector);
     const {items, status, isLoading} = useSelector(getFruitsSelector);
     const {appearAnimate} = useSelector(getAnimationSelector);
     const [localItems, setLocalItems] = useState<Fruit[]>([]);
@@ -55,19 +55,28 @@ const Catalog = () => {
     const {sort} = useSelector(getFilterSelector);
     const [searchValue, setSearchValue] = useState('');
 
-    const onChangeCategory = useCallback((id: number) => {
-      dispatch(setCategoryId(id));
+    const onChangeCategory = useCallback((id: string) => {
+      dispatch(setCategory(id));
     }, [])
+
+    const onChangeSearch = (value: string) => {
+      dispatch(setCategory(''));
+      setTimeout(() => {
+        setSearchValue(value)
+      }, 500)
+      
+    }
 
     const onChangePage = (number) => {
       dispatch(setCurrentPage(number));
       anchor.current?.scrollIntoView({ block: "center", behavior: "smooth" });
     }
 
-    const getFruits = () => {
+    const getFruits = (categoryId) => {
         dispatch(setLoading(true))
-        const category = categoryId > 0 ? `category=${categoryId}` : '';
-        const search = searchValue ? `&search=${searchValue}` : '';
+        const category = Number(categoryId) > 0 ? String(categoryId) : '';
+        const search = searchValue || "";
+        console.log(searchValue)
         const order = sort.value.includes('-') ? 'asc' : 'desc';
         const sortBy = sort.value.replace('-', '');
         
@@ -90,17 +99,17 @@ const Catalog = () => {
     
     useEffect(() => {
       if(appearAnimate){
-        getFruits();
+        getFruits(category);
         setCanFetch(true);
       }
     }, [appearAnimate])
 
     useEffect(() => {
       if(!isSearch.current && canFetch) {
-        getFruits();
+        getFruits(category);
       }
       isSearch.current = false;
-    }, [categoryId, sort.value, searchValue, currentPage]);
+    }, [category, sort.value, searchValue, currentPage]);
     
     useEffect(() => {
         if(status === "filled"){
@@ -120,16 +129,16 @@ const Catalog = () => {
         if(isMounted.current){
           const queryString = qs.stringify({
             sortProperty: sort.value,
-            categoryId,
+            category,
             currentPage
           });
           navigate(`?${queryString}`)
         }
         isMounted.current = true;
-    }, [categoryId, sort.value, searchValue, currentPage])
+    }, [category, sort.value, searchValue, currentPage])
 
     window.onload = function () {
-      getFruits();
+      getFruits(category);
       setCanFetch(true)
     }
     
@@ -137,9 +146,10 @@ const Catalog = () => {
       if(window.location.search){
         const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
         const sort = sortOptions.find(obj => obj.value === params.sortBy)
+        console.log(params.category)
         dispatch(setFilters({
           searchValue: params.search,
-          categoryId: Number(params.category),
+          category: Number(params.category) > 0 ? params.category : '0',
           currentPage: Number(params.currentPage),
           sort: sort || sortOptions[0]
         }))
@@ -161,9 +171,11 @@ const Catalog = () => {
                 <Content >
                     <div className="anchor" ref={anchor} />
                     <StyledCatalogHead>
-                      {/* <Search searchValue={searchValue} setSearchValue={setSearchValue} /> */}
                       <SectionHead desktop={true}>
-                          <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+                          <Flex gap="30px">
+                            <Search searchValue={searchValue} setSearchValue={onChangeSearch} />
+                            <Categories value={Number(category)} onChangeCategory={onChangeCategory} />
+                          </Flex>
                           <SortDropdown select={sort} />
                       </SectionHead>
                     </StyledCatalogHead>
@@ -173,7 +185,7 @@ const Catalog = () => {
                       <>
                         <Preloader active={isLoading} />
                         <CardGrid autoHeight={!isLoading}> { catalogItems } </CardGrid>
-                        { categoryId === 0 &&
+                        { Number(category) === 0 &&
                           <Flex justify="space-between">
                             <Pagination onChangePage={(number) => onChangePage(number)}/>
                           </Flex> }

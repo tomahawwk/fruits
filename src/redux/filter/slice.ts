@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { FilterState, SortValueEnum, Sort } from "./types";
 
 const initialState: FilterState = {
-    categoryId: 0,
+    category: '0',
     currentPage: 1,
     searchValue: '',
     sort: { 
@@ -15,8 +15,8 @@ const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-        setCategoryId(state, action: PayloadAction<number>) {
-            state.categoryId = action.payload;
+        setCategory(state, action: PayloadAction<string>) {
+            state.category = action.payload;
         },
         setSort(state, action: PayloadAction<Sort>) {
             state.sort = action.payload;
@@ -27,11 +27,11 @@ const filterSlice = createSlice({
         setFilters(state, action: PayloadAction<FilterState>) {
             state.sort = action.payload.sort;
             state.currentPage = Number(action.payload.currentPage);
-            state.categoryId = action.payload.categoryId;
+            state.category = String(action.payload.category);
         }
     }
 })
 
-export const { setCategoryId, setSort, setCurrentPage, setFilters } = filterSlice.actions;
+export const { setCategory, setSort, setCurrentPage, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

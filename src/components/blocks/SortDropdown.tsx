@@ -5,6 +5,8 @@ import { setSort } from '../../redux/filter/slice'
 import { SortValueEnum, Sort } from '../../redux/filter/types'
 import { useEffect, useRef, useState } from 'react';
 
+import { FadeYDown } from '../helpers/Animations'
+
 interface SortProps {
     select: Sort;
 }
@@ -15,6 +17,10 @@ interface SortStyledProps {
 }
 
 const StyledSortDropdown = styled.div`
+    opacity: 0;
+    
+    animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
+    animation-delay: .6s;
     display: flex;
     grid-gap: 7px;
     align-items: center;

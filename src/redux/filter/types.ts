@@ -13,7 +13,7 @@ export type Sort = {
 }
 
 export interface FilterState {
-    categoryId: number;
+    category: string;
     searchValue: string;
     currentPage: number;
     sort: Sort,

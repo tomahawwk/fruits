@@ -1,8 +1,8 @@
 export type SearchParams = {
+    sortBy: string;
+    order: string;
     category: string;
     search: string;
-    order: string;
-    sortBy: string;
     currentPage: string;
 }
 
@@ -14,7 +14,7 @@ export enum Status {
 
 export type Fruit = {
     id: string;
-    category: number;
+    category: string;
     title: string;
     price: number;
     oldprice: number;

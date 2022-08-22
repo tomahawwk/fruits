@@ -1,10 +1,13 @@
 import styled, {css} from 'styled-components'
 import {FC, memo} from 'react'
+
 import AnimatedWord from '../elements/AnimatedWord';
+
+import { FadeYDown } from '../helpers/Animations'
 
 type CategoriesProps = {
     value: number;
-    onChangeCategory: (index: number) => void;
+    onChangeCategory: (index: string) => void;
 }
 
 interface CategoriesStyledProps {
@@ -18,6 +21,8 @@ const StyledCategories = styled.ul`
 `
 
 const StyledCategory = styled.li<CategoriesStyledProps>`
+    opacity: 0;
+    animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
     button {
         font-weight: 500;
         border: none;
@@ -33,6 +38,18 @@ const StyledCategory = styled.li<CategoriesStyledProps>`
             color: ${props => props.theme.colors.yellow};
         }
     `}
+    &:nth-child(1){
+        animation-delay: .1s;
+    }
+    &:nth-child(2){
+        animation-delay: .2s;
+    }
+    &:nth-child(3){
+        animation-delay: .3s;
+    }
+    &:nth-child(4){
+        animation-delay: .4s;
+    }
 `
 
 const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
@@ -50,7 +67,7 @@ const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
                         key={`category-${index}`}
                         active={value === index ? true : false}
                         >
-                    <button onClick={() => onChangeCategory(index)}>
+                    <button onClick={() => onChangeCategory(String(index))}>
                         <AnimatedWord text={category.title} />
                     </button>
                     </StyledCategory>

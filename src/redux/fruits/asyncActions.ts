@@ -22,7 +22,7 @@ export const fetchFruits = createAsyncThunk<Fruit[], SearchParams>(
           identity,
         ),
       });
-  
+      console.log(params)
       return data;
     },
   );

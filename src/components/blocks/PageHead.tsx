@@ -8,6 +8,7 @@ import Link from '../elements/Link'
 import { ArrowPrevIcon, ArrowNextIcon } from '../elements/Icons'
 
 import Flex from '../helpers/Flex'
+import { MoveY, FadeYDown } from '../helpers/Animations'
 
 interface Props {
     title?: string;
@@ -55,6 +56,19 @@ const StyledPageHeadTitle = styled(Title)`
     text-align: center;
     position: relative;
     width: fit-content;
+    div {
+        line-height: 120%;
+        transform: translateY(-100%);
+        animation: ${MoveY} 1s ${props => props.theme.transition.function} forwards;
+        animation-delay: .1s;
+        &:last-child {
+            animation-delay: .3s;
+        }
+    }
+    b, span {
+        overflow: hidden;
+        display: block;
+    }
     span{
         color: ${props => props.theme.colors.yellow};
         font-family: ${props => props.theme.fonts.secondary};
@@ -88,6 +102,14 @@ const StyledPageHeadPart = styled.div`
         font-size: 14px;
         color: rgba(255,255,255,.7);
     }
+    div {
+        opacity: 0;
+        animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
+        animation-delay: .4s;
+        &:last-child {
+            animation-delay: .5s;
+        }
+    }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         display: none;
     }
@@ -106,7 +128,10 @@ const PageHead: FC<Props> = ({title, subtitle, back, next, background}) => {
     return (
         <StyledPageHead grain>
             <StyledPageHeadBackground src={background} />
-            <StyledPageHeadTitle t1>{ title } <span>{ subtitle }</span></StyledPageHeadTitle>
+            <StyledPageHeadTitle t1>
+                <b><div>{ title }</div></b>
+                <span><div>{ subtitle }</div></span>
+            </StyledPageHeadTitle>
             <StyledPageHeadPart>
                 <Flex justify="center" gap="3px">
                     <Link to={back.url}>{back.name}</Link>

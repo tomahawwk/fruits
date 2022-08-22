@@ -5,6 +5,7 @@ import { ReactComponent as Twitter } from '../../assets/svg/twitter.svg'
 import { ReactComponent as Facebook } from '../../assets/svg/facebook.svg'
 import { ReactComponent as ArrowPrev } from '../../assets/svg/arrow-prev.svg'
 import { ReactComponent as ArrowNext } from '../../assets/svg/arrow-next.svg'
+import { ReactComponent as Search } from '../../assets/svg/search.svg'
 
 export const BasketIcon = () => { return (<Basket />) }
 export const InstagramIcon = () => { return (<Instagram />) }
@@ -12,3 +13,4 @@ export const TwitterIcon = () => { return (<Twitter />) }
 export const FacebookIcon = () => { return (<Facebook />) }
 export const ArrowPrevIcon = () => { return (<ArrowPrev />) }
 export const ArrowNextIcon = () => { return (<ArrowNext />) }
+export const SearchIcon = () => { return (<Search />) }
