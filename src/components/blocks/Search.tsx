@@ -18,6 +18,7 @@ interface StyledSearchProps {
 
 const StyledSearch = styled.div`
     opacity: 0;
+    z-index: 1;
     animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
     transition-duration: ${props => props.theme.transition.duration};
     transition-timing-function: ${props => props.theme.transition.function};
@@ -35,6 +36,21 @@ const StyledSearch = styled.div`
         transition-timing-function: inherit;
         top: -2px;
         left: 25px;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            opacity: 1;
+            pointer-events: all;
+            position: static;
+            font-size: 12px;
+            color: black;
+        }
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        background: white;
+        width: 100%;
+        border-radius: 4px;
+        box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+        animation-delay: .4s;
+        height: 37px;
     }
 `
 
@@ -43,8 +59,18 @@ const StyledSearchButton = styled.button`
     transition-duration: inherit;
     transition-timing-function: inherit;
     stroke: ${props => props.theme.colors.grey5};
+    position: relative;
+    svg{
+        width: 100%;
+        height: 100%;
+    }
     &:hover {
         stroke: ${props => props.theme.colors.yellow};
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
     }
 `
 
@@ -60,6 +86,9 @@ const StyledSearchClear = styled(Button)`
     transition-delay: 0s;
     transition-duration: inherit;
     transition-timing-function: inherit;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        display: none;
+    }
 `
 
 const StyledSearchInner = styled.div<StyledSearchProps>`
@@ -68,6 +97,14 @@ const StyledSearchInner = styled.div<StyledSearchProps>`
     transition-duration: inherit;
     transition-timing-function: inherit;
     position: relative;
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        width: 100%;
+        display: flex;
+        grid-gap: 10px;
+        align-items: center;
+        padding: 0 10px;
+        height: 100%;
+    }
     ${props => props.active && css`
         width: 150px;
         input {
@@ -89,6 +126,9 @@ const StyledSearchInner = styled.div<StyledSearchProps>`
         height: 1px;
         position: absolute;
         background: rgba(255,255,255,.1);
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
     }
 `
 
@@ -125,7 +165,7 @@ const Search: FC<SearchProps> = ({ setSearchValue }) => {
                 <StyledSearchButton onClick={searchOnClick}>
                     <SearchIcon />
                 </StyledSearchButton>
-                <input ref={input} value={value} onChange={(e) => onChangeInput(e)} />
+                <input ref={input} value={value} onChange={(e) => onChangeInput(e)} placeholder="Search" />
                 <StyledSearchClear onClick={searchOnClear} close={true} />
             </StyledSearchInner>
             

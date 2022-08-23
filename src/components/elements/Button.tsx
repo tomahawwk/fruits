@@ -9,12 +9,16 @@ interface Props {
     align?: string;
     width?: string;
     height?: string;
+    plus?: boolean;
+    minus?: boolean;
 }
   
 export default styled.button<Props>`
     will-change: transform;
     border: none;
+    position: relative;
     background: none;
+    white-space: nowrap;
     width: ${props => props.width};
     height: ${props => props.height};
     align-self: ${props => props.align};
@@ -35,6 +39,24 @@ export default styled.button<Props>`
         }
         @media (max-width: ${props => props.theme.screen.tablet}){
             font-size: 9px;
+        }
+    `}
+    ${props => props.plus && css`
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 14px;
+            height: 2px;
+            background-color: ${props => props.theme.colors.grey2};
+        }
+        &:after{
+            width: 2px;
+            height: 14px;
         }
     `}
     ${props => props.close && css`

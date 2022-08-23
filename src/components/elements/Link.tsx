@@ -58,6 +58,7 @@ export default styled(Link)<Props>`
       text-transform: uppercase;
       color: white;
       display: flex;
+      white-space: nowrap;
       align-items: center;
       grid-gap: 15px;
       font-size: 12px;

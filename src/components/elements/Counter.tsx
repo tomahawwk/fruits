@@ -54,16 +54,35 @@ const StyledCounter = styled(Flex)`
             color: black;
             text-align: center;
             box-shadow: 0px 2px 6px rgba(0,0,0,.2);
-            font-size: 28px;
+            font-size: 0;
             font-weight: 300;
             line-height: 0;
             padding: 0 0 2px;
             will-change: transform;
+            &:before, &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                width: 14px;
+                height: 2px;
+                background-color: ${props => props.theme.colors.grey2};
+            }
+            &:after{
+                width: 2px;
+                height: 14px;
+            }
             &:active {
                 transform: scale(1.2);
             }
             &:first-child {
                 padding: 0 0 8px;
+                &:after{
+                    display: none;
+                }
             }
         }
     }

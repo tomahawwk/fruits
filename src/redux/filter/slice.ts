@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { sortOptions } from "components/blocks/SortDropdown";
 import { FilterState, SortValueEnum, Sort } from "./types";
 
 const initialState: FilterState = {
@@ -28,10 +29,15 @@ const filterSlice = createSlice({
             state.sort = action.payload.sort;
             state.currentPage = Number(action.payload.currentPage);
             state.category = String(action.payload.category);
+        },
+        clearFilters(state){
+            state.category = '0';
+            state.currentPage = 1;
+            state.sort = sortOptions[0];
         }
     }
 })
 
-export const { setCategory, setSort, setCurrentPage, setFilters } = filterSlice.actions;
+export const { setCategory, setSort, setCurrentPage, setFilters, clearFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

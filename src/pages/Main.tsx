@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FadeYDown } from '../components/helpers/Animations'
 
 import { Page, Hero, Section, CardGrid, Card } from '../components/blocks';
 import { Content, Link, SectionHead, Title } from '../components/elements';
@@ -9,6 +10,17 @@ import { OrderSteps } from '../components/blocks';
 
 const StyledMain = styled(Page)`
     width: 100%;
+`
+
+const MainSectionHead = styled(SectionHead)`
+    animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
+    opacity: 0;
+    animation-delay: .5s;
+    a {
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: none;
+        }
+    }
 `
 
 const Main = () => {
@@ -95,26 +107,26 @@ const Main = () => {
             <Hero />
             <Section>
                 <Content>
-                    <SectionHead>
+                    <MainSectionHead>
                         <Title t3={true}>Bestsellers</Title>
                         <Link to="/catalog" arrow={+true}>
                             <span>Go to catalog</span>
                             <ArrowNextIcon />
                         </Link>
-                    </SectionHead>
+                    </MainSectionHead>
                     <CardGrid>{ bestsellers.map((item: Fruit) => (<Card key={item.index} {...item} />)) }</CardGrid>
                 </Content>
             </Section>
             <OrderSteps />
             <Section>
                 <Content>
-                    <SectionHead>
+                    <MainSectionHead>
                         <Title t3={true}>Articles</Title>
                         <Link to="/catalog" arrow={+true}>
                             <span>Go to articles</span>
                             <ArrowNextIcon />
                         </Link>
-                    </SectionHead>
+                    </MainSectionHead>
                 </Content>
             </Section>
             

@@ -9,6 +9,8 @@ import { FadeYDown } from '../helpers/Animations'
 
 interface SortProps {
     select: Sort;
+    mobile?: boolean;
+    customChangeEvent?: () => void;
 }
 
 interface SortStyledProps {
@@ -18,7 +20,7 @@ interface SortStyledProps {
 
 const StyledSortDropdown = styled.div`
     opacity: 0;
-    
+    z-index: 11;
     animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
     animation-delay: .6s;
     display: flex;
@@ -86,6 +88,36 @@ const StyledSortPopup = styled.div<SortStyledProps>`
         display: grid;
         grid-gap: 7px;
         list-style: none;
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            display: flex;
+            flex-wrap: wrap;
+            grid-gap: 4px 9px;
+        }
+    }
+    li {
+        @media (max-width: ${props => props.theme.screen.tabletMin}){
+            &:first-child {
+                button {
+                    text-transform: initial;
+                }
+            }
+            &:not(:last-child){
+                &:after{
+                    content: ',';
+                    color: ${props => props.theme.colors.grey5};
+                }
+            }
+        }
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        opacity: 1;
+        transform: translateY(0px);
+        position: static;
+        pointer-events: all;
+        padding: 0;
+        border: none;
+        background: none;
+        box-shadow: none;
     }
 `
 
@@ -95,11 +127,15 @@ const StyledSortButton = styled.button<SortStyledProps>`
     transition-duration: ${props => props.theme.transition.duration};
     color: ${props => props.theme.colors.grey5};
     white-space: nowrap;
+    text-transform: lowercase;
     ${props => props.active && css`
         color: white;
     `}
     &:hover {
         color: white;
+    }
+    @media (max-width: ${props => props.theme.screen.tabletMin}){
+        font-size: 12px;
     }
 `
 
@@ -109,15 +145,15 @@ type SortItem = {
 }
 
 export const sortOptions: SortItem[] = [
-    { label: "rating (highest)", value: SortValueEnum.RATING_DESC },
-    { label: "rating (lowest)", value: SortValueEnum.RATING_ASC },
-    { label: 'price (highest)', value: SortValueEnum.PRICE_DESC },
-    { label: 'price (lowest)', value: SortValueEnum.PRICE_ASC },
-    { label: 'alphabet (A-Z)', value: SortValueEnum.ALPHABET_DESC },
-    { label: 'alphabet (Z-A)', value: SortValueEnum.ALPHABET_ASC }
+    { label: "Rating (highest)", value: SortValueEnum.RATING_DESC },
+    { label: "Rating (lowest)", value: SortValueEnum.RATING_ASC },
+    { label: 'Price (highest)', value: SortValueEnum.PRICE_DESC },
+    { label: 'Price (lowest)', value: SortValueEnum.PRICE_ASC },
+    { label: 'Alphabet (A-Z)', value: SortValueEnum.ALPHABET_DESC },
+    { label: 'Alphabet (Z-A)', value: SortValueEnum.ALPHABET_ASC }
 ];
 
-const SortDropdown: FC<SortProps> = memo(({ select }) => {
+const SortDropdown: FC<SortProps> = memo(({ select, mobile, customChangeEvent }) => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
@@ -125,11 +161,16 @@ const SortDropdown: FC<SortProps> = memo(({ select }) => {
     const onClickItem = (obj: SortItem) => {
         dispatch(setSort(obj));
         setOpen(false);
+        if(customChangeEvent){
+            setTimeout(() => {
+                customChangeEvent();
+            }, 400)
+        }
     }
     
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
-            if(sortRef.current && !e.composedPath().includes(sortRef.current))
+            if(sortRef.current && !e.composedPath().includes(sortRef.current) && !mobile)
                 setOpen(false);
         }
         document.body.addEventListener("click", handleClickOutside);
@@ -139,10 +180,12 @@ const SortDropdown: FC<SortProps> = memo(({ select }) => {
 
     return (
         <StyledSortDropdown ref={sortRef}>
-            <span>Sort by:</span>
-            <StyledSortLabel onClick={() => setOpen(!open)}>
-                <span>{ select.label }</span>
-            </StyledSortLabel>
+            {!mobile && <>
+                <span>Sort by:</span>
+                <StyledSortLabel onClick={() => setOpen(!open)}>
+                    <span>{ select.label }</span>
+                </StyledSortLabel>
+            </>}
             <StyledSortPopup open={open}>
                 <ul>
                     {sortOptions.map((item, index) => (<li key={index}>

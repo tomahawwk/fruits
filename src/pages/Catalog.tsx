@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../redux/store';
 import styled from 'styled-components';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +11,8 @@ import { setLoading } from '../redux/fruits/slice';
 import { fetchFruits } from '../redux/fruits/asyncActions';
 import { getFruitsSelector } from '../redux/fruits/selectors';
 import { getAnimationSelector } from '../redux/animation/selectors';
+
 import Flex from '../components/helpers/Flex';
-import { useAppDispatch } from '../redux/store';
 
 import {
   Page,
@@ -23,9 +24,10 @@ import {
   SortDropdown,
   PageHead,
   Pagination,
+  MobileFilters
 } from '../components/blocks';
 
-import { Content, Preloader, Error, SectionHead } from '../components/elements';
+import { Content, Preloader, Error, SectionHead, Button } from '../components/elements';
 import { sortOptions } from '../components/blocks/SortDropdown';
 
 const StyledCatalog = styled(Page)`
@@ -54,7 +56,7 @@ const Catalog = () => {
     const [canFetch, setCanFetch] = useState(false);
     const {sort} = useSelector(getFilterSelector);
     const [searchValue, setSearchValue] = useState('');
-
+    
     const onChangeCategory = useCallback((id: string) => {
       dispatch(setCategory(id));
     }, [])
@@ -76,7 +78,6 @@ const Catalog = () => {
         dispatch(setLoading(true))
         const category = Number(categoryId) > 0 ? String(categoryId) : '';
         const search = searchValue || "";
-        console.log(searchValue)
         const order = sort.value.includes('-') ? 'asc' : 'desc';
         const sortBy = sort.value.replace('-', '');
         
@@ -146,7 +147,6 @@ const Catalog = () => {
       if(window.location.search){
         const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
         const sort = sortOptions.find(obj => obj.value === params.sortBy)
-        console.log(params.category)
         dispatch(setFilters({
           searchValue: params.search,
           category: Number(params.category) > 0 ? params.category : '0',
@@ -159,7 +159,7 @@ const Catalog = () => {
     const catalogItems = localItems.map((item: Fruit) => (<Card key={item.index} {...item} />));
 
     return (
-        <StyledCatalog mobileHeadImage="">
+        <StyledCatalog>
             <PageHead
                 title="Catalog"
                 subtitle="our goods"
@@ -177,6 +177,10 @@ const Catalog = () => {
                             <Categories value={Number(category)} onChangeCategory={onChangeCategory} />
                           </Flex>
                           <SortDropdown select={sort} />
+                      </SectionHead>
+                      <SectionHead phone={true}>
+                        <Search searchValue={searchValue} setSearchValue={onChangeSearch} />
+                        <MobileFilters sort={sort} categoriesValue={Number(category)} onChangeCategory={onChangeCategory} />
                       </SectionHead>
                     </StyledCatalogHead>
                     { status === "failure" ?

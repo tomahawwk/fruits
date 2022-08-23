@@ -63,7 +63,7 @@ export default styled.div<Props>`
         fluidRange(
           {
             prop: 'font-size',
-            fromSize: `22px`,
+            fromSize: `18px`,
             toSize: `28px`,
           },
           props.theme.screen.tablet,

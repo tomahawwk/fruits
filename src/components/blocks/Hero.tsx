@@ -17,7 +17,7 @@ const StyledHero = styled.div`
   height: 100vh;
   position: relative;
   @media (max-width: ${props => props.theme.screen.tabletMin}){
-    height: 50vh;
+    height: 200px;
     background-image: url('./images/mobile-backgrounds/3.jpg');
     background-position: center;
     background-size: cover;
@@ -309,6 +309,7 @@ const StyledHeroTitle = styled(Content)`
     right: 0;
     width: 55%;
     z-index: 2;
+    margin-top: 20px;
   }
 `;
 

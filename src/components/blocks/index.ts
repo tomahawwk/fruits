@@ -16,6 +16,7 @@ import Socials from './Socials';
 import SortDropdown from './SortDropdown';
 import Categories from './Categories';
 import OrderSteps from './OrderSteps';
+import MobileFilters from './MobileFilters';
 
 export {
     AsideNav,
@@ -35,5 +36,6 @@ export {
     Socials,
     SortDropdown,
     Categories,
-    OrderSteps
+    OrderSteps,
+    MobileFilters
 }

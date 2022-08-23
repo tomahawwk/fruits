@@ -26,7 +26,7 @@ export default styled.div<Props>`
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         grid-template-columns: initial;
         grid-gap: 12px;
-        min-height: 90vh;
+        min-height: 500px;
     }
     ${props => props.autoHeight && css`
         @media (max-width: ${props => props.theme.screen.tabletMin}){

@@ -101,7 +101,7 @@ const StyledCardContent = styled(Flex)`
     padding: 20px;
     width: 100%;
     @media (max-width: ${props => props.theme.screen.tabletMin}){
-        padding: 12px 15px;
+        padding: 12px;
     }
 `
 
@@ -274,7 +274,7 @@ const Card: FC<CardProps> = ({
                                 { count > 0 && <span>{ count }</span> }
                             </StyledCardButton>
                         </StyledCardFooterRow>
-                        <StyledCardMobileButton onClick={onClickAdd} quad={true}>+</StyledCardMobileButton>
+                        <StyledCardMobileButton onClick={onClickAdd} quad={true} plus={true} />
                     </Flex>
                 </StyledCardContent>
             </StyledCard>
