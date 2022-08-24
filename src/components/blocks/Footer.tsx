@@ -131,7 +131,7 @@ const Footer: FC = () => {
           </StyledFooterContact>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">LinkedIn</Title>
-            <a href="https://t.me/tom_ahawk" target="_blank">@tom_ahawk</a>
+            <a href="https://www.linkedin.com/in/egor-stulenkov-29867523a/" target="_blank">Egor Stulenkov</a>
           </StyledFooterContact>
           <StyledFooterContact direction="column" gap="12px">
             <Title size="14px">Telegram</Title>
@@ -143,7 +143,7 @@ const Footer: FC = () => {
           </StyledFooterContact>
         </StyledFooterContacts>
       </StyledFooterPart>
-      <Banner url="/" image="images/banner.jpg" />
+      <Banner url="/" image="/images/banner.jpg" />
 
       <StyledFooterPart grey={true} desktop={true}>
         <Logo row={+true} />

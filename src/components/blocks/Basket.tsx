@@ -7,6 +7,11 @@ import { getCartSelector } from '../../redux/cart/selectors';
 import { BasketItem } from './';
 
 import { Button, AnimatedWord, Text } from '../elements';
+import { FadeY, FadeYUp } from '../helpers/Animations'
+
+interface Props {
+    delay?: boolean;
+}
 
 const StyledBasket = styled.div`
     min-height: 50vh;
@@ -18,11 +23,13 @@ const StyledBasketContent = styled.div`
   grid-gap: 20px;
 `
 
-const StyledBasketHead = styled.div`
+const StyledBasketHead = styled.div<Props>`
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px 100px;
     align-items: center;
     p {
+        opacity: 0;
+        animation: ${FadeY} 1s ${props => props.theme.transition.timing} forwards;
         color: white;
         font-size: 12px;
         font-weight: 500;
@@ -31,6 +38,21 @@ const StyledBasketHead = styled.div`
         display: flex;
         &:not(:first-child) {
             justify-content: center;
+        }
+        &:nth-child(1) {
+            animation-delay: ${props => props.delay ? '1.3s' : '.1s'};
+        }
+        &:nth-child(2) {
+            animation-delay: ${props => props.delay ? '1.4s' : '.2s'};
+        }
+        &:nth-child(3) {
+            animation-delay: ${props => props.delay ? '1.5s' : '.3s'};
+        }
+        &:nth-child(4) {
+            animation-delay: ${props => props.delay ? '1.6s' : '.4s'};
+        }
+        &:nth-child(5) {
+            animation-delay: ${props => props.delay ? '1.7s' : '.5s'};
         }
     }
     @media (max-width: ${(props) => props.theme.screen.desktopMin}) {
@@ -41,13 +63,32 @@ const StyledBasketHead = styled.div`
     }
 `
 
-const StyledBasketList = styled.ul`
+const StyledBasketList = styled.ul<Props>`
     display: flex;
     grid-gap: 15px; 
     list-style: none;
     flex-direction: column;
     @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
         z-index: 1;
+    }
+    li {
+        opacity: 0;
+        animation: ${FadeYUp} 1s ${props => props.theme.transition.timing} forwards;
+        &:nth-child(1) {
+            animation-delay: ${props => props.delay ? '1.5s' : '.3s'};
+        }
+        &:nth-child(2) {
+            animation-delay: ${props => props.delay ? '1.6s' : '.4s'};
+        }
+        &:nth-child(3) {
+            animation-delay: ${props => props.delay ? '1.7s' : '.5s'};
+        }
+        &:nth-child(4) {
+            animation-delay: ${props => props.delay ? '1.8s' : '.6s'};
+        }
+        &:nth-child(5) {
+            animation-delay: ${props => props.delay ? '1.9s' : '.7s'};
+        }
     }
 `
 
@@ -71,12 +112,15 @@ const StyledBasketFooter = styled.div`
     }
 `
 
-const StyledBasketTotal = styled.div`
+const StyledBasketTotal = styled.div<Props>`
     display: none;
     border-radius: 4px;
+    opacity: 0;
     background-color: ${props => props.theme.colors.grey};
     box-shadow: 0px 1px 7px rgba(0,0,0,.5);
     padding: 12px 10px;
+    animation: ${FadeYUp} 1s ${props => props.theme.transition.timing} forwards;
+    animation-delay: ${props => props.delay ? '1.8s' : '.6s'};
     @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
         display: block;
     }
@@ -105,7 +149,7 @@ const StyledBasketEmpty = styled.div`
 
 `
 
-const Basket: FC = () => {
+const Basket: FC<Props> = ({ delay }) => {
     const dispatch = useDispatch();
     const {items, totalPrice} = useSelector(getCartSelector);
 
@@ -117,21 +161,21 @@ const Basket: FC = () => {
         <StyledBasket>
             { items.length ?
                 <StyledBasketContent>
-                    <StyledBasketHead>
+                    <StyledBasketHead delay={delay}>
                         <Text uppercase={true}>Product</Text>
                         <Text uppercase={true}>Price</Text>
                         <Text uppercase={true}>Quantity</Text>
                         <Text uppercase={true}>Total</Text>
                         <Text uppercase={true}>Delete</Text>
                     </StyledBasketHead>
-                    <StyledBasketList>
+                    <StyledBasketList delay={delay}>
                         {items.map((item, index) => (
                             <li key={index}>
                                 <BasketItem {...item}/>
                             </li>
                         ))}
                     </StyledBasketList>
-                    <StyledBasketTotal>
+                    <StyledBasketTotal delay={delay}>
                         <StyledBasketTotalRow>
                             <div>Subtotal</div>
                             <p>{ totalPrice }.00 <span>€</span></p>

@@ -64,7 +64,7 @@ export default styled.section<Props>`
 
       &:before {
         animation: ${Grain} 8s steps(10) infinite;
-        background-image: url('images/noise.png');
+        background-image: url('/images/noise.png');
         content: '';
         height: 300%;
         left: -50%;

@@ -15,6 +15,7 @@ interface FiltersProps {
     categoriesValue: number;
     onChangeCategory: (index: string) => void;
     sort: Sort;
+    delay?: boolean;
 }
 
 interface FilterPopupProps {
@@ -90,7 +91,7 @@ const StyledMobileFiltersPopupPart = styled.div`
     }
 `
 
-const MobileFilters:FC<FiltersProps> = ({ sort, categoriesValue, onChangeCategory }) => {
+const MobileFilters:FC<FiltersProps> = ({ sort, categoriesValue, onChangeCategory, delay }) => {
     const [active, setActive] = useState<boolean>(false);
     const popup = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
@@ -125,11 +126,11 @@ const MobileFilters:FC<FiltersProps> = ({ sort, categoriesValue, onChangeCategor
                 </StyledMobileFiltersClear>
                 <StyledMobileFiltersPopupPart>
                     <p>Category:</p>
-                    <Categories value={categoriesValue} onChangeCategory={onChangeCategory} customChangeEvent={activeHandler} />
+                    <Categories value={categoriesValue} onChangeCategory={onChangeCategory} customChangeEvent={activeHandler} delay={delay}/>
                 </StyledMobileFiltersPopupPart>
                 <StyledMobileFiltersPopupPart>
                     <p>Sort by:</p>
-                    <SortDropdown mobile={true} select={sort} customChangeEvent={activeHandler} />
+                    <SortDropdown mobile={true} select={sort} customChangeEvent={activeHandler} delay={delay}/>
                 </StyledMobileFiltersPopupPart>
             </StyledMobileFiltersPopup>
         </StyledMobileFilters>

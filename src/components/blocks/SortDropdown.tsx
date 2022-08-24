@@ -11,18 +11,20 @@ interface SortProps {
     select: Sort;
     mobile?: boolean;
     customChangeEvent?: () => void;
+    delay?: boolean;
 }
 
 interface SortStyledProps {
     active?: boolean;
     open?: boolean;
+    delay?: boolean;
 }
 
-const StyledSortDropdown = styled.div`
+const StyledSortDropdown = styled.div<SortStyledProps>`
     opacity: 0;
     z-index: 11;
     animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
-    animation-delay: .6s;
+    animation-delay: ${props => props.delay ? '2s' : '.6s'};
     display: flex;
     grid-gap: 7px;
     align-items: center;
@@ -153,7 +155,7 @@ export const sortOptions: SortItem[] = [
     { label: 'Alphabet (Z-A)', value: SortValueEnum.ALPHABET_ASC }
 ];
 
-const SortDropdown: FC<SortProps> = memo(({ select, mobile, customChangeEvent }) => {
+const SortDropdown: FC<SortProps> = memo(({ select, mobile, customChangeEvent, delay }) => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
@@ -179,7 +181,7 @@ const SortDropdown: FC<SortProps> = memo(({ select, mobile, customChangeEvent })
     }, [])
 
     return (
-        <StyledSortDropdown ref={sortRef}>
+        <StyledSortDropdown ref={sortRef} delay={delay}>
             {!mobile && <>
                 <span>Sort by:</span>
                 <StyledSortLabel onClick={() => setOpen(!open)}>

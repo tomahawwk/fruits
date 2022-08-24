@@ -27,7 +27,7 @@ import {
   MobileFilters
 } from '../components/blocks';
 
-import { Content, Preloader, Error, SectionHead, Button } from '../components/elements';
+import { Content, Preloader, Error, SectionHead } from '../components/elements';
 import { sortOptions } from '../components/blocks/SortDropdown';
 
 const StyledCatalog = styled(Page)`
@@ -56,6 +56,7 @@ const Catalog = () => {
     const [canFetch, setCanFetch] = useState(false);
     const {sort} = useSelector(getFilterSelector);
     const [searchValue, setSearchValue] = useState('');
+    const [delay, setDelay] = useState<boolean>(false);
     
     const onChangeCategory = useCallback((id: string) => {
       dispatch(setCategory(id));
@@ -66,7 +67,6 @@ const Catalog = () => {
       setTimeout(() => {
         setSearchValue(value)
       }, 500)
-      
     }
 
     const onChangePage = (number) => {
@@ -97,12 +97,13 @@ const Catalog = () => {
           getData();
         }, 600)
     }
-    
+
     useEffect(() => {
       if(appearAnimate){
         getFruits(category);
         setCanFetch(true);
       }
+      appearAnimate && setDelay(true);
     }, [appearAnimate])
 
     useEffect(() => {
@@ -166,6 +167,7 @@ const Catalog = () => {
                 back={{ name: "Home", url: "/" }}
                 next={{ name: "Articles", url: "/articles" }}
                 background="./images/mobile-backgrounds/1.jpg"
+                delay={delay}
             />
             <Section grey>
                 <Content >
@@ -173,18 +175,18 @@ const Catalog = () => {
                     <StyledCatalogHead>
                       <SectionHead desktop={true}>
                           <Flex gap="30px">
-                            <Search searchValue={searchValue} setSearchValue={onChangeSearch} />
-                            <Categories value={Number(category)} onChangeCategory={onChangeCategory} />
+                            <Search searchValue={searchValue} setSearchValue={onChangeSearch} delay={delay}/>
+                            <Categories value={Number(category)} onChangeCategory={onChangeCategory} delay={delay} />
                           </Flex>
-                          <SortDropdown select={sort} />
+                          <SortDropdown select={sort} delay={delay}/>
                       </SectionHead>
                       <SectionHead phone={true}>
-                        <Search searchValue={searchValue} setSearchValue={onChangeSearch} />
-                        <MobileFilters sort={sort} categoriesValue={Number(category)} onChangeCategory={onChangeCategory} />
+                        <Search searchValue={searchValue} setSearchValue={onChangeSearch} delay={delay}/>
+                        <MobileFilters sort={sort} categoriesValue={Number(category)} onChangeCategory={onChangeCategory} delay={delay} />
                       </SectionHead>
                     </StyledCatalogHead>
                     { status === "failure" ?
-                      <Error>Fruit getting error :(</Error>
+                      <Error>Fruits getting error :(</Error>
                       :
                       <>
                         <Preloader active={isLoading} />

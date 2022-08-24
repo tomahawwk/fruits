@@ -3,7 +3,6 @@ import { setRouteAnimation } from '../../redux/animation/slice';
 import { fluidRange } from 'polished'
 import { useDispatch } from 'react-redux'
 import { useLocation } from "react-router-dom";
-import { FadeYDown, MoveY, scaleX } from '../helpers/Animations';
 
 import Section from './Section';
 

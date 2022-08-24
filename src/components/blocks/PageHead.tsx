@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 import Section from './Section';
@@ -16,6 +16,11 @@ interface Props {
     background: string;
     back: { url: string; name: string; };
     next: { url: string; name: string; };
+    delay?: boolean;
+}
+
+interface StyledProps {
+    delay?: boolean;
 }
 
 const StyledPageHead = styled(Section)`
@@ -52,7 +57,7 @@ const StyledPageHead = styled(Section)`
     }
 `
 
-const StyledPageHeadTitle = styled(Title)`
+const StyledPageHeadTitle = styled(Title)<StyledProps>`
     text-align: center;
     position: relative;
     width: fit-content;
@@ -60,10 +65,7 @@ const StyledPageHeadTitle = styled(Title)`
         line-height: 120%;
         transform: translateY(-100%);
         animation: ${MoveY} 1s ${props => props.theme.transition.function} forwards;
-        animation-delay: .1s;
-        &:last-child {
-            animation-delay: .3s;
-        }
+        animation-delay: ${props => props.delay ? '1.5s' : '.1s'};
     }
     b, span {
         overflow: hidden;
@@ -82,6 +84,9 @@ const StyledPageHeadTitle = styled(Title)`
         @media (max-width: ${props => props.theme.screen.tabletMin}){
             display: none;
         }
+        div {
+            animation-delay: ${props => props.delay ? '1.7s' : '.3s'};
+        }
     }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         font-weight: 400;
@@ -92,7 +97,7 @@ const StyledPageHeadTitle = styled(Title)`
     }
 `
 
-const StyledPageHeadPart = styled.div`
+const StyledPageHeadPart = styled.div<StyledProps>`
     display: flex;
     flex-direction: column;
     grid-gap: 20px;
@@ -105,9 +110,9 @@ const StyledPageHeadPart = styled.div`
     div {
         opacity: 0;
         animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
-        animation-delay: .4s;
+        animation-delay: ${props => props.delay ? '1.8s' : '.4s'};
         &:last-child {
-            animation-delay: .5s;
+            animation-delay: ${props => props.delay ? '1.9s' : '.5s'};
         }
     }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
@@ -124,15 +129,15 @@ const StyledPageHeadBackground = styled.img`
     }
 `
 
-const PageHead: FC<Props> = ({title, subtitle, back, next, background}) => {
+const PageHead: FC<Props> = ({title, subtitle, back, next, background, delay}) => {
     return (
         <StyledPageHead grain>
             <StyledPageHeadBackground src={background} />
-            <StyledPageHeadTitle t1>
+            <StyledPageHeadTitle t1={true} delay={delay}>
                 <b><div>{ title }</div></b>
                 <span><div>{ subtitle }</div></span>
             </StyledPageHeadTitle>
-            <StyledPageHeadPart>
+            <StyledPageHeadPart delay={delay}>
                 <Flex justify="center" gap="3px">
                     <Link to={back.url}>{back.name}</Link>
                     <span>/</span>

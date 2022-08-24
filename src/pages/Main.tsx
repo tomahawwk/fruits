@@ -118,7 +118,7 @@ const Main = () => {
                 </Content>
             </Section>
             <OrderSteps />
-            <Section>
+            {/* <Section>
                 <Content>
                     <MainSectionHead>
                         <Title t3={true}>Articles</Title>
@@ -128,7 +128,7 @@ const Main = () => {
                         </Link>
                     </MainSectionHead>
                 </Content>
-            </Section>
+            </Section> */}
             
         </StyledMain>
     )

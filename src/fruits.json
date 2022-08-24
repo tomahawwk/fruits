@@ -8,8 +8,9 @@
       "category": 1,
       "oldprice": 52,
       "price": 48,
-      "desktopImage": "images/cards/3.jpg",
-      "phoneImage": "images/cards-mobile/3.png"
+      "desktopImage": "/images/cards/3.jpg",
+      "phoneImage": "/images/cards-mobile/3.png",
+      "detailImage": "/images/cards-detail/3.jpg"
     },
     {
       "key": 1,
@@ -20,8 +21,9 @@
       "oldprice": 58,
       "rating": 2,
       "price": 45,
-      "desktopImage": "images/cards/5.jpg",
-      "phoneImage": "images/cards-mobile/5.png"
+      "desktopImage": "/images/cards/5.jpg",
+      "phoneImage": "/images/cards-mobile/5.png",
+      "detailImage": "/images/cards-detail/5.jpg"
     },
     {
       "key": 2,
@@ -32,8 +34,9 @@
       "rating": 5,
       "oldprice": 47,
       "price": 34,
-      "desktopImage": "images/cards/2.jpg",
-      "phoneImage": "images/cards-mobile/2.png"
+      "desktopImage": "/images/cards/2.jpg",
+      "phoneImage": "/images/cards-mobile/2.png",
+      "detailImage": "/images/cards-detail/2.jpg"
     },
     {
       "key": 3,
@@ -44,8 +47,9 @@
       "rating": 7,
       "oldprice": 84,
       "price": 62,
-      "desktopImage": "images/cards/4.jpg",
-      "phoneImage": "images/cards-mobile/4.png"
+      "desktopImage": "/images/cards/4.jpg",
+      "phoneImage": "/images/cards-mobile/4.png",
+      "detailImage": "/images/cards-detail/4.jpg"
     },
     {
       "key": 4,
@@ -56,8 +60,9 @@
       "oldprice": 45,
       "rating": 3,
       "price": 39,
-      "desktopImage": "images/cards/1.jpg",
-      "phoneImage": "images/cards-mobile/1.png"
+      "desktopImage": "/images/cards/1.jpg",
+      "phoneImage": "/images/cards-mobile/1.png",
+      "detailImage": "/images/cards-detail/1.jpg"
     },
     {
       "key": 6,
@@ -68,8 +73,9 @@
       "oldprice": 37,
       "rating": 4,
       "price": 24,
-      "desktopImage": "images/cards/6.jpg",
-      "phoneImage": "images/cards-mobile/6.png"
+      "desktopImage": "/images/cards/6.jpg",
+      "phoneImage": "/images/cards-mobile/6.png",
+      "detailImage": "/images/cards-detail/6.jpg"
     },
     {
       "key": 7,
@@ -80,20 +86,22 @@
       "oldprice": 29,
       "rating": 6,
       "price": 18,
-      "desktopImage": "images/cards/9.jpg",
-      "phoneImage": "images/cards-mobile/9.png"
+      "desktopImage": "/images/cards/9.jpg",
+      "phoneImage": "/images/cards-mobile/9.png",
+      "detailImage": "/images/cards-detail/9.jpg"
     },
     {
       "key": 8,
       "id": "8",
-      "title": "Garnet",
-      "description": "Garnet derives from Old French grenat by metathesis, from Medieval Latin granatum as used in a different meaning 'of a dark red color'. This derivation may have originated from pomum granatum, describing the color of pomegranate pulp, or from granum, referring to 'red dye, cochineal'.",
+      "title": "Pomegranate",
+      "description": "Pomegranate derives from Old French grenat by metathesis, from Medieval Latin granatum as used in a different meaning 'of a dark red color'. This derivation may have originated from pomum granatum, describing the color of pomegranate pulp, or from granum, referring to 'red dye, cochineal'.",
       "category": 1,
       "rating": 8,
       "oldprice": 64,
       "price": 57,
-      "desktopImage": "images/cards/7.jpg",
-      "phoneImage": "images/cards-mobile/7.png"
+      "desktopImage": "/images/cards/7.jpg",
+      "phoneImage": "/images/cards-mobile/7.png",
+      "detailImage": "/images/cards-detail/7.jpg"
     },
     {
       "key": 9,
@@ -104,8 +112,9 @@
       "rating": 4,
       "oldprice": 89,
       "price": 75,
-      "desktopImage": "images/cards/8.jpg",
-      "phoneImage": "images/cards-mobile/8.png"
+      "desktopImage": "/images/cards/8.jpg",
+      "phoneImage": "/images/cards-mobile/8.png",
+      "detailImage": "/images/cards-detail/8.jpg"
     },
     {
       "key": 10,
@@ -116,8 +125,9 @@
       "rating": 5,
       "oldprice": 105,
       "price": 86,
-      "desktopImage": "images/cards/10.jpg",
-      "phoneImage": "images/cards-mobile/10.png"
+      "desktopImage": "/images/cards/10.jpg",
+      "phoneImage": "/images/cards-mobile/10.png",
+      "detailImage": "/images/cards-detail/10.jpg"
     },
     {
       "key": 11,
@@ -128,7 +138,8 @@
       "rating": 3,
       "oldprice": 55,
       "price": 46,
-      "desktopImage": "images/cards/11.jpg",
-      "phoneImage": "images/cards-mobile/11.png"
+      "desktopImage": "/images/cards/11.jpg",
+      "phoneImage": "/images/cards-mobile/11.png",
+      "detailImage": "/images/cards-detail/11.jpg"
     }
   ]

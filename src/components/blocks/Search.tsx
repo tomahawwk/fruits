@@ -1,4 +1,4 @@
-import { useCallback, useState, FC, useRef } from 'react';
+import { useCallback, useState, FC, useRef, useEffect } from 'react';
 import styled, {css} from 'styled-components'
 import { debounce } from 'lodash'
 
@@ -10,16 +10,16 @@ import { FadeYDown } from '../helpers/Animations'
 interface SearchProps {
     searchValue: string;
     setSearchValue: (value: string) => void;
+    delay?: boolean;
 }
 
 interface StyledSearchProps {
-    active: boolean;
+    active: boolean;  
+    delay?: boolean;
 }
 
 const StyledSearch = styled.div`
-    opacity: 0;
     z-index: 1;
-    animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
     transition-duration: ${props => props.theme.transition.duration};
     transition-timing-function: ${props => props.theme.transition.function};
     input {
@@ -97,6 +97,9 @@ const StyledSearchInner = styled.div<StyledSearchProps>`
     transition-duration: inherit;
     transition-timing-function: inherit;
     position: relative;
+    opacity: 0;
+    animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
+    animation-delay: ${props => props.delay ? '1.5s' : '0s'};
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         width: 100%;
         display: flex;
@@ -132,10 +135,11 @@ const StyledSearchInner = styled.div<StyledSearchProps>`
     }
 `
 
-const Search: FC<SearchProps> = ({ setSearchValue }) => {
+const Search: FC<SearchProps> = ({ setSearchValue, delay }) => {
     const [value, setValue] = useState('');
     const [active, setActive] = useState<boolean>(false);
     const input = useRef<HTMLInputElement>(null);
+
     const searchOnClick = () => {
         setActive(!active);
         if(input.current)
@@ -161,14 +165,13 @@ const Search: FC<SearchProps> = ({ setSearchValue }) => {
 
     return (
         <StyledSearch>
-            <StyledSearchInner active={active}>
+            <StyledSearchInner active={active} delay={delay}>
                 <StyledSearchButton onClick={searchOnClick}>
                     <SearchIcon />
                 </StyledSearchButton>
                 <input ref={input} value={value} onChange={(e) => onChangeInput(e)} placeholder="Search" />
                 <StyledSearchClear onClick={searchOnClear} close={true} />
             </StyledSearchInner>
-            
         </StyledSearch>
     )
 }

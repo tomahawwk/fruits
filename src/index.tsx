@@ -23,6 +23,7 @@ const theme = {
     grey6: "#555555",
     grey7: "#ADADAD",
     yellow: "#fbe201",
+    green: "#1ec100",
     light: "#FFF",
     altLight: "#F9F3DF",
     text: "#818183"

@@ -1,5 +1,7 @@
 import styled, {css} from 'styled-components'
 import {FC, memo} from 'react'
+import { useSelector } from 'react-redux';
+import { getAnimationSelector } from '../../redux/animation/selectors';
 
 import AnimatedWord from '../elements/AnimatedWord';
 
@@ -9,10 +11,12 @@ type CategoriesProps = {
     value: number;
     onChangeCategory: (index: string) => void;
     customChangeEvent?: () => void;
+    delay?: boolean;
 }
 
 interface CategoriesStyledProps {
     active?: boolean;
+    delay?: boolean;
 }
 
 const StyledCategories = styled.ul`
@@ -75,20 +79,20 @@ const StyledCategory = styled.li<CategoriesStyledProps>`
         }
     `}
     &:nth-child(1){
-        animation-delay: .1s;
+        animation-delay: ${props => props.delay ? '1.6s' : '.1s'};
     }
     &:nth-child(2){
-        animation-delay: .2s;
+        animation-delay: ${props => props.delay ? '1.7s' : '.2s'};
     }
     &:nth-child(3){
-        animation-delay: .3s;
+        animation-delay: ${props => props.delay ? '1.8s' : '.3s'};
     }
     &:nth-child(4){
-        animation-delay: .4s;
+        animation-delay: ${props => props.delay ? '1.9s' : '.4s'};
     }
 `
 
-const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory, customChangeEvent }) => {
+const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory, customChangeEvent, delay }) => {
         const categories = [
             { title: "All" },
             { title: "Fruits" },
@@ -111,6 +115,7 @@ const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory, customC
                     <StyledCategory
                         key={`category-${index}`}
                         active={value === index ? true : false}
+                        delay={delay}
                         >
                     <button onClick={() => changeHangler(String(index))}>
                         <AnimatedWord text={category.title} />

@@ -58,6 +58,24 @@ export const scaleX = keyframes`
 	}
 `
 
+export const zoomIn = keyframes`
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.2);
+	}
+`
+
+export const scaleYOut = keyframes`
+	0% {
+		transform: scaleY(1);
+	}
+	100% {
+		transform: scaleY(0);
+	}
+`
+
 export const Grain = keyframes`
   0%,
 	to {
