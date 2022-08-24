@@ -53,7 +53,6 @@ const Catalog = () => {
     const {items, status, isLoading} = useSelector(getFruitsSelector);
     const {appearAnimate} = useSelector(getAnimationSelector);
     const [localItems, setLocalItems] = useState<Fruit[]>([]);
-    const [canFetch, setCanFetch] = useState(false);
     const {sort} = useSelector(getFilterSelector);
     const [searchValue, setSearchValue] = useState('');
     const [delay, setDelay] = useState<boolean>(false);
@@ -99,15 +98,11 @@ const Catalog = () => {
     }
 
     useEffect(() => {
-      if(appearAnimate){
-        getFruits(category);
-        setCanFetch(true);
-      }
       appearAnimate && setDelay(true);
     }, [appearAnimate])
 
     useEffect(() => {
-      if(!isSearch.current && canFetch) {
+      if(!isSearch.current) {
         getFruits(category);
       }
       isSearch.current = false;
@@ -138,11 +133,6 @@ const Catalog = () => {
         }
         isMounted.current = true;
     }, [category, sort.value, searchValue, currentPage])
-
-    window.onload = function () {
-      getFruits(category);
-      setCanFetch(true)
-    }
     
     useEffect(() => {
       if(window.location.search){
