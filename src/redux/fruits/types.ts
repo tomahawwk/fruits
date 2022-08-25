@@ -18,7 +18,6 @@ export type Fruit = {
     title: string;
     price: number;
     oldprice: number;
-    quantity: number;
     description: string;
     desktopImage: string;
     phoneImage: string;

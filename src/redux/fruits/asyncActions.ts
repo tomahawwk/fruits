@@ -8,7 +8,6 @@ export const fetchFruits = createAsyncThunk<Fruit[], SearchParams>(
     'fruits/fetchFruits',
     async (params) => {
       const { sortBy, order, category, search, currentPage } = params;
-      
       const { data } = await axios.get<Fruit[]>(`https://62bcc3246b1401736c008049.mockapi.io/items`, {
         params: pickBy(
           {
@@ -22,7 +21,6 @@ export const fetchFruits = createAsyncThunk<Fruit[], SearchParams>(
           identity,
         ),
       });
-      console.log(params)
       return data;
     },
   );

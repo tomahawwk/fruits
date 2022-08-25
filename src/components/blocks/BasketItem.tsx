@@ -5,7 +5,7 @@ import { addItem, removeItem, minusItem } from '../../redux/cart/slice';
 import { CartItem } from '../../redux/cart/types';
 import Flex from '../helpers/Flex'
 
-import { Price, Counter, Button, Text, Picture } from '../elements/'
+import { Price, Counter, Button, Text, Picture, Link } from '../elements/'
 
 type BasketItemProps = {
     title: string;
@@ -64,7 +64,7 @@ const StyledBasketItem = styled.div`
     }
 `
 
-const StyledBasketItemHead = styled.div`
+const StyledBasketItemHead = styled(Link)`
     display: flex;
     align-items: center;
     grid-gap: 15px;
@@ -122,7 +122,7 @@ const BasketItem: FC<BasketItemProps> = ({ title, desktopImage, price, count, id
 
     return (
         <StyledBasketItem>
-            <StyledBasketItemHead>
+            <StyledBasketItemHead to={`/catalog/${id}`}>
                 <Picture desktop={desktopImage} phone={phoneImage} alt={title} />
                 <Text uppercase={true}>{ title }</Text>
             </StyledBasketItemHead>
@@ -133,13 +133,13 @@ const BasketItem: FC<BasketItemProps> = ({ title, desktopImage, price, count, id
             <Price>{ price * count } €</Price>
             <div><Button close={true} onClick={onRemove} width="20px" height="20px" /></div>
             <StyledBasketItemMobileContent>
-                <Flex direction="column">
+                <Link to={`/catalog/${id}`}>
                     <Text uppercase={true} className="title">{ title }</Text>
                     <Flex align="end" gap="10px">
                         <Price>{ price } €</Price>
                         <Price old>{ oldprice } €</Price>
                     </Flex>
-                </Flex>
+                </Link>
                 <Counter onPlus={onCountPlus} onMinus={onCountMinus} count={count} />                
             </StyledBasketItemMobileContent>
         </StyledBasketItem>

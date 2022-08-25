@@ -345,7 +345,7 @@ const StyledMenuCartCounter = styled.span<MenuStyledProps>`
     color: ${props => props.theme.colors.yellow};
     font-weight: 400;
     right: -27px;
-    bottom: -2px;
+    bottom: 0px;
     letter-spacing: 1px;
     @media (max-width: ${props => props.theme.screen.tablet}){
         display: flex;
@@ -366,7 +366,6 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
-
     const linkHandler = () => {
         setMenuOpened(false);
     }
@@ -386,7 +385,7 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
                 <StyledMenuList open={menuOpened}>
                     {
                         links.map((link, index) => 
-                            <li className={splitLocation[1] === link.url ? "is-active" : ""} key={index}>
+                            <li className={splitLocation[1] === link.url && !splitLocation[2] ? "is-active" : ""} key={index}>
                                 <Link to={`/${link.url}`} onClick={() => {linkHandler()}}>
                                     <div>
                                         {

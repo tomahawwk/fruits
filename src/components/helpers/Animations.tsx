@@ -49,12 +49,21 @@ export const MoveY = keyframes`
     }
 `
 
-export const scaleX = keyframes`
+export const ScaleX = keyframes`
 	0% {
 		transform: scaleX(0);
 	}
 	100% {
 		transform: scaleX(1);
+	}
+`
+
+export const Scale = keyframes`
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
 	}
 `
 
@@ -67,7 +76,7 @@ export const zoomIn = keyframes`
 	}
 `
 
-export const scaleYOut = keyframes`
+export const ScaleYOut = keyframes`
 	0% {
 		transform: scaleY(1);
 	}

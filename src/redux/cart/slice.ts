@@ -11,12 +11,13 @@ const cartSlice = createSlice({
     reducers: {
         addItem(state, action: PayloadAction<CartItem>) {
             const findItem = state.items.find(obj => obj.id === action.payload.id);
+            const count = action.payload.count > 1 ? action.payload.count : 1;
             if (findItem) {
-                findItem.count++;  
+                findItem.count = findItem.count + count;  
             } else{
                 state.items.push({
                     ...action.payload,
-                    count: 1,
+                    count: count,
                 })
             }
             state.totalPrice = calcTotalPrice(state.items);
