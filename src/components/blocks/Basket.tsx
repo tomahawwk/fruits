@@ -1,15 +1,21 @@
 import styled from 'styled-components'
-import {FC} from 'react'
+import { FC, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { clearItems } from '../../redux/cart/slice';
 import { getCartSelector } from '../../redux/cart/selectors';
 
 import { BasketItem } from './';
 
-import { Button, AnimatedWord, Text } from '../elements';
+import { Button, AnimatedWord, Text, Title, Link } from '../elements';
 import { FadeY, FadeYUp } from '../helpers/Animations'
+import { ArrowNextIcon } from '../elements/Icons';
 
 interface Props {
+    delay?: boolean;
+    setDelay: (delay: boolean) => void;
+}
+
+interface StyledProps {
     delay?: boolean;
 }
 
@@ -23,7 +29,7 @@ const StyledBasketContent = styled.div`
   grid-gap: 20px;
 `
 
-const StyledBasketHead = styled.div<Props>`
+const StyledBasketHead = styled.div<StyledProps>`
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px 100px;
     align-items: center;
@@ -63,7 +69,7 @@ const StyledBasketHead = styled.div<Props>`
     }
 `
 
-const StyledBasketList = styled.ul<Props>`
+const StyledBasketList = styled.ul<StyledProps>`
     display: flex;
     grid-gap: 15px; 
     list-style: none;
@@ -110,9 +116,13 @@ const StyledBasketFooter = styled.div`
             color: ${props => props.theme.colors.yellow};
         }
     }
+    @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+        flex-direction: column-reverse;
+        grid-gap: 15px;
+    }
 `
 
-const StyledBasketTotal = styled.div<Props>`
+const StyledBasketTotal = styled.div<StyledProps>`
     display: none;
     border-radius: 4px;
     opacity: 0;
@@ -145,16 +155,69 @@ const StyledBasketTotalRow = styled.div`
     }
 `
 
-const StyledBasketEmpty = styled.div`
-
+const StyledBasketAnchor = styled.div`
+    position: absolute;
+    left: 0;
+    top: -20vh;
 `
 
-const Basket: FC<Props> = ({ delay }) => {
+const StyledBasketEmpty = styled.div<StyledProps>`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    grid-gap: 20px;
+    justify-content: center;
+    @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+        z-index: 2;
+        grid-gap: 10px;
+        padding-bottom: 30px;
+    }
+    img {
+        width: 140px;
+        opacity: 0;
+        animation: ${FadeYUp} 1s ${props => props.theme.transition.timing} forwards;
+        animation-delay: ${props => props.delay ? '1.5s' : '.3s'};
+        @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+            width: 120px;
+            margin: 50px 0 20px;
+        }
+    }
+    div {
+        font-size: 36px;
+        opacity: 0;
+        animation: ${FadeYUp} 1s ${props => props.theme.transition.timing} forwards;
+        animation-delay: ${props => props.delay ? '1.6s' : '.4s'};
+        &:first-letter {
+            color: ${props => props.theme.colors.yellow};
+            @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+                color: white;
+            }
+        }
+        @media (max-width: ${(props) => props.theme.screen.tabletMin}) {
+            font-size: 20px;
+        }
+    }
+    a{
+        opacity: 0;
+        animation: ${FadeYUp} 1s ${props => props.theme.transition.timing} forwards;
+        animation-delay: ${props => props.delay ? '1.7s' : '.5s'};
+    }
+`
+
+const Basket: FC<Props> = ({ delay, setDelay }) => {
     const dispatch = useDispatch();
     const {items, totalPrice} = useSelector(getCartSelector);
+    const anchor = useRef<HTMLDivElement>(null);
 
     const onClear = () => {
+        anchor.current?.scrollIntoView({ block: "end", behavior: "smooth" });
         dispatch(clearItems());
+        setDelay(false);
     }
 
     return (
@@ -199,10 +262,16 @@ const Basket: FC<Props> = ({ delay }) => {
                     </StyledBasketFooter>
                 </StyledBasketContent>
                 :
-                <StyledBasketEmpty>
-                    
+                <StyledBasketEmpty delay={delay}>
+                    <img src="/images/cart.png" />
+                    <Title t2>Oops! Your cart is empty</Title>
+                    <Link to="/catalog" arrow={+true}>
+                        <span>Go to catalog</span>
+                        <ArrowNextIcon />
+                    </Link>
                 </StyledBasketEmpty>
             }
+            <StyledBasketAnchor ref={anchor} />
         </StyledBasket>
     )
 }

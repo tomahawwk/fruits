@@ -21,7 +21,6 @@ interface FiltersProps {
 interface FilterPopupProps {
     active?: boolean;
 }
-const StyledMobileFilters = styled.div``
 
 const StyledMobileFiltersButton = styled(Button)`
   opacity: 0;
@@ -116,7 +115,7 @@ const MobileFilters:FC<FiltersProps> = ({ sort, categoriesValue, onChangeCategor
     }, [])
 
     return (
-        <StyledMobileFilters ref={popup}>
+        <div ref={popup}>
             <StyledMobileFiltersButton quad={true} onClick={activeHandler}>
                 <OptionsIcon />
             </StyledMobileFiltersButton>
@@ -133,7 +132,7 @@ const MobileFilters:FC<FiltersProps> = ({ sort, categoriesValue, onChangeCategor
                     <SortDropdown mobile={true} select={sort} customChangeEvent={activeHandler} delay={delay}/>
                 </StyledMobileFiltersPopupPart>
             </StyledMobileFiltersPopup>
-        </StyledMobileFilters>
+        </div >
     )
 }
 

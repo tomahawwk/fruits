@@ -29,7 +29,7 @@ const Cart = () => {
             />
             <Section grey>
                 <Content>
-                    <Basket delay={delay}/>
+                    <Basket delay={delay} setDelay={setDelay}/>
                 </Content>
             </Section>
         </StyledCart>

@@ -36,9 +36,28 @@ export default styled.button<Props>`
             font-weight: 600;
             background-color: ${props => props.theme.colors.yellow};
             border: 1px solid ${props => props.theme.colors.yellow};
+            @media (max-width: ${props => props.theme.screen.tablet}){
+                border: none;
+                & span {
+                    transition: none;
+                    transform: translateY(0);
+                }
+            }
         }
         @media (max-width: ${props => props.theme.screen.tablet}){
             font-size: 9px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            background-color: ${props => props.theme.colors.yellow};
+            box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+            color: black;
+            font-weight: 600;
+            & span {
+                transition: none;
+                will-change: initial;
+                transform: translateY(0);
+            }
         }
     `}
     ${props => props.plus && css`
@@ -106,7 +125,17 @@ export default styled.button<Props>`
     `}
     ${props => props.grey && css`
         color: ${props.theme.colors.grey5};
-        border: 1px solid ${props.theme.colors.grey2};
+        border: 1px solid ${props.theme.colors.grey2}; 
+        @media (max-width: ${props => props.theme.screen.tablet}){
+            background-color: ${props => props.theme.colors.grey};
+            color: white;
+            font-weight: 500;
+            &:hover {
+                font-weight: 500;
+                color: white;
+                background-color: rgba(0,0,0,.05);
+            }
+        }
     `}
     ${props => props.quad && css`
         transition-duration: ${props => props.theme.transition.duration};

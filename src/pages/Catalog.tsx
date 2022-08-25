@@ -41,8 +41,6 @@ const StyledCatalog = styled(Page)`
   }
 `
 
-const StyledCatalogHead = styled.div``
-
 const Catalog = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -162,7 +160,7 @@ const Catalog = () => {
             <Section grey>
                 <Content >
                     <div className="anchor" ref={anchor} />
-                    <StyledCatalogHead>
+                    <div>
                       <SectionHead desktop={true}>
                           <Flex gap="30px">
                             <Search searchValue={searchValue} setSearchValue={onChangeSearch} delay={delay}/>
@@ -174,7 +172,7 @@ const Catalog = () => {
                         <Search searchValue={searchValue} setSearchValue={onChangeSearch} delay={delay}/>
                         <MobileFilters sort={sort} categoriesValue={Number(category)} onChangeCategory={onChangeCategory} delay={delay} />
                       </SectionHead>
-                    </StyledCatalogHead>
+                    </div>
                     { status === "failure" ?
                       <Error>Fruits getting error :(</Error>
                       :

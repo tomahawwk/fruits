@@ -205,6 +205,7 @@ const StyledCardMobileButton = styled(Button)`
     right: 15px;
     bottom: 12px;
     display: none;
+    
     @media (max-width: ${props => props.theme.screen.tabletMin}){
         display: flex;
     }

@@ -5,7 +5,7 @@ import { BasketIcon } from './Icons';
 
 import Link from './Link';
 import { useSelector } from 'react-redux';
-import { getCartSelector } from '../../redux/cart/selectors';
+import { getCartSelector, getTotalCount } from '../../redux/cart/selectors';
 
 interface Props {
     active?: boolean;
@@ -55,9 +55,9 @@ const StyledBasketLinkCounter = styled.span<Props>`
     `}
 `
 
-const BasketLink: FC = (props) => {
+const BasketLink: FC = () => {
     const { items } = useSelector(getCartSelector);
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
+    const totalCount = useSelector(getTotalCount);
     const isMounted = useRef(false);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const BasketLink: FC = (props) => {
     }, [items])
 
     return (
-        <StyledBasketLink {...props} to="/cart" icon={+true}>
+        <StyledBasketLink to="/cart" icon={+true}>
             <BasketIcon />
             <StyledBasketLinkCounter active={totalCount > 0 && true}>{ totalCount > 0 && totalCount }</StyledBasketLinkCounter>
         </StyledBasketLink>

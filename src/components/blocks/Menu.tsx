@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 import { setRouteAnimation } from '../../redux/animation/slice';
 import { fluidRange } from 'polished'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from "react-router-dom";
+import { getTotalCount } from '../../redux/cart/selectors';
 
 import Section from './Section';
 
@@ -44,8 +45,9 @@ const StyledMenuContent = styled(Section)<MenuStyledProps>`
     `}
     @media (max-width: ${props => props.theme.screen.tablet}){
         background-color: ${props => props.theme.colors.grey3};
+        flex-direction: column;
         padding-top: 80px;
-        padding-bottom: 55px;
+        padding-bottom: 25px;
         ${props => fluidRange({
                 prop: 'padding-left',
                 fromSize: `${props.theme.unit.phone}px`,
@@ -274,7 +276,7 @@ const StyledMenuContacts = styled.ul`
     display: grid;
     grid-gap: 25px;
     @media (max-width: ${props => props.theme.screen.tablet}){
-        display: none;
+        align-self: initial;
     }
 `
 
@@ -284,10 +286,16 @@ const StyledMenuContact = styled.li<MenuStyledProps>`
     b{
         color: white;
         font-size: 22px;
+        @media (max-width: ${props => props.theme.screen.tablet}){
+            font-size: 16px;
+        }
     }
     p{
         font-size: 18px;
-        color: ${props => props.theme.colors.grey5}
+        color: ${props => props.theme.colors.grey5};
+        @media (max-width: ${props => props.theme.screen.tablet}){
+            font-size: 14px;
+        }
     }
     b, p {
         transform: translateY(-20px);
@@ -325,13 +333,33 @@ const StyledMenuSymbol = styled.span<MenuStyledProps>`
     `}
 `
 
+const StyledMenuCartCounter = styled.span<MenuStyledProps>`
+    display: none;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: ${props => props.theme.colors.yellow};
+    font-weight: 400;
+    right: -27px;
+    bottom: -2px;
+    letter-spacing: 1px;
+    @media (max-width: ${props => props.theme.screen.tablet}){
+        display: flex;
+    }
+`
+
 const Menu = ({ menuOpened, setMenuOpened }) => {
+    const totalCount = useSelector(getTotalCount);
     const dispatch = useDispatch();
     const links = [
         { title: "home page", url: "" },
         { title: "catalog", url: "catalog" },
         { title: "articles", url: "articles" },
-        { title: "cart", url: "cart" },
+        { title: "cart", url: "cart", counter: true },
     ]
 
     let menuShow = false;
@@ -367,6 +395,7 @@ const Menu = ({ menuOpened, setMenuOpened }) => {
                                             )
                                         }
                                     </div>
+                                    { link.counter && totalCount > 0 ? <StyledMenuCartCounter>{ totalCount }</StyledMenuCartCounter> : "" }
                                 </Link>
                             </li> 
                         )

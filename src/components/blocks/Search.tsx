@@ -45,11 +45,7 @@ const StyledSearch = styled.div`
         }
     }
     @media (max-width: ${props => props.theme.screen.tabletMin}){
-        background: white;
         width: 100%;
-        border-radius: 4px;
-        box-shadow: 0px 1px 7px rgba(0,0,0,.5);
-        animation-delay: .4s;
         height: 37px;
     }
 `
@@ -101,6 +97,11 @@ const StyledSearchInner = styled.div<StyledSearchProps>`
     animation: ${FadeYDown} 1s ${props => props.theme.transition.function} forwards;
     animation-delay: ${props => props.delay ? '1.5s' : '0s'};
     @media (max-width: ${props => props.theme.screen.tabletMin}){
+        background: white;
+        width: 100%;
+        border-radius: 4px;
+        box-shadow: 0px 1px 7px rgba(0,0,0,.5);
+        animation-delay: .4s;
         width: 100%;
         display: flex;
         grid-gap: 10px;
